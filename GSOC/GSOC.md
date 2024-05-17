@@ -1,3 +1,8 @@
+---
+tags:
+  - gsoc
+---
+
 # Google Summer Of Code 2024
 
 I'm pretty excited to be participating in [Google's 2024 Summer of Code ](https://en.wikipedia.org/wiki/Google_Summer_of_Code)program with [Waycrate](https://waycrate.github.io/index.html). I have been eyeing GSoC for a few years and I'm happy that after a few false starts I was able to find a project I was interested in and an organization I could fit into.
@@ -22,5 +27,3 @@ It's all a bit steeped in domain specific knowledge which is distributed all ove
 
 I have redacted the first and last pages but this is otherwise identical to the proposal that got accepted:
 ![[Waycrate_GSOC_2024.pdf]]
-
-#gsoc

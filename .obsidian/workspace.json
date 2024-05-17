@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GSOC/GsoC Research Links.md",
+                "file": "GSOC/GSOC.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GSOC/GsoC Research Links.md",
+                "file": "GSOC/GSOC.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GSOC/GsoC Research Links.md",
+                "file": "GSOC/GSOC.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GSOC/GsoC Research Links.md"
+                "file": "GSOC/GSOC.md"
               }
             }
           }
@@ -163,11 +163,11 @@
   "active": "20c9cc2c27c93397",
   "lastOpenFiles": [
     "Home.md",
+    "GSOC/GsoC Research Links.md",
+    "GSOC/GSOC.md",
     "redirect.html~",
     "redirect.html",
     "GSOC/The Community Bonding Period.md",
-    "GSOC/GsoC Research Links.md",
-    "GSOC/GSOC.md",
     "config.yaml~",
     "Index.md",
     "output/md/GSOC/GSOC.md",

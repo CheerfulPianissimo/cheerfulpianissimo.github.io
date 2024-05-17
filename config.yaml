@@ -28,10 +28,10 @@ toggles:
       layout: documentation # documentation, tabs, minimal 
     rss:
       enabled: true
-      host_root: 'https://cheerfulpianissimo.github.io/'
+      host_root: 'https://cheerfulpianissimo.github.io/notes'
       channel:
         title: "CheerfulP's Notes"
-        website_link: 'cheerfulpianissimo.github.io'
+        website_link: 'cheerfulpianissimo.github.io/notes'
         description: "CheerfulPianissimo's Notebook/Blog"
         language_code: en-us
         managing_editor: "na"

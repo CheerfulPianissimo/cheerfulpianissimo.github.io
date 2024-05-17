@@ -9,7 +9,7 @@ jobs:
     name: Build and Push
     steps:
       - name: Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           ref: main
           path: notes

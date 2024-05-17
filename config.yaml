@@ -15,7 +15,7 @@ html_url_prefix: '/notes'
 site_name: CheerfulP's Notes
 navbar_links:
   - name: Home
-    link: Home.html
+    link: index.html
   - name: GSoC 2024
     link: GSOC/GSOC.html
 

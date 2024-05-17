@@ -28,6 +28,13 @@ toggles:
       layout: documentation # documentation, tabs, minimal 
     rss:
       enabled: true
+      channel:
+        title: CheerfulP's Notes
+        website_link: https://cheerfulpianissimo.github.io/
+        description: CheerfulPianissimo's Notebook/Blog
+        language_code: en-us
+        managing_editor: n/a
+        web_master: n/a
     table_of_contents:
       add_toc_when_missing: true
     side_pane:

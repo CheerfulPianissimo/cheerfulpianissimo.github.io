@@ -6,7 +6,7 @@ tags:
 I don't expect this of to be of much use to anyone else in this form but I would like this to be here for the sake of reference:
 ## General Wayland Resources
 - [Wayland Book by Drew DeVault](https://wayland-book.com/) - https://wayland-book.com/
-- [Somewhat Outdated but Detailed Wayland Book](https://jan.newmarch.name/Wayland/index.html) - https://jan.newmarch.name/Wayland/index.html
+- [Somewhat outdated but detailed book on Wayland](https://jan.newmarch.name/Wayland/index.html) - https://jan.newmarch.name/Wayland/index.html
 - [Writing Wayland Clients (in C)](https://bugaevc.gitbooks.io/writing-wayland-clients/content/) - https://bugaevc.gitbooks.io/writing-wayland-clients/content/
 - [Wayland Protocols](https://wayland.app/) - https://wayland.app/
 - [Smithay Wayland-rs Explainer](https://smithay.github.io/book) - https://smithay.github.io/book
@@ -16,7 +16,7 @@ I don't expect this of to be of much use to anyone else in this form but I would
 - [Eleni's DMABuf Sharing Example](https://eleni.mutantstargoat.com/hikiko/egl-dma-1/) - https://eleni.mutantstargoat.com/hikiko/egl-dma-1/
 - [Pekka Paalanen on Supporting Wayland GL Clients and DMABuf](https://ppaalanen.blogspot.com/2012/11/on-supporting-wayland-gl-clients-and.html) - https://ppaalanen.blogspot.com/2012/11/on-supporting-wayland-gl-clients-and.html
 
-## DMABuf Implementations
+## DMABuf+Screencopy Implementations
 - [wf-recorder's DMABuf Implementation](https://github.com/ammen99/wf-recorder/pull/206) - https://github.com/ammen99/wf-recorder/pull/206
 - [wl-screenrec using scrcpy+dmabuf for Recording](https://github.com/russelltg/wl-screenrec) - https://github.com/russelltg/wl-screenrec
 

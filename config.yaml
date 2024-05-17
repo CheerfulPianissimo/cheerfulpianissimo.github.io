@@ -30,7 +30,7 @@ toggles:
       enabled: true
       channel:
         title: CheerfulP's Notes
-        website_link: https://cheerfulpianissimo.github.io/
+        website_link: "cheerfulpianissimo.github.io"
         description: CheerfulPianissimo's Notebook/Blog
         language_code: en-us
         managing_editor: n/a

@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GsoC Research Links.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GsoC Research Links.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GsoC Research Links.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GSOC/GSOC.md"
+                "file": "GSOC/GsoC Research Links.md"
               }
             }
           }
@@ -162,9 +162,12 @@
   },
   "active": "20c9cc2c27c93397",
   "lastOpenFiles": [
-    "config.yaml~",
+    "redirect.html~",
+    "redirect.html",
+    "GSOC/The Community Bonding Period.md",
     "GSOC/GsoC Research Links.md",
     "GSOC/GSOC.md",
+    "config.yaml~",
     "Index.md",
     "output/md/GSOC/GSOC.md",
     "GSOC/Waycrate_GSOC_2024.pdf",

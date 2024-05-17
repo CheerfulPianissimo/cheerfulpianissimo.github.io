@@ -16,9 +16,11 @@ Wayshot is a screen capture *client* for Wayland compositors (which in this inst
 
 Right now, wayshot uses the non-hardware accelerated screen capture provisions of this protocol which has its drawbacks in terms of performance, my project will be to modify libwayshot so that it uses the part of the protocol that *does* do on-GPU screen copy. This is done via  DMA-BUFs (Direct memory access buffers) which is a part of the Linux Kernel's [Direct Rendering Manager](https://en.wikipedia.org/wiki/Direct_Rendering_Manager) subsystem. 
 
-It's all a bit steeped in domain specific knowledge which is distributed all over the internet. I have a unorganized and non-exhaustive pile of links I used to get a better idea of the problem which may be of interest to some:  [[GsoC Research Links]]
+It's all a bit steeped in domain specific knowledge which is distributed all over the internet. I have an unorganized and non-exhaustive pile of links I used to get a better idea of the problem which may be of interest to some:  [[GsoC Research Links]]
 
 # My Proposal
 
 I have redacted the first and last pages but this is otherwise identical to the proposal that got accepted:
 ![[Waycrate_GSOC_2024.pdf]]
+
+#gsoc

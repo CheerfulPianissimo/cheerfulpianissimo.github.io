@@ -24,6 +24,7 @@ jobs:
           obsidianhtml convert -i notes/config.yaml -v
           touch output/html/.nojekyll
           mv output/html output/notes #handle the site being on /notes
+          mv notes/redirect.html output/index.html
 
       - name: Publish to Github Pages
         uses: s0/git-publish-subdir-action@develop

@@ -29,3 +29,4 @@ I don't expect this of to be of much use to anyone else in this form but I would
 - [New Screencopy Protocol](https://gitlab.freedesktop.org/wayland/wayland-protocols/-/merge_requests/124) - https://gitlab.freedesktop.org/wayland/wayland-protocols/-/merge_requests/124
 - [LWN Series on Linux Graphics Stack](https://lwn.net/Articles/955376/) and [Part 2](https://lwn.net/Articles/955708/) - https://lwn.net/Articles/955376/ and https://lwn.net/Articles/955708/
 - [About Gaming on Wayland](https://zamundaaa.github.io/wayland/2021/12/14/about-gaming-on-wayland.html) - https://zamundaaa.github.io/wayland/2021/12/14/about-gaming-on-wayland.html
+#gsoc 

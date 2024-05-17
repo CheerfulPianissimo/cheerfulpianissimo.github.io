@@ -1,0 +1,19 @@
+# The first folder that contains all obsidian files
+# Use full path or relative path, but don't use ~/
+#obsidian_folder_path_str: ',/' 
+
+# The note that will be used as the index.html 
+# should be in obsidian_folder_path_str
+# Use full path or relative path, but don't use ~/
+obsidian_entrypoint_path_str: 'Index.md'
+
+copy_vault_to_tempdir: true
+copy_vault_to_tempdir_method: default
+
+html_url_prefix: '/notes'
+
+toggles:
+  # If this is false only the entrypoint and all its links (recursively) are processed
+  # if true all the notes will be processed
+  process_all: False
+

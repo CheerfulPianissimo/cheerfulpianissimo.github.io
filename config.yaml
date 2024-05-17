@@ -12,8 +12,17 @@ copy_vault_to_tempdir_method: default
 
 html_url_prefix: '/notes'
 
+site_name: CheerfulP's Notes
+navbar_links:
+  - name: Home
+    link: index.html
+  - name: GSoC 2024
+    link: GSOC/GSOC.html
+
 toggles:
   # If this is false only the entrypoint and all its links (recursively) are processed
   # if true all the notes will be processed
   process_all: False
-
+  features:
+    styling:
+      layout: documentation # documentation, tabs, minimal 

@@ -25,18 +25,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Index.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "46fb0ea39f77ccf6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "GSOC/GSOC.md",
                 "mode": "source",
                 "source": false
@@ -44,7 +32,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -172,11 +160,13 @@
       "wikipedia-search:Open Article": false
     }
   },
-  "active": "5f2c0aa56bf97f64",
+  "active": "20c9cc2c27c93397",
   "lastOpenFiles": [
+    "config.yaml~",
     "GSOC/GsoC Research Links.md",
-    "Index.md",
     "GSOC/GSOC.md",
+    "Index.md",
+    "output/md/GSOC/GSOC.md",
     "GSOC/Waycrate_GSOC_2024.pdf",
     "GSOC/output.pdf",
     "index.md",

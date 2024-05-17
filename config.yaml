@@ -26,3 +26,26 @@ toggles:
   features:
     styling:
       layout: documentation # documentation, tabs, minimal 
+    rss:
+      enabled: true
+    table_of_contents:
+      add_toc_when_missing: true
+    side_pane:
+      left_pane:
+        enabled: true
+        width: 16rem
+        contents: dir_tree
+        content_args:
+          rel_path: index.html
+          div_selector: .content
+          strip_sub_divs:
+            - .toc
+      right_pane:
+        enabled: true
+        width: 16rem
+        contents: toc
+        content_args:
+          rel_path: index.html
+          div_selector: .content
+          strip_sub_divs:
+            - .toc

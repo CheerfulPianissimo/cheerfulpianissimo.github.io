@@ -26,7 +26,7 @@ I don't expect this of to be of much use to anyone else in this form but I would
 - [DMABuf System Slides](https://elinux.org/images/a/a8/DMA_Buffer_Sharing-_An_Introduction.pdf) - https://elinux.org/images/a/a8/DMA_Buffer_Sharing-_An_Introduction.pdf
 
 ## PipeWire and DMABuf
-- [DMABuf in PipeWire](https://docs.pipewire.org/page_dma_buf.html) - https://docs.pipewire.org/page_dma_buf.html
+- [DMABuf in PipeWire](https://docs.pipewire.org/page_dma_buf.html) - https://docs2.pipewire.org/page_dma_buf.html
 - [Better Screencasting with GNOME on Wayland](https://feaneron.com/2020/02/24/even-better-screencast-with-gnome-on-wayland/) - https://feaneron.com/2020/02/24/even-better-screencast-with-gnome-on-wayland/
 - [Introducing Graphics Offload in GTK](https://blog.gtk.org/2023/11/15/introducing-graphics-offload/) - https://blog.gtk.org/2023/11/15/introducing-graphics-offload/
 

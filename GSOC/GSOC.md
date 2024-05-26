@@ -15,7 +15,7 @@ To put it in a nutshell: It's basically about adding hardware accelerated [Wayla
 
 In a tad bit more detail: 
 
-Wayshot is a screen capture *client* for Wayland compositors (which in this instance act as servers) that implement the [wlr-screencopy](https://wayland.app/protocols/wlr-screencopy-unstable-v1)  protocol (which at this point is mostly compositors based on the [wlroots](https://github.com/swaywm/wlroots) library including the amazing [sway](https://en.wikipedia.org/wiki/Sway_(window_manager)) compositor which is used by yours truly).
+Wayshot is a screen capture *client* for Wayland compositors (which in this instance act as servers) that implement the [wlr-screencopy](https://wayland.app/protocols/wlr-screencopy-unstable-v1)  protocol (which at this point is mostly compositors based on the [wlroots](https://github.com/swaywm/wlroots) library like [sway](https://en.wikipedia.org/wiki/Sway_(window_manager)) , river, etc).
 > [!question]- What is a Wayland Compositor? 
 > It's basically a program that manages how all *other* programs on your system are displayed. All your programs draw stuff and pass it to your compositor which ultimately draws them onto your monitor after adding stuff like window decorations. It's kinda a big part of the Linux desktop user experience
 
@@ -23,7 +23,15 @@ Right now, wayshot uses the non-hardware accelerated screen capture provisions o
 
 It's all a bit steeped in domain specific knowledge which is distributed all over the internet. I have an unorganized and non-exhaustive pile of links I used to get a better idea of the problem which may be of interest to some:  [[GsoC Research Links]]
 
-# My Proposal
+# Devlog
+I will keep a devlog to document my GSoC 2024 experience:
+- [[GSoC Devlog (May)]]
+# Latest Project Proposal
+The updated project proposal doc in markdown format will be made available here:
+- [[Project Motivation]]
+- [[Project Design]]
+I feel like it's more ergonomic and easier to handle to have it as an easily editable markdown file than as richtext.
+# The Original Proposal
 
 I have redacted the first and last pages but this is otherwise identical to the proposal that got accepted:
 ![[Waycrate_GSOC_2024.pdf]]

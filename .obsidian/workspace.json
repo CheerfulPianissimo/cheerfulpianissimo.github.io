@@ -8,7 +8,19 @@
         "type": "tabs",
         "children": [
           {
-            "id": "d15f32b47620ee35",
+            "id": "518bbb88f4d61e1b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GSOC/Project Design.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "efda9608f5e2161d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,7 +32,7 @@
             }
           },
           {
-            "id": "20c9cc2c27c93397",
+            "id": "fca3d07b753caccd",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -30,8 +42,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "7824a9d9d730184c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GSOC/WayshotConnection Functions.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -60,7 +85,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#Protocol",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -81,7 +106,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 473.5
+    "width": 267.5
   },
   "right": {
     "id": "a636fcdf93476e70",
@@ -97,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GSOC/GsoC Research Links.md",
+                "file": "GSOC/WayshotConnection Functions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GSOC/GsoC Research Links.md",
+                "file": "GSOC/WayshotConnection Functions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GSOC/GsoC Research Links.md"
+                "file": "GSOC/WayshotConnection Functions.md"
               }
             }
           }
@@ -159,12 +184,25 @@
       "wikipedia-search:Open Article": false
     }
   },
-  "active": "d15f32b47620ee35",
+  "active": "7824a9d9d730184c",
   "lastOpenFiles": [
-    "GSOC/GSOC.md",
+    "GSOC/GSoC Devlog (May).md",
     "GSOC/GsoC Research Links.md",
-    "config.yaml~",
+    "GSOC/Project Design.md",
+    "GSOC/GSOC.md",
+    "GSOC/WayshotConnection Functions.md",
+    "GSoC Devlog  (May).md",
+    "GSOC/GSoC Devlog  (May).md",
+    "GSOC/Project Motivation.md",
+    "_attachments/proposal_image1.png",
     "Home.md",
+    "_attachments/image1.png",
+    "GSOC/Project Design.md~",
+    "GSOC/WaycrateGSoC2024Proposal_Idea1_SoorajS.html",
+    "_attachments/wayshot-2024_05_14-18_34_28.png",
+    "_attachments",
+    "Untitled.md",
+    "config.yaml~",
     "redirect.html~",
     "redirect.html",
     "GSOC/The Community Bonding Period.md",

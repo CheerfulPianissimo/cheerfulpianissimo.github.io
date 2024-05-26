@@ -72,19 +72,19 @@ The key data structure that deals with individual frames in libwayshot is the `C
 Creating a DMA-BUF is a somewhat more involved process than creating shm buffers. While the latter can be created using a few system calls, the general mechanism for creating DMA-BUFs in wayland is by using the stable linux-dmabuf protocol.
 
 The general steps involved are:
-1.  Obtain the ZwpLinuxDmabufV1 interface from the compositor.
-	1. The wayland global registry can be queried to do this.
-2.  Use ZwpLinuxDmabufV1 to create a ZwpLinuxBufferParamsV1 interface object.
-	1.  Relevant request: [create_params](https://wayland.app/protocols/linux-dmabuf-v1#zwp_linux_dmabuf_v1:request:create_params)
-3.  Use the ZwpLinuxBufferParamsV1 interface to build a dmabuf backed wl-buffer:
-	1. Use the frame parameters obtained earlier from screencopy's `linux_dmabuf` event to create a GBM buffer object (`create_buffer_object`)
-	2. Get a file descriptor to the buffer object and pass it to the ZwpLinuxBufferParamsV1 object's add method to connect the wayland object to it's backing buffer
-	3.  Use the [create_immed](https://wayland.app/protocols/linux-dmabuf-v1#zwp_linux_buffer_params_v1:request:create_immed)method to immediately initialize a wl_buffer object.
+- Obtain the ZwpLinuxDmabufV1 interface from the compositor.
+	- The wayland global registry can be queried to do this.
+-  Use ZwpLinuxDmabufV1 to create a ZwpLinuxBufferParamsV1 interface object.
+	-  Relevant request: [create_params](https://wayland.app/protocols/linux-dmabuf-v1#zwp_linux_dmabuf_v1:request:create_params)
+- Use the ZwpLinuxBufferParamsV1 interface to build a dmabuf backed wl-buffer:
+	- Use the frame parameters obtained earlier from screencopy's `linux_dmabuf` event to create a GBM buffer object (`create_buffer_object`)
+	- Get a file descriptor to the buffer object and pass it to the ZwpLinuxBufferParamsV1 object's add method to connect the wayland object to it's backing buffer
+	-  Use the [create_immed](https://wayland.app/protocols/linux-dmabuf-v1#zwp_linux_buffer_params_v1:request:create_immed)method to immediately initialize a wl_buffer object.
 
 ## Passing the wl-buffer to compositor for copy
 Once the requisite wl-buffer has been created a handle to it needs to be passed to the compositor so that the compositor can fill it in. The steps for this are:
-1.  Create the dmabuf backed wl-buffer using the linux-dmabuf protocol as discussed above.
-2. Pass the dmabuf backed wl-buffer to the compositor to be filled in. libwayshot already does this with the copy request on the ZwlrScreencopyFrameV1 interface. The process is the same for dmabuf backed wl-buffers.
+-  Create the dmabuf backed wl-buffer using the linux-dmabuf protocol as discussed above.
+- Pass the dmabuf backed wl-buffer to the compositor to be filled in. libwayshot already does this with the copy request on the ZwlrScreencopyFrameV1 interface. The process is the same for dmabuf backed wl-buffers.
 ## Returning the resulting buffer to the library user
 Once the copy is complete libwayshot has to pass the resultant screenshot to the caller in a usable form. This can be done by returning one or all of the following objects:
 - GBM Buffer Objects

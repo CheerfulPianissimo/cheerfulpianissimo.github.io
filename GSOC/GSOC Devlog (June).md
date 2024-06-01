@@ -40,6 +40,7 @@ Some thoughts:
 		```
 		which stores reusable state for dmabuf mode in WayshotConnection
 		-  Not sure if WayshotConnection is the right place for this, presently most of this state for shm screencopy is stored in the intermediate `capture_*` functions.
+
 - In general there's stuff that needs to be done once like init, getting output information or creating a screencopy manager with the output and region selected and then there is the stuff that needs to be done every frame: getting the buffer parameters, properly initializing the buffers, and actually copying the frame.
 	- Presently wayshot is not geared to really separate this: for instance, it creates a new screencopy manager for every frame initialized  and it's clearly designed to be a single use screenshot library rather than a continuous screen-capture system. 
 	- I intend to build out the dmabuf functionality in the current framework, will see if it can be refactored out later to more clearly separate the frame capture init from the actual frame capture loop.

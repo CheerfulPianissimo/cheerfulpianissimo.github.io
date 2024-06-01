@@ -6,7 +6,8 @@ Some thoughts:
 	- The shm mode in which libwayshot presently works
 		- Some relevant data-structures:
 			- FrameCopy:
-				- ```struct FrameCopy {
+				```
+				struct FrameCopy {
 					pub frame_format: FrameFormat,
 				    pub frame_color_type: ColorType,
 				    pub frame_mmap: MmapMut,
@@ -14,25 +15,30 @@ Some thoughts:
 				    /// Logical region with the transform already applied.
 				    pub logical_region: LogicalRegion,
 				    pub physical_size: Size,
-				}```
+				}
+				```
 				This struct stores the frame metadata along with the buffer that backs it
 			- FrameGuard:
-				- ```pub struct FrameGuard {
+				```
+				pub struct FrameGuard {
 					pub buffer: WlBuffer,
 					pub shm_pool: WlShmPool,
-					}```
+					}
+				```
 				This struct serves as a "Guard" for that wayland-rs proxy objects that calls `destroy()` on them when dropped
 		- The DMA-BUF mode:
 			- In this mode we'll have to store a `ZwpLinuxDmabufV1` to create the WlBuffers needed for copy(). One instance of this can be reused across multiple frames.
 			- A GBMDevice to create GBM backing buffer objects on. Again, one instance of this can be reused across frames.
 - Implemented a new constructor to initialize a GBM Device and store it in the main state of the program `WayshotConnection`
-	- Also created a ```
-		struct DMABUFState {
+	- Also created a 
+	```
+	struct DMABUFState {
 			linux_dmabuf: ZwpLinuxDmabufV1,
 			gbmdev: GBMDevice<Card>,
-		}```
-		which stored reusable state for dmabuf mode in WayshotConnection
-		- Not sure if WayshotConnection is the right place for this, presently most of this state for shm screencopy is stored in the intermediate `capture_*` functions.
+		}
+	```
+	which stores reusable state for dmabuf mode in WayshotConnection
+	- Not sure if WayshotConnection is the right place for this, presently most of this state for shm screencopy is stored in the intermediate `capture_*` functions.
 - In general there's stuff that needs to be done once like init, getting output information or creating a screencopy manager with the output and region selected and then there is the stuff that needs to be done every frame: getting the buffer parameters, properly initializing the buffers, and actually copying the frame.
 	- Presently wayshot is not geared to really separate this: for instance, it creates a new screencopy manager for every frame initialized  and it's clearly designed to be a single use screenshot library rather than a continuous screen-capture system. 
 	- I intend to build out the dmabuf functionality in the current framework, will see if it can be refactored out later to more clearly separate the frame capture init from the actual frame capture loop.

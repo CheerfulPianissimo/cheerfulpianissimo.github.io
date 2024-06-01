@@ -1,6 +1,7 @@
 ---
 tags:
   - gsoc
+  - devlog
 ---
 This was my first month as a [Google Summer of Code](GSOC) contributor at [Waycrate](https://waycrate.github.io/index.html) and I feel like I've made a pretty decent start. We had a few meetings with the mentors and fellow contributors and they seem cool. 
 
@@ -8,7 +9,7 @@ I have my college semester exams at the beginning of the coding period so I thou
 # What have you been working on?
 
 ## The MVP
-I decided to build a MVP of the project in order to gain a closer understanding of the problem. I was able to hack and slash my way to something working by referring to the code from [wl-screenrec](https://github.com/russelltg/wl-screenrec) and the official example client [here](https://gitlab.freedesktop.org/wlroots/wlr-clients/-/blob/master/screencopy-dmabuf.c?ref_type=heads)
+I decided to build a MVP of the project in order to gain a closer understanding of the problem. I was able to hack and slash my way to something working by referring to the code from [wl-screenrec](https://github.com/russelltg/wl-screenrec) and the official example client [here](https://gitlab.freedesktop.org/wlroots/wlr-clients/-/blob/master/screencopy-dmabuf.c?ref_type=heads) It may be found on 
 
 Here's the first successful image captured using it:
 ![[wayshot-2024_05_14-18_34_28.png]]

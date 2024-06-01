@@ -81,11 +81,11 @@ The general steps involved are:
 	- Get a file descriptor to the buffer object and pass it to the ZwpLinuxBufferParamsV1 object's add method to connect the wayland object to it's backing buffer
 	-  Use the [create_immed](https://wayland.app/protocols/linux-dmabuf-v1#zwp_linux_buffer_params_v1:request:create_immed)method to immediately initialize a wl_buffer object.
 
-## Passing the wl-buffer to compositor for copy
+### Passing the wl-buffer to compositor for copy
 Once the requisite wl-buffer has been created a handle to it needs to be passed to the compositor so that the compositor can fill it in. The steps for this are:
 -  Create the dmabuf backed wl-buffer using the linux-dmabuf protocol as discussed above.
 - Pass the dmabuf backed wl-buffer to the compositor to be filled in. libwayshot already does this with the copy request on the ZwlrScreencopyFrameV1 interface. The process is the same for dmabuf backed wl-buffers.
-## Returning the resulting buffer to the library user
+### Returning the resulting buffer to the library user
 Once the copy is complete libwayshot has to pass the resultant screenshot to the caller in a usable form. This can be done by returning one or all of the following objects:
 - GBM Buffer Objects
 - wayland-rs wl-buffer
@@ -93,4 +93,4 @@ Once the copy is complete libwayshot has to pass the resultant screenshot to the
 > [!question] What is EGL?
 > From the [EGL specification](http://www.khronos.org/registry/egl/specs/eglspec.1.5.pdf) "EGL [is] an interface between rendering APIs such as OpenCL, OpenGL, OpenGL ES or OpenVG (referred to collectively as client APIs) and one or more underlying platforms (typically window systems such as X11)" (or in our case - Wayland)
 
-The caller can then perform whatever it wants with these buffer handles.
+The caller can then do whatever it wants to with these buffer handles.

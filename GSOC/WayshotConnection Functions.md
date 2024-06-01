@@ -1,4 +1,4 @@
-Below is a dependency graph that outlines which functions in the `WayshotConnection` struct call which other functions. This should help illustrate the flow and dependencies between the functions:
+Below is a dependency graph that outlines which functions in the `WayshotConnection` struct call which other functions. 
 
 ```scss
 WayshotConnection

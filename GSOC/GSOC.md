@@ -26,6 +26,7 @@ It's all a bit steeped in domain specific knowledge which is distributed all ove
 # Devlog
 I will keep a devlog to document my GSoC 2024 experience:
 - [[GSoC Devlog (May)]]
+- [[GSOC Devlog (June)]]
 # Latest Project Proposal
 The updated project proposal doc in markdown format will be made available here:
 - [[Project Motivation]]

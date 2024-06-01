@@ -31,13 +31,13 @@ Some thoughts:
 			- A GBMDevice to create GBM backing buffer objects on. Again, one instance of this can be reused across frames.
 - Implemented a new constructor to initialize a GBM Device and store it in the main state of the program `WayshotConnection`
 	- Also created a 
-	```
-	struct DMABUFState {
-			linux_dmabuf: ZwpLinuxDmabufV1,
-			gbmdev: GBMDevice<Card>,
-		}
-	```
-	which stores reusable state for dmabuf mode in WayshotConnection
+		```
+		struct DMABUFState {
+				linux_dmabuf: ZwpLinuxDmabufV1,
+				gbmdev: GBMDevice<Card>,
+			}
+		```
+		which stores reusable state for dmabuf mode in WayshotConnection
 	- Not sure if WayshotConnection is the right place for this, presently most of this state for shm screencopy is stored in the intermediate `capture_*` functions.
 - In general there's stuff that needs to be done once like init, getting output information or creating a screencopy manager with the output and region selected and then there is the stuff that needs to be done every frame: getting the buffer parameters, properly initializing the buffers, and actually copying the frame.
 	- Presently wayshot is not geared to really separate this: for instance, it creates a new screencopy manager for every frame initialized  and it's clearly designed to be a single use screenshot library rather than a continuous screen-capture system. 

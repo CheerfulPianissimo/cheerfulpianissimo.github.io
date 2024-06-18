@@ -61,4 +61,29 @@ Some thoughts:
 	  - How to reconcile two different types of frame metadata: 
 		  - `Buffer` events give the parameters for shm mode and is stored in `FrameFormat` struct in `CaptureFrameState` presently
 		  - Should the equivalent parameters for `dmabuf` event be stored in `FrameFormat` (even though the `dmabuf` event doesn't give the stride parameter that `Buffer` gives and `FrameFormat` requires) or should a new struct be created specifically for storing `dmabuf` parameters?
-	
+# Week 4
+I spent Weeks 2 and 3 busy with my semester exams. In that time, I outlined a strategy to refactor libwayshot and implemented it in Week 4 after discussing the above questions with my mentors.
+
+I would modify the core data structures in libwayshot and then make code changes wherever the compiler demands it.  Then I would modify/add whatever functions are required for the API.
+
+Reading the code, I discovered that there are three levels of abstraction in libwayshot:
+- The `screenshot_*` series of functions: These are the public API and mostly wrap around one of the `capture_*` series of functions.
+- The `capture_frame_copy*` and `capture_output_frame_shm_fd` series of functions: `capture_output_frame_shm_fd` is a part of the public libwayshot API  that allows for low-level access to the screencapture data in the form of file descriptors and a `FrameGuard` struct that contains a `WlBuffer`. The `capture_frame_copy*` functions handles the creation of a `FrameCopy` struct which is a sort of intermediate data structure between raw shared memory and a `DynamicImage`, these functions are used by the `screenshot*` function layer above and are not public.
+- The `capture_output_frame_get_state` and `capture_output_frame_inner` functions: These two functions deal with the nitty-gritty of interacting with the wlr-screencopy protocol. The primary data structure here is `CaptureFrameState`.
+	- `capture_output_frame_get_state` sets up a [zwlr_screencopy_manager_v1](https://wayland.app/protocols/wlr-screencopy-unstable-v1#zwlr_screencopy_manager_v1 "zwlr_screencopy_manager_v1 interface") with the correct sub-region and the output to be captured to get a  [zwlr_screencopy_frame_v1](https://wayland.app/protocols/wlr-screencopy-unstable-v1#zwlr_screencopy_frame_v1 "zwlr_screencopy_frame_v1 interface") 
+	- `capture_output_frame_inner` manages the copy of frame data from the created zwlr_screencopy_frame_v1 into the shared memory buffers.
+	- `capture_output_frame_shm_fd` and it's sister function `capture_output_frame_shm_from_file` call the above two functions one after the other to handle everything to do with wlr-screencopy.
+## First Draft API Implementation
+For the first phase I decided to create dmabuf version of the lower two levels of abstraction. My goal was to create a dmabuf equivalent for `capture_output_frame_shm_fd` which would provide low level access to the dma buffer objects and a wl-buffer. 
+
+To this goal, I created the new function variants `capture_output_frame_get_state_dmabuf` and `capture_output_frame_inner_dmabuf` to replicate the lowest layer and `capture_output_frame_dmabuf` to replicate the public API on the level above. `capture_output_frame_dmabuf` would return a GBM BufferObject, a FrameGuard containing a WlBuffer and the frame format descriptor.
+
+Two new structs `DMAFrameFormat` and `DMAFrameGuard` were created as counterparts to `FrameFormat` and `FrameGuard`. 
+
+For the most part adapting the code from the MVP into these functions was straightforward with the shm variants as a reference.
+
+One part I have some trouble with is error handling. Using unwrap() in library code is generally frowned upon but I haven't figured out a good way to pass up errors to the caller without running into compiler errors like "? couldn't convert the error to `error::Error`
+the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait". This requires some research.
+
+The next phase will be testing. I will need some way to test the new API, ideally without having any VRAM->CPU copying. The simplest plan is to start with a basic wayland window demo and attach the `WlBuffer` obtained from the API to a `WlSurface` and see what the result looks like. 
+

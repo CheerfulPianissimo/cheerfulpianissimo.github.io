@@ -44,7 +44,7 @@ Some thoughts:
 - In general there's stuff that needs to be done once like init, getting output information or creating a screencopy manager with the output and region selected and then there is the stuff that needs to be done every frame: getting the buffer parameters, properly initializing the buffers, and actually copying the frame.
 	- Presently wayshot is not geared to really separate this: for instance, it creates a new screencopy manager for every frame initialized  and it's clearly designed to be a single use screenshot library rather than a continuous screen-capture system. 
 	- I intend to build out the dmabuf functionality in the current framework, will see if it can be refactored out later to more clearly separate the frame capture init from the actual frame capture loop.
-## Questions
+## Questions for Week 1
 - How to distribute program state?
 	- There are multiple places to store it: `WayshotConnection`, a mostly unused `WayshotState` struct and the `CaptureFrameState` struct
 	- Some state changes from frame to frame:
@@ -86,4 +86,10 @@ One part I have some trouble with is error handling. Using unwrap() in library c
 the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait". This requires some research.
 
 The next phase will be testing. I will need some way to test the new API, ideally without having any VRAM->CPU copying. The simplest plan is to start with a basic wayland window demo and attach the `WlBuffer` obtained from the API to a `WlSurface` and see what the result looks like. 
+## Testing the Draft API
+I started with the simple window client [example](https://github.com/Smithay/wayland-rs/blob/master/wayland-client/examples/simple_window.rs) from the wayland-rs project. This sample program simply sets up a window and attaches a shared memory backed `WlBuffer` containing a simple image to a `WlSurface`.
+
+All I had to do was to swap out the shm `WlBuffer` with the `WlBuffer` obtained from the new API at `capture_output_frame_dmabuf`. I was surprised to find it working out of the box:
+![[Pasted image 20240619212710.png]]
+The window on the right mirrors whatever is on the screen via the new API.
 

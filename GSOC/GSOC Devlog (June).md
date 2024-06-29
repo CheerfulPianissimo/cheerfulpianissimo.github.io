@@ -87,9 +87,9 @@ the question mark operation (`?`) implicitly performs a conversion on the error 
 
 The next phase will be testing. I will need some way to test the new API, ideally without having any VRAM->CPU copying. The simplest plan is to start with a basic wayland window demo and attach the `WlBuffer` obtained from the API to a `WlSurface` and see what the result looks like. 
 ## Testing the Draft API
-I started with the simple window client [example](https://github.com/Smithay/wayland-rs/blob/master/wayland-client/examples/simple_window.rs) from the wayland-rs project. This sample program simply sets up a window and attaches a shared memory backed `WlBuffer` containing a simple image to a `WlSurface`.
+I started with the simple window client [example](https://github.com/Smithay/wayland-rs/blob/master/wayland-client/examples/simple_window.rs) from the wayland-rs project. This sample program simply sets up a window and attaches a shared memory backed `WlBuffer` containing a simple image to a `WlSurface`. The code is stored in stored in `src/examples/waymirror.rs`. 
 
-All I had to do was to swap out the shm `WlBuffer` with the `WlBuffer` obtained from the new API at `capture_output_frame_dmabuf`. I was surprised to find it working out of the box:
+All I had to do was to swap out the shm `WlBuffer` in the example program with the `WlBuffer` obtained from the new API at `capture_output_frame_dmabuf`. I was surprised to find it working out of the box:
 ![[Pasted image 20240619212710.png]]
 The window on the right mirrors whatever is on the screen via the new API.
 
@@ -100,7 +100,7 @@ I can't say the next phase is going to be the same. That phase is going to inclu
 ## Phase 2: Transformations And OpenGL
 Let's recap the current state of affairs: libwayshot now has an API that provides screencapture data in two formats: a BufferObject managed using gbm-rs and a WlBuffer managed using wayland-rs.
 
-This is all you need for some applications. The demo app `waymirror` is one example: all it needs to do is pick up the WlBuffer and attach it to a WlSurface to directly draw the screenshot to the window. It does not involve any VRAM->RAM copies. In a sense this already is a complete on-GPU pipeline for moving around screencapture data in libwayshot. 
+This is all you need for some applications. The demo app `waymirror` is one example: all it needs to do is pick up the WlBuffer containing the screen capture data and attach it to a WlSurface to directly draw the screenshot to the window. It does not involve any VRAM->RAM copies. In a sense this already is a complete on-GPU pipeline for moving around screencapture data in libwayshot. 
 
 So what's next? libwayshot does a lot more than just pass on the screenshot - it can capture specific subregions of the screen, deal with screen rotation, capture regions spanning multiple outputs - merging the result into a single image. The WlBuffer/BufferObject API is of insufficient utility when you want to manipulate the data stored within them - they are designed for moving images around, not manipulating them. 
 
@@ -108,10 +108,10 @@ This is where OpenGL comes in - the plan is to convert the DMABUF screencopy dat
 
 One issue here is that I do not have any personal experience directly using OpenGL even if I'm not new to the graphics rendering field. So I'll be spending a week or two learning up on the topic using the tutorial at https://learnopengl.com/ with the help of my mentors.
 ### The Plan
-FIrst we need to create a OpenGL context. A context basically stores the present state of the OpenGL rendering pipeline. There's a couple of methods of doing this on various platforms but the wlroots native method would via the use of [wayland-egl](https://docs.rs/wayland-egl/latest/wayland_egl/index.html). 
+FIrstly, we need to create a OpenGL context. A context basically stores the present state of the OpenGL rendering pipeline. There's a couple of methods of doing this on various platforms but the wlroots native method would via the use of [wayland-egl](https://docs.rs/wayland-egl/latest/wayland_egl/index.html). 
 
 One of my mentors, [@Shinyzenith](https://github.com/Shinyzenith) has a demo project at [wayland-egl-ctx](https://github.com/Shinyzenith/wayland-egl-ctx)conveniently recreating the OpenGL [Hello Triangle](https://learnopengl.com/Getting-started/Hello-Triangle)example via wayland-egl. My plan at this point is to:
 - Adapt code from that demo to properly initialize EGL and get a working OpenGL pipeline.
 - Figure out how to import dmabufs and turn them into textures:
 - Return the texture to the API caller
-With this preliminary pipeline working, further plans can be made to perform further transformations.
+With this preliminary pipeline working, further plans can be made to perform the aforementioned transformations and image merges via the use of OpenGL.

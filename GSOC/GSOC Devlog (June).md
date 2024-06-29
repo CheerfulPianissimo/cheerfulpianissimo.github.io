@@ -100,7 +100,7 @@ I can't say the next phase is going to be the same. That phase is going to inclu
 ## Phase 2: Transformations And OpenGL
 Let's recap the current state of affairs: libwayshot now has an API that provides screencapture data in two formats: a BufferObject managed using gbm-rs and a WlBuffer managed using wayland-rs.
 
-This is all you need for some applications. The demo app `waymirror` is one example: all it needs to do is pick up the WlBuffer attach it to a WlSurface to directly draw the screenshot to the window. It does not involve any VRAM->RAM copies. In a sense this already is a complete on-GPU pipeline for moving around screencapture data in libwayshot. 
+This is all you need for some applications. The demo app `waymirror` is one example: all it needs to do is pick up the WlBuffer and attach it to a WlSurface to directly draw the screenshot to the window. It does not involve any VRAM->RAM copies. In a sense this already is a complete on-GPU pipeline for moving around screencapture data in libwayshot. 
 
 So what's next? libwayshot does a lot more than just pass on the screenshot - it can capture specific subregions of the screen, deal with screen rotation, capture regions spanning multiple outputs - merging the result into a single image. The WlBuffer/BufferObject API is of insufficient utility when you want to manipulate the data stored within them - they are designed for moving images around, not manipulating them. 
 

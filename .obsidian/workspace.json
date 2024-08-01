@@ -13,31 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GSOC/Project Design.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "efda9608f5e2161d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GSOC/WayshotConnection Functions.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "fca3d07b753caccd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GSOC/GSOC Devlog (June).md",
+                "file": "GSOC/GSoC Devlog (July).md",
                 "mode": "source",
                 "source": false
               }
@@ -67,8 +43,7 @@
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -134,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GSOC/GSOC Devlog (June).md",
+                "file": "GSOC/GSoC Devlog (July).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +126,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GSOC/GSOC Devlog (June).md",
+                "file": "GSOC/GSoC Devlog (July).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +149,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GSOC/GSOC Devlog (June).md"
+                "file": "GSOC/GSoC Devlog (July).md"
               }
             }
           }
@@ -196,19 +171,23 @@
       "wikipedia-search:Open Article": false
     }
   },
-  "active": "fca3d07b753caccd",
+  "active": "518bbb88f4d61e1b",
   "lastOpenFiles": [
-    "GSOC/WayshotConnection Functions.md",
-    "GSOC/Project Design.md",
-    "GSOC/GSoC Changelog.md",
-    "GSOC/GSOC.md",
+    "GSOC/GSoC Devlog (May).md",
     "GSOC/GSOC Devlog (June).md",
+    "GSOC/GSoC Devlog (July).md",
+    "GSOC/GSOC.md",
+    "_attachments/Pasted image 20240730180043.png",
+    "_attachments/Pasted image 20240730180003.png",
+    "_attachments/Pasted image 20240730174837.png",
+    "GSOC/Project Design.md",
+    "GSOC/WayshotConnection Functions.md",
+    "GSOC/GSoC Changelog.md",
     "_attachments/Pasted image 20240619212710.png",
     "_attachments/Pasted image 20240619212607.png",
     "GSOC/Project Motivation.md",
     "_attachments/Pasted image 20240618105537.png",
     "GSOC/GsoC Research Links.md",
-    "GSOC/GSoC Devlog (May).md",
     "GSoC Devlog  (May).md",
     "GSOC/GSoC Devlog  (May).md",
     "_attachments/proposal_image1.png",

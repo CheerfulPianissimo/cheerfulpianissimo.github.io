@@ -4,7 +4,7 @@ Some useful resources I perused:
 - https://learnopengl.com/ for learning the foundational OpenGL concepts along with a simple triangle demo.
 - https://registry.khronos.org/EGL/ the EGL specs. EGL doesn't have as many resources as OpenGL to learn from so often you have to look at the base specs themselves. The particular extensions I had to use in my project were described by:
 	- https://registry.khronos.org/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import.txt for converting a GBM BufferObject into an EGLImage
-	- https://registry.khronos.org/OpenGL/extensions/OES/OES_EGL_image_external.txt : for importing the EGLImage as a usable GL texture
+	- https://registry.khronos.org/OpenGL/extensions/OES/OES_EGL_image_external.txt : for importing the EGLImage as an usable GL texture
 Also invaluable was the [Exchanging pixel buffers](https://www.kernel.org/doc/html//latest/userspace-api/dma-buf-alloc-exchange.html#exchanging-pixel-buffers "Permalink to this heading") document which helped me make sense of the various parameters demanded by the above functions. 
 
 # Weeks 3-5

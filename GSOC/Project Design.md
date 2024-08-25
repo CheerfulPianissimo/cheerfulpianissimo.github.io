@@ -92,5 +92,4 @@ Once the copy is complete libwayshot has to pass the resultant screenshot to the
 - An EGL Image, this will add additional dependencies to the library but will add more flexibility to what can be done with the buffers. 
 > [!question] What is EGL?
 > From the [EGL specification](http://www.khronos.org/registry/egl/specs/eglspec.1.5.pdf) "EGL [is] an interface between rendering APIs such as OpenCL, OpenGL, OpenGL ES or OpenVG (referred to collectively as client APIs) and one or more underlying platforms (typically window systems such as X11)" (or in our case - Wayland)
-
-The caller can then do whatever it wants to with these buffer handles.
+- A OpenGL texture. This can be obtained from the EGLImage, bound to the GL context and can then be rendered on screen.

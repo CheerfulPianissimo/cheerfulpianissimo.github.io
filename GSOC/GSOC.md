@@ -10,7 +10,7 @@ I'm pretty excited to be participating in [Google's 2024 Summer of Code ](https:
 # What's your project about?
 To put it in a nutshell: It's basically about implementing hardware accelerated [Wayland ](https://en.wikipedia.org/wiki/Wayland_(protocol))screen capture to a Rust library called [libwayshot](https://github.com/waycrate/wayshot). 
 
-> [!question]- Never heard of Wayland, what's it?
+> [!question]- Never heard of Wayland, what is it?
 > Technically, It's a set of protocols that determine how programs that want to draw things on the screen communicate with each other on Linux (and BSD-based) systems. More colloquially, think of it as an ecosystem of building blocks for the Linux desktop. Chances are good you're already using Wayland if you're on a recent Linux distro. 
 
 In a bit more detail: 
@@ -19,7 +19,9 @@ Wayshot is a screen capture *client* for Wayland compositors (which in this inst
 > [!question]- What is a Wayland Compositor? 
 > It's basically a program that manages how all *other* programs on your system are displayed. All your programs draw stuff and pass it to your compositor which ultimately draws them onto your monitor after adding stuff like window decorations. It's kinda a big part of the Linux desktop user experience
 
-Right now, wayshot uses the non-hardware accelerated screen capture provisions of this protocol which has its drawbacks in terms of performance, my project will be to modify libwayshot so that it uses the part of the protocol that *does* do on-GPU screen copy. This is done via  DMA-BUFs (Direct memory access buffers) which is a part of the Linux Kernel's [Direct Rendering Manager](https://en.wikipedia.org/wiki/Direct_Rendering_Manager) subsystem. 
+Right now, wayshot uses the non-hardware accelerated screen capture provisions of this protocol which has its drawbacks in terms of performance - it especially starts struggling when dealing with images at the 4K range. Every frame captured is downloaded onto the RAM from the VRAM in order to process it further.
+
+My project will be to modify libwayshot so that it uses the part of the protocol that *does* do on-GPU screen copy. This is done via  DMA-BUFs (Direct memory access buffers) which is a part of the Linux Kernel's [Direct Rendering Manager](https://en.wikipedia.org/wiki/Direct_Rendering_Manager) subsystem. By doing this we keep all the processing on the GPU and avoid costly memory copies between RAM and the GPU if at all possible. This will allow for significantly improved performance in domains like screen streaming/recording (where the encoding can also happen on the GPU), screen mirroring, screen magnification and implementation of low overhead display filters (think color inversion, gamma correction, color correction filters and so on). 
 
 It's all a bit steeped in domain specific knowledge which is distributed all over the internet. I have an unorganized and non-exhaustive pile of links I used to get a better idea of the problem which may be of interest to some:  [[GsoC Research Links]]
 

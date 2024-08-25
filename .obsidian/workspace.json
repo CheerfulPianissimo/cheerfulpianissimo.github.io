@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Devlog (August).md",
                 "mode": "source",
                 "source": false
               }
@@ -67,7 +67,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GSOC/GSOC Devlog (June).md",
+                "file": "GSOC/GSoC Devlog (June).md",
                 "mode": "source",
                 "source": false
               }
@@ -164,7 +164,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Devlog (August).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -181,7 +181,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Devlog (August).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -204,7 +204,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GSOC/GSOC.md"
+                "file": "GSOC/GSoC Devlog (August).md"
               }
             }
           }
@@ -229,14 +229,14 @@
   },
   "active": "5f2c0aa56bf97f64",
   "lastOpenFiles": [
+    "GSOC/GSoC Devlog (July).md",
+    "GSOC/GSoC Devlog (May).md",
+    "GSOC/GSoC Devlog (August).md",
     "GSOC/GSoC Changelog.md",
+    "GSOC/GSoC Devlog (June).md",
     "GSOC/GSOC.md",
     "GSOC/Project Design.md",
     "GSOC/Project Motivation.md",
-    "GSOC/GSoC Devlog (May).md",
-    "GSOC/GSoC Devlog (July).md",
-    "GSOC/GSoC Devlog (August).md",
-    "GSOC/GSOC Devlog (June).md",
     "GSOC/GsoC Research Links.md",
     "GSOC/Waycrate_GSOC_2024.pdf",
     "_attachments/Pasted image 20240730180043.png",

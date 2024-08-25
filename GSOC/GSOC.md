@@ -28,13 +28,13 @@ It's all a bit steeped in domain specific knowledge which is distributed all ove
 # Devlog
 I kept a devlog to document my GSoC 2024 experience. I go into some details  on my experience implementing this project in these entries:
 - [[GSoC Devlog (May)]]
-- [[GSOC Devlog (June)]]
+- [[GSoC Devlog (June)]]
 - [[GSoC Devlog (July)]]
 - [[GSoC Devlog (August)]]
 # Post-Project Report
 The project timeline can be roughly organized into these parts:
 - Creating an initial Minimal Viable Prototype: I created an MVP that used the wlr-screencopy DMA-BUF pipeline fitted into the existing API in order to figure out the necessary crates and types. Detailed in [[GSoC Devlog (May)]].
-- Creating the lower level DMA-BUF public API: I built out the pipeline to interact with the compositor using the wlr-screencopy protocol with DMA-BUFs and then created two public facing API functions that returned the results to the user. In order to test this work, I also built a example for this API in the form of `waymirror`. More details in [[GSOC Devlog (June)]].
+- Creating the lower level DMA-BUF public API: I built out the pipeline to interact with the compositor using the wlr-screencopy protocol with DMA-BUFs and then created two public facing API functions that returned the results to the user. In order to test this work, I also built a example for this API in the form of `waymirror`. More details in [[GSoC Devlog (June)]].
 - Creating an MVP for the higher level EGL and OpenGL pipeline for libwayshot: I studied EGL and OpenGL and used the knowledge along with my mentors assistance to get a working demo that directly rendered screen contents as an texture with zero GPU downloads. I think this was the hardest part of the project for me. A particularly persistent bug with the EGL setup code took me a week to solve. Detailed in [[GSoC Devlog (July)]].
 - Creating the higher level EGL/OpenGL public API: With the  MVP working, the remaining work was in refactoring the code from the MVP into the library. Most of the work was in delineating code between the library/the application and figuring out the shape of the API. I added a new wrapper type to ensure proper cleanup of the EGLImage type. This type was simply a raw C pointer and I wanted the type system to do the work of handling it's validity. This is the part of the project where I fought the compiler the most - it dealt with lifetimes, traits and generics all at once. I feel like my understanding of the language has improved a lot with this. More details in [[GSoC Devlog (August)]].
 # What I Did

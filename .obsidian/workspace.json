@@ -13,19 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GSOC/GSoC Devlog (August).md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "025e52a39bb18c0d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Changelog.md",
                 "mode": "source",
                 "source": false
               }
@@ -43,8 +31,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "a58424685878e6ae",
@@ -165,7 +152,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Changelog.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -182,7 +169,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Changelog.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -205,7 +192,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GSOC/GSOC.md"
+                "file": "GSOC/GSoC Changelog.md"
               }
             }
           }
@@ -228,14 +215,14 @@
       "wikipedia-search:Open Article": false
     }
   },
-  "active": "025e52a39bb18c0d",
+  "active": "514ff0d54d1422c7",
   "lastOpenFiles": [
-    "GSOC/GSoC Changelog.md",
+    "GSOC/GSOC.md",
     "GSOC/GSoC Devlog (August).md",
+    "GSOC/GSoC Changelog.md",
     "GSOC/GSoC Devlog (July).md",
     "GSOC/GSoC Devlog (May).md",
     "GSOC/GSoC Devlog (June).md",
-    "GSOC/GSOC.md",
     "GSOC/Project Design.md",
     "GSOC/Project Motivation.md",
     "GSOC/GsoC Research Links.md",

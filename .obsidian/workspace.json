@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GSOC/GSoC Changelog.md",
+                "file": "GSOC/GSOC.md",
                 "mode": "source",
                 "source": false
               }
@@ -43,7 +43,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "a58424685878e6ae",
@@ -164,7 +165,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GSOC/GSoC Devlog (August).md",
+                "file": "GSOC/GSOC.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -181,7 +182,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GSOC/GSoC Devlog (August).md",
+                "file": "GSOC/GSOC.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -204,7 +205,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GSOC/GSoC Devlog (August).md"
+                "file": "GSOC/GSOC.md"
               }
             }
           }
@@ -227,12 +228,12 @@
       "wikipedia-search:Open Article": false
     }
   },
-  "active": "5f2c0aa56bf97f64",
+  "active": "025e52a39bb18c0d",
   "lastOpenFiles": [
+    "GSOC/GSoC Changelog.md",
+    "GSOC/GSoC Devlog (August).md",
     "GSOC/GSoC Devlog (July).md",
     "GSOC/GSoC Devlog (May).md",
-    "GSOC/GSoC Devlog (August).md",
-    "GSOC/GSoC Changelog.md",
     "GSOC/GSoC Devlog (June).md",
     "GSOC/GSOC.md",
     "GSOC/Project Design.md",

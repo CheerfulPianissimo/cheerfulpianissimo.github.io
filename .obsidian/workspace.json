@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Changelog.md",
                 "mode": "source",
                 "source": false
               }
@@ -164,7 +164,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Changelog.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -181,7 +181,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GSOC/GSOC.md",
+                "file": "GSOC/GSoC Changelog.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -204,7 +204,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GSOC/GSOC.md"
+                "file": "GSOC/GSoC Changelog.md"
               }
             }
           }
@@ -229,8 +229,8 @@
   },
   "active": "514ff0d54d1422c7",
   "lastOpenFiles": [
-    "GSOC/GSoC Changelog.md",
     "GSOC/GSOC.md",
+    "GSOC/GSoC Changelog.md",
     "GSOC/Project Design.md",
     "GSOC/Project Motivation.md",
     "GSOC/GSoC Devlog (May).md",

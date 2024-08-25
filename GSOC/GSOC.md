@@ -50,13 +50,9 @@ In summary the deliverables for this project are:
 	- Also associated with this functionality is automatic GPU selection. Presently, the constructor demands a path to the DRI device from the user for maximum configurability. It should be possible to figure out the best device to choose for GBM buffer object creation even without this. 
 - **Streaming support in libwayshot** This wasn't entirely in scope for this project but it's something that can now be pursued with DMA-BUF support available. libwayshot needs some refactoring to handle the streaming use case efficiently. I did modify the final MVP to continuously mirror screen content but the performance was sub-par due to the fact that the overall API is structured to take frame-to-frame screenshots rather than continuous streams. A lot of reduntant protocol setup and buffer creation happens between the frames.   
 	- As a waypoint for this feature, some kind of benchmarking may also be advisable in order to track performance improvements and regressions.
-
-# Latest Project Proposal
-The updated project proposal doc in markdown format will be made available here:
+# The Original Proposal
+The live project proposal doc in markdown format was made available here:
 - [[Project Motivation]]
 - [[Project Design]]
-I feel like it's more ergonomic and easier to handle to have it as an easily editable markdown file than as richtext.
-# The Original Proposal
-
 I have redacted the first and last pages but this is otherwise identical to the proposal that got accepted:
 ![[Waycrate_GSOC_2024.pdf]]

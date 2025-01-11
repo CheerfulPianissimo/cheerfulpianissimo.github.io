@@ -1,0 +1,7 @@
+command:
+- convert
+config_path: notes/config.yaml
+literals:
+  -i: notes/config.yaml
+  -v: null
+verbose: true

@@ -1,0 +1,46 @@
+copy_vault_to_tempdir: true
+copy_vault_to_tempdir_method: default
+html_url_prefix: /notes
+navbar_links:
+- link: index.html
+  name: Home
+- link: GSOC/GSOC.html
+  name: GSoC 2024
+obsidian_entrypoint_path_str: notes/Home.md
+site_name: CheerfulP's Notes
+toggles:
+  features:
+    rss:
+      channel:
+        description: CheerfulPianissimo's Notebook/Blog
+        language_code: en-us
+        managing_editor: na
+        title: CheerfulP's Notes
+        web_master: na
+        website_link: cheerfulpianissimo.github.io/notes
+      enabled: true
+      host_root: https://cheerfulpianissimo.github.io/notes
+    side_pane:
+      left_pane:
+        content_args:
+          div_selector: .content
+          rel_path: index.html
+          strip_sub_divs:
+          - .toc
+        contents: dir_tree
+        enabled: true
+        width: 16rem
+      right_pane:
+        content_args:
+          div_selector: .content
+          rel_path: index.html
+          strip_sub_divs:
+          - .toc
+        contents: toc
+        enabled: true
+        width: 16rem
+    styling:
+      layout: documentation
+    table_of_contents:
+      add_toc_when_missing: true
+  process_all: false

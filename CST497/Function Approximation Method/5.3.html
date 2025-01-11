@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stochastic-gradient Methods</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Stochastic-gradient Methods</div>
+    <div class="topic-info">Topic Number: 5.3</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a section on "Stochastic-Gradient Methods" for a Reinforcement Learning course, drawing from the provided text, with explanations:
+
+**Stochastic-Gradient Methods in Reinforcement Learning**
+
+In reinforcement learning, we often need to update our estimates of value functions (V(s)) or action-value functions (Q(s,a)) based on observed experiences. Many of these updates can be viewed as forms of stochastic-gradient descent, although they are not typically explicitly formulated as such.  This section will explore the connections between temporal-difference learning and stochastic-gradient methods.
+
+**Incremental Updates as Stochastic Gradient Descent**
+
+Many reinforcement learning algorithms use incremental updates, where each new piece of data leads to a small change in our estimates. The core idea is to move the current estimate in the direction that reduces a defined error. The provided text shows two examples of incremental updates. The first is for computing the mean of a sequence of numbers, and the second is for updating the value function in Monte Carlo learning.
+
+**Incremental Mean Update**
+
+The text shows the incremental update of the mean µk of a sequence x1,x2...
+
+    µk = µk−1 + 1/k (xk −µk−1)
+
+This update can be viewed as a stochastic gradient descent update, where the error is (µk − xk) and the learning rate is 1/k.
+
+*   **Explanation:** The goal is to minimize the difference between the current estimate (µk) and the new data point (xk). We take a small step (learning rate 1/k) in the direction that reduces the error (xk−µk-1).
+*   **Significance:**  This is a basic example of how an update rule can be expressed as an optimization process.
+
+**Constant-alpha Monte Carlo Update**
+
+The text presents constant-α Monte Carlo as:
+
+    V(St) ← V(St) + α [Gt − V(St)]
+
+*   **Explanation:**
+    *   `V(St)` is the current estimated value of state `St`.
+    *   `Gt` is the actual return (sum of rewards) observed after visiting state `St`.
+    *   `α` is a constant step-size parameter (learning rate).
+    *   `[Gt - V(St)]` is the error, or the difference between the observed return and the current estimate.
+*   **Stochastic Gradient View:**
+    *   The goal is to minimize the error between the estimated value `V(St)` and the observed return `Gt`.
+    *   The update moves the estimate `V(St)` a small step (determined by `α`) towards the observed return `Gt`.  This is analogous to gradient descent, where we move in the direction of the negative gradient. In this case, the error function is implicitly defined by the squared error (1/2)[Gt − V(St)]^2, and the update is equivalent to a gradient step.
+
+**TD(0) Update**
+
+The text also presents the TD(0) update:
+
+    V(St) ← V(St) + α [Rt+1 + γV(St+1) − V(St)]
+
+*   **Explanation:**
+    *   `Rt+1` is the reward received after transitioning from `St` to `St+1`.
+    *   `γ` is the discount factor.
+    *   `V(St+1)` is the estimated value of the next state.
+    *   `[Rt+1 + γV(St+1) − V(St)]` is the TD error, the difference between the target estimate and the current estimate.
+*   **Stochastic Gradient View:**
+    *   Similar to the Monte Carlo update, this update can be viewed as a stochastic gradient descent step.
+    *   The goal is to minimize the TD error.
+    *   The update moves the estimate `V(St)` a small step (determined by `α`) toward the TD target `Rt+1 + γV(St+1)`.
+
+**Key Points**
+
+*   **Stochastic Nature:** The term "stochastic" arises because we're not using the true expected return or value but rather sampled experiences. For example, in Monte Carlo, we use a single trajectory's return `Gt` instead of the expected return. In TD, we use a single transition and the current estimate of the next state.
+*   **Step-size Parameter (α):**  The step size parameter `α` is crucial.  It controls how much we update the estimate based on each new experience.  A smaller `α` results in smaller updates and potentially slower but more stable learning.
+*   **Bootstrapping:** TD methods are "bootstrapping" methods because they use the estimated value of the next state `V(St+1)` to update the current state `V(St)`. This is different from Monte Carlo, which waits until the end of the episode to update.
+*  **Convergence:** According to the text, both MC and TD methods converge to the true value vπ(s) as experience approaches infinity.
+
+**Batch Training**
+
+The text also explores batch training. Here, we accumulate data from multiple episodes and then apply MC or TD updates to the whole batch. This can be an alternative to updating after every episode. It can be useful when the data is not generated sequentially but in batches.
+
+**Why is understanding this important?**
+
+*   **Unified View:** Recognizing that many RL algorithms are based on stochastic gradient methods provides a unified view of seemingly different methods.
+*   **Algorithm Design:** This understanding can help you design new algorithms or adapt existing ones.
+*   **Optimization:** It allows us to leverage knowledge from the field of optimization, such as techniques for choosing the learning rate or dealing with non-convex error surfaces.
+
+**In summary:**
+
+Stochastic gradient methods form the foundation of many reinforcement learning algorithms. Understanding the connection between the update rules of methods like Monte Carlo and TD learning with the concept of gradient descent is important for understanding the core of how these methods work and for designing and adapting new RL algorithms.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

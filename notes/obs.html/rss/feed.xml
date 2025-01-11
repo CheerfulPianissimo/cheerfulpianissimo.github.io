@@ -1,0 +1,92 @@
+<rss version="2.0">
+    <channel>
+        <title>CheerfulP's Notes</title>
+        <link>cheerfulpianissimo.github.io/notes</link>
+        <description>CheerfulPianissimo's Notebook/Blog</description>
+        <language>en-us</language>
+        <pubDate>Sat, 11 Jan 2025 07:30:22 UTC</pubDate>
+        <lastBuildDate>Mon, 01 Jan 1 00:00:00 UTC</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>ObsidianHtml</generator>
+        <managingEditor>na</managingEditor>
+        <webMaster>na</webMaster>
+        <item>
+            <title>GSoC Devlog (May)</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC%20Devlog%20(May).html</link>
+            <description>This was my first month as a Google Summer of Code contributor at Waycrate and I feel like I&#x27;ve made a pretty decent start. We had a few meetings with the mentors and fellow contributors and they seem cool.    &lt;br/&gt;&lt;br/&gt;I have my college semester exams at the beginning of the coding period so I thought I would get started a bit early to offset that:   &lt;br/&gt;&lt;br/&gt;</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC Devlog (May).html</guid>
+            
+        </item>
+        <item>
+            <title>Project Design</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/Project%20Design.html</link>
+            <description>First, we need some context around how wlroots-based wayland compositors handle screen capture. There are mainly two protocols that enable this: 
+1.  wlr-screencopy-unstable-v1 
+2.  wlr-export-dmabuf-unstable-v1   &lt;br/&gt;&lt;br/&gt;Libwayshot in its present state uses only wlr-screencopy. The major difference between these two is in the type of buffers each of them deal with:   &lt;br/&gt;&lt;br/&gt;</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/Project Design.html</guid>
+            
+        </item>
+        <item>
+            <title>Project Motivation</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/Project%20Motivation.html</link>
+            <description>libwayshot is a Rust crate that implements screen capture functionality for wlroots based compositors. It’s also associated with wayshot - a cli app based on libwayshot that provides an executable for capturing wlroots outputs or parts of them.   &lt;br/&gt;&lt;br/&gt;Presently libwayshot uses shared memory (in the form of wl_shm buffers) to transfer screen capture data from the compositor via the wlr-screencopy protocol.   &lt;br/&gt;&lt;br/&gt;</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/Project Motivation.html</guid>
+            
+        </item>
+        <item>
+            <title>GsoC Research Links</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/GsoC%20Research%20Links.html</link>
+            <description>I don&#x27;t expect this of to be of much use to anyone else in this form but I would like this to be here for the sake of reference:   &lt;br/&gt;&lt;br/&gt;</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/GsoC Research Links.html</guid>
+            
+        </item>
+        <item>
+            <title>Weeks 1-2</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC%20Devlog%20(July).html</link>
+            <description>Most of this time was spent catching up on OpenGL, EGL and the interactions thereof. 
+Some useful resources I perused:   &lt;br/&gt;&lt;br/&gt;Also invaluable was the Exchanging pixel buffers document which helped me make sense of the various parameters demanded by the above functions.    &lt;br/&gt;&lt;br/&gt;</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC Devlog (July).html</guid>
+            
+        </item>
+        <item>
+            <title>Weeks 1-2</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC%20Devlog%20(August).html</link>
+            <description>With the final weeks of GSoC approaching, it was time to consolidate all the existing work in the demos into the library as a public API.   &lt;br/&gt;&lt;br/&gt;Most of the work in this time was around figuring out how to do the libwayshot API and refactoring the code for it from the waymirror-egl demo into the main libwayshot library. 
+After some discussions with my mentor, I decided to use the following three level API structure for the EGLImage related APIs:   &lt;br/&gt;&lt;br/&gt;</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC Devlog (August).html</guid>
+            
+        </item>
+        <item>
+            <title>Week 1</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC%20Devlog%20(June).html</link>
+            <description>Spent some time slowly turning the MVP into a draft API in libwayshot. 
+Some thoughts:   &lt;br/&gt;&lt;br/&gt;We need to make libwayshot work in two modes, basically:   &lt;br/&gt;&lt;br/&gt;</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC Devlog (June).html</guid>
+            
+        </item>
+        <item>
+            <title>Google Summer Of Code 2024 With Waycrate</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/GSOC.html</link>
+            <description>I&#x27;m pretty excited to be participating in Google&#x27;s 2024 Summer of Code program with Waycrate. I have been eyeing GSoC for a few years and I&#x27;m happy that after a few false starts I was able to find a project I was interested in and an organization I could fit into.   &lt;br/&gt;&lt;br/&gt;To put it in a nutshell: It&#x27;s basically about implementing hardware accelerated Wayland screen capture to a Rust library called libwayshot.    &lt;br/&gt;&lt;br/&gt;</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/GSOC.html</guid>
+            
+        </item>
+        <item>
+            <title>GSoC Changelog</title>
+            <link>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC%20Changelog.html</link>
+            <description>GSoC Changelog</description>
+            <pubDate></pubDate>
+            <guid>https://cheerfulpianissimo.github.io/notes/GSOC/GSoC Changelog.html</guid>
+            
+        </item>
+
+    </channel>
+</rss>

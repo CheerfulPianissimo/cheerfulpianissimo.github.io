@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarsa: On-policy TD Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Sarsa: On-policy TD Control</div>
+    <div class="topic-info">Topic Number: 4.3</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's the course text on "Sarsa: On-policy TD Control", drawing directly from the provided lecture notes, with explanations and attributions:
+
+**Sarsa: On-Policy TD Control**
+
+**Introduction**
+
+In reinforcement learning, we often want to learn an optimal *policy*, which is a strategy for selecting actions in different states to maximize cumulative reward.  We've explored prediction methods like Temporal Difference learning (TD), which estimate the value of states. Now we'll shift our focus to control – methods that learn policies directly.  Sarsa is one such method.  It's an *on-policy* algorithm, meaning it learns the value of the policy that is being used to make decisions.  Sarsa is a Temporal Difference learning method that learns action values, Q(s,a), rather than state values, V(s).
+
+**Sarsa: A Step-by-Step Approach**
+
+Sarsa is an algorithm that learns the action-value function Q(s, a) by updating it after each step. Specifically, the update rule is based on the following:
+
+1.  **Take an action (A) in state (S) according to the current policy (π).**
+2.  **Observe the resulting reward (R) and the next state (S').**
+3.  **Take another action (A') in state (S') according to the same policy (π).** This is what makes it on-policy.
+4.  **Update Q(S,A) using the following update rule:**
+
+   ```
+   Q(S,A) ← Q(S,A) + α [R + γQ(S',A') - Q(S,A)]
+   ```
+
+   Where:
+    *  `α` is the learning rate, determining the step size of the update.
+    *  `γ` is the discount factor, determining the importance of future rewards.
+    *  `R` is the immediate reward received.
+    *  `Q(S,A)` is the current estimate of the value of taking action A in state S.
+    *  `Q(S',A')` is the current estimate of the value of taking action A' in the next state S'.
+
+The term `R + γQ(S',A')` is called the *TD target*, which represents the estimated total return from state S onward. The difference between the TD target and the current estimate `Q(S,A)` is the *TD error*, which is used to update our value estimate.
+
+**Sarsa(λ): Incorporating Eligibility Traces**
+
+Just as we can extend TD learning with eligibility traces, we can do the same with Sarsa. This leads to the *Sarsa(λ)* algorithm.
+
+**Why use eligibility traces?**
+Eligibility traces allow us to propagate rewards and errors back to previous state-action pairs. This speeds up learning by enabling us to update multiple state-action pairs at once rather than updating just the most recent state-action pair. This allows for faster learning by giving credit to past state-action pairs.
+
+**Key Idea of Sarsa(λ)**
+The key idea of Sarsa(λ) is to apply the TD(λ) prediction method to state-action pairs rather than just states. To do this, we need to maintain a separate *eligibility trace* for each state-action pair. Let `E(s,a)` denote the trace for the state-action pair `(s,a)`.  The eligibility trace values are updated as follows:
+
+   ```
+   E0(s,a) = 0
+   Et(s,a) = γλEt-1(s,a) + 1(St = s, At = a)
+   ```
+    *   `λ` is the trace-decay parameter, which controls how far into the past the algorithm looks.
+    *   `1(St = s, At = a)` is an indicator function that is 1 if the current state and action are equal to s and a, respectively, and 0 otherwise.
+
+**Sarsa(λ) Update Rule**
+
+The Q-function update for Sarsa(λ) is:
+
+```
+Q(s,a) ← Q(s,a) + αδt Et(s,a)
+```
+Where:
+    *   `δt` is the TD error defined as: `δt = Rt+1 + γQ(St+1,At+1) - Q(St,At)`
+    * The update is applied for *every* state-action pair `(s,a)`.
+
+**Types of Eligibility Traces**
+The traces can be of different types, including:
+
+*   **Accumulating:** `Et(s,a) = γλEt-1(s,a) + 1(St = s, At = a)`
+*   **Dutch:** `Et(s,a) = (1 - α)γλEt-1(s,a) + 1(St = s, At = a)`
+*   **Replacing:** `Et(s,a) = (1 - 1(St = s, At = a))γλEt-1(s,a) + 1(St = s, At = a)`
+
+**Comparison with n-Step Sarsa**
+
+The notes also introduce *n-step Sarsa*. This method looks ahead *n* steps into the future. The n-step Q-return is defined as:
+
+```
+q(n)t = Rt+1 + γRt+2 + ... + γn-1Rt+n + γnQ(St+n, At+n)
+```
+The update is then:
+
+```
+Q(St,At) ← Q(St,At) + α(q(n)t - Q(St,At))
+```
+*   Note that when n = 1, this is the original Sarsa update.
+*   When n = infinity, this is equivalent to Monte Carlo learning.
+
+Sarsa(λ) can be thought of as a way of combining n-step updates for all possible values of n, weighted by λ.
+
+**Summary**
+
+Sarsa is an on-policy TD control method that learns action values. Sarsa(λ) extends this by incorporating eligibility traces, allowing for more efficient learning by propagating rewards and errors to past state-action pairs.  Sarsa is an important algorithm in reinforcement learning due to its simplicity and effectiveness for a wide range of problems.
+
+**Attribution:** This material is based on and adapted from the provided lecture notes on Model-Free Control.
+
+**Explanation of Changes:**
+
+*   **Stripped Credits and Non-Textual Elements:** I removed any credits, lecture numbers, figures, and section numbering that didn't directly contribute to the text on the Sarsa algorithm.
+*   **Combined Information:** I brought together all the information related to Sarsa and Sarsa(λ) from the provided text, even though it was split across different sections.
+*   **Added Explanations:** I added explanations to clarify the concepts, such as why we use eligibility traces and what the different parameters represent.
+*   **Organized into a Logical Structure:** I structured the text to follow a logical flow: introduction, step-by-step explanation of Sarsa, the extension to Sarsa(λ), the different trace types, and finally, a short comparison to n-step Sarsa.
+*   **Consistent Formatting:** I formatted the equations for clarity and used consistent terminology.
+*   **Attribution:** I added a clear attribution statement at the end, acknowledging that the material is based on the provided lecture notes.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

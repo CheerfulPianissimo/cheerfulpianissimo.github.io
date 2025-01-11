@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finite Markov Decision Processes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Finite Markov Decision Processes</div>
+    <div class="topic-info">Topic Number: 2.2</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's course text on "Finite Markov Decision Processes" based on the provided lecture notes, with explanations:
+
+**Finite Markov Decision Processes (MDPs)**
+
+**Introduction**
+
+A Markov Decision Process (MDP) is a mathematical framework for modeling decision-making in environments where outcomes are partly random and partly under the control of a decision-maker (agent).  It's a core concept in reinforcement learning. A key characteristic of an MDP is that all states are *Markov*, meaning the future depends only on the current state and action, not on the past history of states and actions.
+
+**Definition**
+
+A Markov Decision Process (MDP) is formally defined as a tuple  ⟨S, A, P, R, γ⟩, where:
+
+*   **S** is a finite set of *states*. These represent the different situations the agent can find itself in.
+*   **A** is a finite set of *actions*. These are the choices the agent can make in each state.
+*   **P** is a state transition probability matrix. Specifically,  P<sup>a</sup><sub>ss'</sub> = P[S<sub>t+1</sub> = s' | S<sub>t</sub> = s, A<sub>t</sub> = a] represents the probability of transitioning from state *s* to state *s'* when taking action *a*.  This defines the dynamics of the environment.
+*   **R** is a reward function. R<sup>a</sup><sub>s</sub> = E[R<sub>t+1</sub> | S<sub>t</sub> = s, A<sub>t</sub> = a] is the expected reward received after taking action *a* in state *s*. This is the immediate feedback the agent gets.
+*   **γ** is a discount factor, where γ ∈ [0, 1]. This determines how much the agent values future rewards compared to immediate rewards.
+
+**Explanation**
+
+*   **Finite Sets:**  The term "finite" in "Finite MDP" emphasizes that both the set of states (S) and the set of actions (A) are finite. This is a common simplifying assumption that allows for tractable computation in many cases.
+
+*   **Markov Property:** The fact that the next state depends only on the current state and current action is the *Markov property*. This simplifies the model because the agent doesn't need to remember the entire history of its interactions with the environment.
+
+*   **Transition Probabilities:** The transition probability matrix P defines the likelihood of transitioning from any state to any other state given a specific action.  For each state-action pair, it specifies a probability distribution over the next possible states.
+
+*   **Reward Function:** The reward function R provides feedback to the agent. The agent's goal is to maximize the cumulative reward it receives over time.
+
+*   **Discount Factor:** The discount factor γ controls the balance between immediate and future rewards. A value close to 0 will make the agent focus only on immediate rewards, while a value close to 1 will make it consider long-term consequences.
+
+**Example: Student Markov Chain**
+
+The provided notes include an example of a student's activities as a *Markov Chain*.  This can be used to illustrate the concept of states and transitions in a simpler, non-decision context, and can be expanded to an MDP.
+
+Consider the following states for a student:
+
+*   Class 1 (C1)
+*   Class 2 (C2)
+*   Class 3 (C3)
+*   Pass (the course)
+*   Pub
+*   Facebook (FB)
+*   Sleep
+
+The student transitions between these states with probabilities shown in the transition matrix:
+
+```
+       C1    C2    C3    Pass   Pub    FB    Sleep
+C1   0.0   0.5   0.0    0.0    0.0  0.5    0.0
+C2   0.0   0.0   0.8    0.0    0.2  0.0    0.0
+C3   0.0   0.6   0.0    0.4    0.0  0.0    0.0
+Pass 1.0   0.0   0.0    0.0    0.0  0.0    0.0
+Pub  0.2   0.4   0.4    0.0    0.0  0.0    0.0
+FB   0.1   0.0   0.0    0.0    0.0  0.9    0.0
+Sleep 0.0   0.0   0.0    1.0    0.0  0.0    0.0
+```
+
+For example, if the student is in state C1 (Class 1), there is a 0.5 probability of transitioning to C2 (Class 2) and a 0.5 probability of transitioning to FB (Facebook). This is a simple Markov Chain because there is no agent making decisions, but it illustrates the concept of states and probabilistic transitions.
+
+**Policies**
+
+In an MDP, the agent's behavior is defined by a *policy*. A policy π is a mapping from states to actions.  Specifically, π(a|s) is the probability of taking action *a* in state *s*.
+
+*   **Policy-Induced Markov Process:** Given an MDP  ⟨S, A, P, R, γ⟩ and a policy π, the sequence of states the agent goes through is a Markov process ⟨S, P<sup>π</sup>⟩. The transition probabilities are defined as:
+
+    P<sup>π</sup><sub>ss'</sub> = ∑<sub>a∈A</sub> π(a|s) P<sup>a</sup><sub>ss'</sub>
+    *This takes the weighted sum of all the possible state transitions given the policy's actions.*
+
+*   **Policy-Induced Markov Reward Process:** The sequence of states and rewards is a Markov reward process  ⟨S, P<sup>π</sup>, R<sup>π</sup>, γ⟩, where the expected reward for state *s* under policy *π* is:
+
+    R<sup>π</sup><sub>s</sub> = ∑<sub>a∈A</sub> π(a|s) R<sup>a</sup><sub>s</sub>
+    *This takes the weighted sum of all the possible rewards given the policy's actions.*
+
+**Explanation**
+
+The policy is what the agent is trying to learn in a reinforcement learning setting. The goal is to find the *optimal policy* that maximizes the cumulative reward.
+
+**Summary**
+
+Finite Markov Decision Processes provide a powerful framework for modeling sequential decision-making problems. They are fundamental to understanding and implementing reinforcement learning algorithms. The key components are the states, actions, transition probabilities, rewards, discount factor, and policies.  The Markov property simplifies the problem by making the future independent of the past given the present, and policies guide the agent's behavior toward maximizing rewards.
+
+**Attribution**
+This text is based on the provided lecture notes.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

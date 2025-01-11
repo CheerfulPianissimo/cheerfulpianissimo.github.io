@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n-step TD Prediction, n-step Sarsa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">n-step TD Prediction, n-step Sarsa</div>
+    <div class="topic-info">Topic Number: 4.6</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on "n-step TD Prediction and n-step Sarsa," drawing from the provided lecture notes and providing explanations:
+
+**n-Step TD Prediction**
+
+In temporal-difference (TD) learning, we aim to predict the value of states.  Instead of looking just one step into the future (as in TD(0)), we can consider *n*-step returns, looking *n* steps into the future.  This provides a way to balance the bias and variance trade-off present in TD learning.
+
+**n-Step Return**
+
+The *n*-step return, denoted as *G(n)<sub>t</sub>*, is defined as the sum of discounted rewards for the next *n* steps, plus the discounted value estimate of the state after *n* steps:
+
+*G(n)<sub>t</sub>* = *R<sub>t+1</sub>* + *γR<sub>t+2</sub>* + ... + *γ<sup>n-1</sup>R<sub>t+n</sub>* + *γ<sup>n</sup>V(S<sub>t+n</sub>)*
+
+Where:
+
+*   *R<sub>t+i</sub>* is the reward received at time *t+i*.
+*   *γ* is the discount factor.
+*   *V(S<sub>t+n</sub>)* is the estimated value of the state *S<sub>t+n</sub>* at time *t+n*.
+
+**Examples of n-Step Returns**
+
+*   **n = 1 (TD):** *G(1)<sub>t</sub>* = *R<sub>t+1</sub>* + *γV(S<sub>t+1</sub>)*. This is the standard one-step TD return.
+*   **n = 2:** *G(2)<sub>t</sub>* = *R<sub>t+1</sub>* + *γR<sub>t+2</sub>* + *γ<sup>2</sup>V(S<sub>t+2</sub>)*. This looks two steps into the future.
+*   **n = ∞ (MC):** *G(∞)<sub>t</sub>* = *R<sub>t+1</sub>* + *γR<sub>t+2</sub>* + ... + *γ<sup>T-1</sup>R<sub>T</sub>*. This is the complete return until the end of the episode (T), which is equivalent to the Monte Carlo return.
+
+**n-Step Temporal-Difference Learning Update**
+
+The update rule for *n*-step TD learning is:
+
+*V(S<sub>t</sub>)* ← *V(S<sub>t</sub>)* + *α* (*G(n)<sub>t</sub>* - *V(S<sub>t</sub>)*)
+
+Where:
+
+*   *α* is the learning rate.
+*   The update moves the current value estimate *V(S<sub>t</sub>)* towards the *n*-step return *G(n)<sub>t</sub>*.
+
+**n-Step Sarsa**
+
+Sarsa is an on-policy TD control algorithm that learns an action-value function, which estimates the value of taking a particular action in a particular state. Similar to n-step TD prediction, we can extend Sarsa to an *n*-step version.
+
+**n-Step Q-Return**
+
+The *n*-step Q-return, denoted as *q(n)<sub>t</sub>*, is defined as the sum of discounted rewards for the next *n* steps, plus the discounted action-value estimate of the state-action pair after *n* steps:
+
+*q(n)<sub>t</sub>* = *R<sub>t+1</sub>* + *γR<sub>t+2</sub>* + ... + *γ<sup>n-1</sup>R<sub>t+n</sub>* + *γ<sup>n</sup>Q(S<sub>t+n</sub>, A<sub>t+n</sub>)*
+
+Where:
+
+*   *R<sub>t+i</sub>* is the reward received at time *t+i*.
+*   *γ* is the discount factor.
+*   *Q(S<sub>t+n</sub>, A<sub>t+n</sub>)* is the estimated action-value of taking action *A<sub>t+n</sub>* in state *S<sub>t+n</sub>* at time *t+n*.
+
+**Examples of n-Step Q-Returns**
+
+*   **n = 1 (Sarsa):** *q(1)<sub>t</sub>* = *R<sub>t+1</sub>* + *γQ(S<sub>t+1</sub>, A<sub>t+1</sub>)*. This is the standard one-step Sarsa return.
+*   **n = 2:** *q(2)<sub>t</sub>* = *R<sub>t+1</sub>* + *γR<sub>t+2</sub>* + *γ<sup>2</sup>Q(S<sub>t+2</sub>, A<sub>t+2</sub>)*. This looks two steps into the future.
+*   **n = ∞ (MC):** *q(∞)<sub>t</sub>* = *R<sub>t+1</sub>* + *γR<sub>t+2</sub>* + ... + *γ<sup>T-1</sup>R<sub>T</sub>*. This is the complete return until the end of the episode.
+
+**n-Step Sarsa Update**
+
+The update rule for *n*-step Sarsa is:
+
+*Q(S<sub>t</sub>, A<sub>t</sub>)* ← *Q(S<sub>t</sub>, A<sub>t</sub>)* + *α* (*q(n)<sub>t</sub>* - *Q(S<sub>t</sub>, A<sub>t</sub>)*)
+
+Where:
+
+*   *α* is the learning rate.
+*   The update moves the current action-value estimate *Q(S<sub>t</sub>, A<sub>t</sub>)* towards the *n*-step Q-return *q(n)<sub>t</sub>*.
+
+**Explanation of Content and Completeness**
+
+1.  **n-Step TD Prediction:** The text defines the n-step return *G(n)<sub>t</sub>*, provides examples for n=1 (TD), n=2, and n=infinity (MC), and explains the n-step TD update rule. It links the concept to the bias-variance tradeoff.
+2.  **n-Step Sarsa:** The text defines the n-step Q-return *q(n)<sub>t</sub>*, provides examples for n=1 (Sarsa), n=2, and n=infinity (MC), and explains the n-step Sarsa update rule.
+3.  **Attribution:**  All definitions and formulas are directly taken from the provided lecture notes.
+4.  **Detail:** The text elaborates on the meaning of each term in the formulas and clarifies the relationship between different values of 'n' (n=1, n=2, n=infinity) and their connection to standard TD and MC methods.
+5.  **Context:** The text clearly positions n-step methods in the context of TD learning and action-value estimation. It also uses the language and terminology of a reinforcement learning course.
+6.  **Completeness:** The text covers all aspects of n-step TD prediction and n-step Sarsa that were presented in the given context. It includes the definitions of n-step returns, the update rules, and examples for different values of n.
+7.  **Non-Text Removal:** I have removed any lecture titles, credits, or non-textual elements. The focus is purely on the technical content related to n-step TD and Sarsa.
+
+This text provides a comprehensive overview of n-step TD prediction and n-step Sarsa, utilizing the given material to explain the concepts and formulas involved.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

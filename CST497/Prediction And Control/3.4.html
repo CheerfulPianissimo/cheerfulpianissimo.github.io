@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Monte Carlo Prediction</div>
+    <div class="topic-info">Topic Number: 3.4</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on "Monte Carlo Prediction," drawing from the provided context and expanding for clarity:
+
+**Course Text: Monte Carlo Prediction**
+
+**Introduction**
+
+In reinforcement learning, prediction refers to the task of estimating the value function for a given policy. This value function tells us how good it is to be in a particular state (or take a particular action in a state) while following that policy. Monte Carlo (MC) methods offer a way to estimate these value functions without needing a complete model of the environment. Instead, they learn directly from episodes of experience.
+
+**Core Idea of Monte Carlo**
+
+Monte Carlo methods learn from complete episodes, meaning sequences of states, actions, and rewards from beginning to end of an interaction with the environment. The core idea is to use the *returns* observed in these episodes to estimate the value of states. The return is the total discounted reward received from a given time step onward in the episode.
+
+**First-Visit Monte Carlo Prediction**
+
+The most basic form of Monte Carlo prediction is *first-visit MC*. Here's how it works:
+
+1.  **Initialization:**
+    *   Start with a policy, π, that we want to evaluate.
+    *   Initialize an arbitrary state-value function, V(s), for each state *s*.
+    *   Create an empty list called *Returns(s)* for each state *s*. This list will store the returns observed after the first visit to *s* in each episode.
+
+2.  **Episode Generation:**
+    *   Generate an episode using the policy π. This means interacting with the environment and recording the sequence of states, actions, and rewards.
+
+3.  **Return Calculation and Storage:**
+    *   For each state *s* that appears in the episode:
+        *   Find the *first* time *s* is visited in the episode.
+        *   Calculate the return, G, following that first visit to *s*. The return *G* is the sum of discounted rewards from that point forward until the end of the episode.
+        *   Append the calculated return *G* to the *Returns(s)* list for that state.
+
+4.  **Value Update:**
+    *   For each state *s*, calculate the average of all the returns stored in *Returns(s)*.
+    *   Update the value of the state *s*: V(s) ← average(*Returns(s)*).
+
+5.  **Repeat:**
+    *   Repeat steps 2-4 forever (or until convergence).
+
+The key idea of first-visit MC is that we only use the *first* return observed after the first visit to the state within a given episode.
+
+**Convergence of First-Visit MC**
+
+The provided text explains that first-visit MC converges to the true value function *vπ(s)* as the number of visits to *s* goes to infinity. This is because each return is an independent, identically distributed estimate of *vπ(s)* with finite variance. As the number of samples increases, the law of large numbers guarantees that the average of these returns converges to their expected value. The standard deviation of the error decreases with the square root of the number of samples.
+
+**Every-Visit Monte Carlo**
+
+Another version of Monte Carlo prediction is called *every-visit MC*. The difference is that *every-visit* MC adds the return of *every* visit of a state in each episode to the *Returns(s)* list, while *first-visit* MC only adds the return following the first visit of the state. Every-visit MC also converges to *vπ(s)* asymptotically, although it is less straightforward to show.
+
+**Incremental Implementation**
+
+Monte Carlo methods can be implemented incrementally, processing episode-by-episode. This is more efficient than waiting for all episodes to complete before updating the value function.
+
+The core idea is to maintain a running average of returns. This can be done using the incremental mean formula:
+
+µk = µk-1 + 1/k (xk - µk-1)
+
+Where:
+
+*   µk is the average of the first k values
+*   xk is the k-th value
+
+The same idea can be applied to Monte Carlo prediction, replacing the rewards in the incremental mean formula with returns. This approach is used for *on-policy* Monte Carlo methods. For *off-policy* methods, we need to account for the difference between the policy used to generate the episodes and the policy we are evaluating.
+
+**Off-Policy Monte Carlo**
+
+Off-policy MC methods use data generated by a *behavior policy* (µ) to evaluate a *target policy* (π). This introduces a new challenge, as the returns observed under the behavior policy might not be representative of those under the target policy.
+
+**Importance Sampling**
+
+To account for this difference, off-policy methods use *importance sampling*. Importance sampling adjusts the returns using the ratio of probabilities of the actions taken under the target and behavior policies.
+
+*   **Ordinary Importance Sampling:** The returns are scaled by the importance sampling ratio and then averaged.  Incremental methods can be used with scaled returns in place of rewards.
+*   **Weighted Importance Sampling:**  A weighted average of the returns is formed, requiring a slightly different incremental algorithm. Let *W<sub>i</sub>* be the importance sampling ratio of the *i*-th return, and *G<sub>i</sub>* the *i*-th return. Then the update rule for the value function is:
+
+    V<sub>n+1</sub> = V<sub>n</sub> + W<sub>n</sub>/C<sub>n</sub> * [G<sub>n</sub> - V<sub>n</sub>]
+
+    Where *C<sub>n+1</sub> = C<sub>n</sub> + W<sub>n+1</sub>* and *C<sub>0</sub> = 0*.
+
+**Truncated Returns**
+
+The context also mentions that in the case of discounting (γ < 1), it is possible to consider only the initial portion of the importance sampling ratio. This is because when discounting is present, later actions become less important to the return, so the later terms in the importance sampling ratio can add a lot of variance for very long episodes without changing the expected value of the update.
+
+**Summary**
+
+Monte Carlo prediction methods provide a way to learn value functions from experience without requiring a model of the environment. They work by averaging returns observed from complete episodes. First-visit MC, every-visit MC, and incremental methods offer different ways to implement Monte Carlo learning. Off-policy methods use importance sampling to account for differences between the behavior policy and the target policy.
+
+**Example: Blackjack**
+
+The text also mentions the game of blackjack as an example where MC can be applied. In blackjack, the goal is to get as close to 21 as possible without exceeding it. The player can choose to "hit" or "stick" until they stick or go bust. The environment is stochastic. MC methods can be used to learn the value of different states (e.g., the player's hand and the dealer's face-up card).
+
+**Key Takeaways**
+
+*   Monte Carlo methods learn from complete episodes.
+*   They estimate value functions by averaging observed returns.
+*   First-visit and every-visit MC are two common approaches.
+*   Incremental methods allow for efficient episode-by-episode updates.
+*   Off-policy methods use importance sampling to learn from data generated by a different policy.
+
+This text provides a comprehensive overview of Monte Carlo prediction based on the provided context, including the different variations, the convergence properties, and the incremental implementation details. It also covers off-policy methods and importance sampling. The example of the blackjack game helps to provide some context.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

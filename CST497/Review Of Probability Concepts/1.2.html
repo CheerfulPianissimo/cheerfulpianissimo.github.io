@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability mass function</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Probability mass function</div>
+    <div class="topic-info">Topic Number: 1.2</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's the course text on "Probability Mass Function" based on the provided context, with explanations:
+
+**Course Text: Probability Mass Function**
+
+In the context of probability and statistics, particularly when dealing with discrete random variables, we often encounter the concept of a Probability Mass Function (PMF). A PMF, denoted as P(X = x),  provides the probability that a discrete random variable, X, will take on a specific value, x.  In essence it describes the probability distribution of a discrete random variable.
+
+**Example 8.9 and PMFs**
+
+The provided example (Example 8.9) indirectly uses the idea of a PMF. Let's consider it in more detail:
+
+In Example 8.9, we are looking at a Poisson distribution for the number of typos on a page. This is a discrete distribution because the number of typos can only be integers (0, 1, 2, 3, etc.). The example states that:
+
+*   Papers by Bob have a Poisson distribution with a mean of 1 typo per page (λ = 1).
+*   Papers by John have a Poisson distribution with a mean of 5 typos per page (λ = 5).
+
+The PMF for a Poisson distribution is given by:
+
+P(X = k) = (λ^k * e^(-λ)) / k!
+
+where:
+*   X is the random variable representing the number of typos
+*   k is a specific number of typos (0, 1, 2, ...)
+*   λ is the average number of events (typos in this case)
+
+The example calculates the PMF for the observed data (2 typos) for both Bob and John:
+
+*   **Bob:** P(X = 2 | λ = 1) = (1^2 * e^(-1)) / 2! = 0.18394
+*   **John:** P(X = 2 | λ = 5) = (5^2 * e^(-5)) / 2! = 0.084224
+
+The calculations show the probability of observing 2 typos given that the paper was from Bob or from John. The value 0.18394 represents the probability that a random page from Bob has 2 typos, while the value 0.084224 represents the probability that a random page from John has 2 typos. Since the probability is higher for Bob, the example concludes that Bob is more likely to be the author.
+
+**Key Points about PMFs:**
+
+*   **Discrete Random Variables:** PMFs are exclusively used for discrete random variables, where the variable can only take on a countable number of values (e.g., integers, categories).
+*   **Probabilities:** The value of a PMF, P(X = x), is always a probability, meaning it must be between 0 and 1 (inclusive).
+*   **Sum to One:** The sum of the probabilities for all possible values of the random variable must equal 1. This is because one of the possible outcomes *must* occur.
+
+**Connection to Maximum Likelihood Estimation**
+
+The example illustrates how PMFs are used in maximum likelihood estimation (MLE). MLE is a method for finding the value of a parameter that maximizes the likelihood of observing the given data. In this case, the "parameter" is the author and the "data" is the number of typos observed. The PMF (or rather the probability calculated from it) represents the likelihood of observing the data given the parameter. The author whose PMF value is higher given the number of typos is the maximum likelihood estimate.
+
+**Summary**
+
+The Probability Mass Function is a fundamental concept for understanding the distribution of discrete random variables. It assigns probabilities to each possible outcome of a discrete variable, which helps to describe the behavior of the variable. The PMF is used in various applications, including maximum likelihood estimation, as seen in the example.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

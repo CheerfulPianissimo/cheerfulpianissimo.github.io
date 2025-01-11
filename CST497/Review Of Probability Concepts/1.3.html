@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability density function</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Probability density function</div>
+    <div class="topic-info">Topic Number: 1.3</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's the course text on "Probability Density Function" based on the provided document, with explanations and attribution:
+
+**Course Text: Probability Density Function**
+
+In this section, we introduce the concept of the probability density function (pdf), a crucial tool for working with continuous random variables.
+
+**Definition and Interpretation**
+
+The probability density function of a random variable X, denoted as fX(x), is defined as the derivative of the cumulative distribution function (cdf), FX(x):
+
+   fX(x) = dFX(x) / dx
+
+  (From "Chapter 4 One Random Variable")
+
+The pdf, if it exists, provides an alternative way to describe the probability distribution of a continuous random variable. Unlike probability mass functions (PMFs) which give the actual probability of a discrete value, the pdf represents the *density* of probability at a particular point.
+
+Specifically, the probability that X falls within a small interval around a point x, say between x and x + h, is approximated by:
+
+  P(x ≤ X ≤ x + h) ≈ fX(x) * h
+
+  (From "Chapter 4 One Random Variable")
+
+As the interval width, h, becomes infinitesimally small, this approximation becomes exact. The pdf can be thought of as the *density* of probability at point x, where the probability of the random variable falling in a small interval around x is proportional to the value of the pdf at x.
+
+**Key Properties of the PDF**
+
+1.  **Non-negativity:** The pdf is always non-negative, i.e., fX(x) ≥ 0. This is because the cdf is a non-decreasing function, and its derivative, the pdf, must therefore be positive. (From "Chapter 4 One Random Variable")
+
+2.  **Probability as Area:** The probability that X falls within a specific interval [a, b] is given by the integral of the pdf over that interval:
+
+    P(a ≤ X ≤ b) = ∫[a, b] fX(x) dx
+
+    (From "Chapter 4 One Random Variable")
+
+    Geometrically, this means the probability is the area under the pdf curve between points a and b. The probability of an event consisting of multiple disjoint intervals is the sum of the integrals (areas) over those intervals.
+
+3.  **Relation to the CDF:** The cdf, FX(x), which gives the probability that X is less than or equal to a value x, can be obtained by integrating the pdf from negative infinity to x:
+
+    FX(x) = ∫[-∞, x] fX(t) dt
+
+    (From "Chapter 4 One Random Variable")
+
+**Explanation and Detail**
+
+*   **Why Density?**  For continuous random variables, the probability of X taking any *exact* single value is actually zero. This is because there are an infinite number of values X can take, so the probability of it taking any specific value is negligibly small. Instead, we use the concept of a density, which tells us where probabilities are concentrated.
+
+*   **Visualizing the PDF:** Imagine the pdf as a curve. Areas under this curve represent probabilities. Regions where the curve is high indicate a higher probability of X falling within that region.
+
+*   **Use Cases**: The pdf is a fundamental concept used in Bayesian statistics, statistical inference and many other areas of machine learning.
+
+**In Summary**
+
+The probability density function is an essential tool for describing the distribution of continuous random variables. It provides a way to calculate probabilities associated with intervals of values, and it is the derivative of the cumulative distribution function. Understanding the pdf is critical for further study in probability and statistics.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

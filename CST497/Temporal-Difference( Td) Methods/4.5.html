@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expected Sarsa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Expected Sarsa</div>
+    <div class="topic-info">Topic Number: 4.5</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Based on the provided context, there is no mention of "Expected Sarsa". The document focuses on Sarsa(λ), n-step Sarsa, and related concepts. Therefore, I cannot generate course text for "Expected Sarsa" using only the provided information.
+
+The document describes the following:
+
+**Sarsa(λ)**
+
+*   **Forward View Sarsa(λ):** This approach combines n-step Q-returns (denoted as q(n)t) using a weighting scheme involving a parameter λ. The qλ return is calculated as a weighted sum of these n-step returns.
+    *   The formula for qλt is given as:  qλt = (1 −λ) ∑n=1∞ λn−1q(n)t
+    *   The update rule for Q(St, At) is: Q(St, At) ← Q(St, At) + α(qλt − Q(St, At))
+    *   Here, α is the learning rate.
+
+*   **n-Step Sarsa:** This concept introduces the idea of calculating returns over n steps, with different values of n representing different approaches.
+    *   For n=1, this is standard Sarsa: q(1)t = Rt+1 + γQ(St+1)
+    *   For n=2: q(2)t = Rt+1 + γRt+2 + γ2Q(St+2)
+    *   For n=∞, this becomes Monte Carlo (MC): q(∞)t = Rt+1 + γRt+2 + ...+ γT-1RT
+    *   The general n-step Q-return is defined as: q(n)t = Rt+1 + γRt+2 + ...+ γn-1Rt+n + γnQ(St+n)
+    *   The update rule is: Q(St, At) ← Q(St, At) + α(q(n)t − Q(St, At))
+
+The document explains how these different returns are used to update the Q-values and how Sarsa(λ) combines these returns. The parameter λ controls the weighting of the n-step returns.
+
+**In summary, based only on the provided context, I cannot provide information on "Expected Sarsa".**
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

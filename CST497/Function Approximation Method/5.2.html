@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Prediction Objective</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">The Prediction Objective</div>
+    <div class="topic-info">Topic Number: 5.2</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's course text on "The Prediction Objective" for a reinforcement learning course, drawing from the provided materials, and explaining the concepts in some detail:
+
+**The Prediction Objective**
+
+In reinforcement learning, a core task is *prediction*. The prediction objective centers around estimating the *value* of being in a particular state, following a specific policy. Put simply, we want to answer the question: "How good is it to be in this situation, given how I'm going to act?" This is crucial because it allows an agent to understand its environment and make informed decisions.
+
+**What is a Policy?**
+
+Before diving into prediction, let's define a key concept: a *policy*. A policy, often denoted as π, is a rule that dictates how an agent chooses actions. It specifies, for each state, the probability of taking each possible action. In other words, the policy guides the agent's behavior. The prediction objective is always tied to a specific policy. We are not asking "how good is this state in general", but rather "how good is this state when I behave according to π".
+
+**Value Function**
+
+The value function, often denoted as V(s), is a function that maps states to their corresponding expected return, given a specific policy π. Let's break this down:
+
+*   **State (s):** A representation of the environment at a particular moment.
+*   **Return (Gt):**  The total discounted reward an agent receives from a given time step onward. This is the sum of all rewards received in the future, with each reward discounted by a factor γ, where 0 ≤ γ ≤ 1. Discounting means that rewards received sooner are weighted more heavily than rewards received later. The return can be written as:
+    
+    Gt = Rt+1 + γRt+2 + γ²Rt+3 + ...
+    
+    Where Rt+1 is the reward the agent gets at time t+1.
+*   **Expected Return:** Because the environment may be stochastic (i.e., not deterministic), the actual return can vary. The value function is the expected value of return.
+* **Value Function (Vπ(s))**: The value function is then the *expected* return when starting in state *s* and following policy *π*.
+
+    Vπ(s) = Eπ[Gt | St = s]
+
+**Why is Prediction Important?**
+
+The prediction objective is important for several reasons:
+
+1.  **Understanding the Environment:** By estimating the value of states, an agent gains an understanding of how the environment responds to its actions and the consequences of being in different states.
+2.  **Policy Evaluation:** Prediction is a crucial step in policy evaluation. We need to know how "good" a policy is before we can start to improve it. The value function is a measure of this policy goodness.
+3.  **Policy Improvement:** In many reinforcement learning algorithms, policy improvement relies on accurate value function estimates. The agent uses value information to select better actions and thereby improve its policy.
+
+**How Do We Learn Value Functions?**
+
+Value function estimation is a learning task. We can estimate the value function using different methods. The document mentions two specific methods:
+
+1.  **Monte Carlo (MC) methods:** These methods estimate the value of a state by averaging the returns observed after visiting that state. MC methods use the actual return *Gt* observed in a complete episode, and update value estimates using this information.
+    
+    ```
+    V(St) ← V(St) + α(Gt - V(St))
+    ```
+    
+    Where α is the learning rate and *Gt* is the return observed after being in state *St*.
+
+2.  **Temporal-Difference (TD) learning:** These methods learn from incomplete episodes by bootstrapping: they update a value estimate based on other value estimates. TD methods update estimates based on the estimated return *Rt+1 + γV(St+1)*. 
+    
+    ```
+    V(St) ← V(St) + α(Rt+1 + γV(St+1) - V(St))
+    ```
+    Here, *Rt+1 + γV(St+1)* is the TD target, and *δt = Rt+1 + γV(St+1) - V(St)* is the TD error.
+
+**Summary**
+
+The prediction objective is to estimate the value function, which tells us how "good" it is to be in a particular state, given a specific policy. This is a crucial step in reinforcement learning, enabling agents to understand their environment, evaluate policies, and ultimately improve their behavior. We can estimate the value function using methods like Monte Carlo and Temporal-Difference learning.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

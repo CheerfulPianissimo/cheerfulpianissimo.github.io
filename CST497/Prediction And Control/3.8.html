@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incremental Implementation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Incremental Implementation</div>
+    <div class="topic-info">Topic Number: 3.8</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on "Incremental Implementation" for a Reinforcement Learning course, drawing from the provided documents and expanding for clarity:
+
+**Topic: Incremental Implementation in Monte Carlo Methods**
+
+In reinforcement learning, particularly with Monte Carlo methods, we often encounter the need to update our estimates based on new data. Instead of recomputing everything from scratch each time we get a new return, we can leverage incremental methods. These methods allow us to update our estimates efficiently, one episode at a time.
+
+**Incremental Updates: The Core Idea**
+
+The core idea behind incremental implementation is to update our existing estimate by only a small change based on the new observation. This approach is computationally much cheaper than recalculating everything. In Monte Carlo methods, instead of averaging rewards as we might in a simpler setting, we average *returns*.
+
+**On-Policy Monte Carlo and Incremental Updates**
+
+For on-policy Monte Carlo methods, the incremental update process is very similar to that used when averaging simple rewards. The key difference is that we are now dealing with returns instead of single-step rewards. So, the incremental average approach discussed for general mean calculation applies:
+  
+  Given a sequence of returns G1, G2,..., Gk, the incremental update rule for the mean of the returns is:
+
+  µk = µk−1 + 1/k (xk − µk−1)
+
+  where:
+   - µk represents the average after seeing k returns
+   - xk is the k-th return
+  This update rule is applied to the returns instead of the rewards in the context of Monte Carlo, but the underlying principle is the same.
+
+**Off-Policy Monte Carlo and Importance Sampling**
+
+The situation becomes more nuanced when we consider off-policy Monte Carlo methods. Here, we have to account for the difference between the behavior policy (the one used to generate the data) and the target policy (the one we want to evaluate).  We use importance sampling to correct for this difference.
+
+*   **Ordinary Importance Sampling:** In this approach, returns are scaled by the importance sampling ratio (ρ). The scaled returns are then used in the same incremental methods as with on-policy methods. The update rule remains the same, but we are now averaging scaled returns instead of raw returns.
+
+*   **Weighted Importance Sampling:** Weighted importance sampling requires a slightly different incremental update due to the weighted average. The goal is to calculate the estimate:
+    
+    Vn = (∑k=1 to n-1 WkGk) / (∑k=1 to n-1 Wk)
+    
+    where:
+    -   Vn is the estimate after n-1 returns
+    -   Gk is the k-th return
+    -   Wk is the importance sampling weight (e.g., ρ) for the k-th return
+
+    To keep this up-to-date as we obtain a single additional return Gn, we maintain Vn and a cumulative sum of weights Cn. The update rules are:
+    
+    Vn+1 = Vn + (Wn / Cn) * (Gn - Vn),  n ≥ 1
+    
+    Cn+1 = Cn + Wn+1
+    
+    Where: 
+    - C0 = 0 and V1 is arbitrary
+   
+   This method effectively gives more weight to returns with higher importance sampling ratios.
+
+**Algorithm Summary**
+
+The incremental algorithm for Monte Carlo policy evaluation, especially in the off-policy case with weighted importance sampling, can be summarized as follows:
+
+1. Initialize *V(s)* for all states *s* arbitrarily and *C(s)* = 0
+2. For each episode:
+     - Generate an episode following the behavior policy
+     - For each state *s* visited in the episode:
+        -  Calculate the return *G* from that state
+        -  Calculate the importance sampling ratio *W* for that episode
+        -  Update the cumulative sum of weights for the state: *C(s)* = *C(s)* + *W*
+        - Update the state-value function: *V(s)* = *V(s)* + (*W* / *C(s)*) * (*G* - *V(s)*)
+
+**Key Takeaways**
+
+*   Incremental implementation allows for efficient updates of estimates in Monte Carlo methods without having to recompute averages from scratch after each episode.
+*   On-policy methods can use similar incremental updates as when averaging rewards, but with returns instead.
+*   Off-policy methods using importance sampling require scaling of returns, either with simple scaling or weighted averaging.
+*   Weighted importance sampling uses a different update rule that weighs the returns based on their importance sampling ratio
+*   Maintaining the cumulative sum of weights is crucial for weighted importance sampling.
+
+This approach is critical for practical applications of Monte Carlo methods, especially when dealing with long episodes or large state spaces.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

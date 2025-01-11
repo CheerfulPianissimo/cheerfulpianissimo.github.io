@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+        <head>
+                <!-- Page information -->
+                <meta charset="UTF-8" />
+                <meta name="node_id" content="gsoc devlog (july)">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="/notes/favicon.ico" />
+
+                <!-- Set title -->
+                <title>CheerfulP's Notes</title>
+
+                <!-- Includes -->
+                <script src="/notes/obs.html/static/obsidian_core.js"></script>
+<script src="/notes/obs.html/static/encoding.js"></script>
+<link rel="stylesheet" href="/notes/obs.html/static/master.css" />
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+            'securityLevel': 'loose',
+            'theme': 'dark',
+            'themeVariables': {
+                    'darkMode': true,
+            }
+    });
+</script>
+<script>
+  MathJax = {
+    loader: {
+      load: [
+        '[tex]/action',
+        'output/chtml',
+        '[tex]/centernot'
+      ]
+    },
+    tex: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true,
+      packages: {'[+]': ['centernot']}
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/notes/obs.html/static/flexsearch.bundle.js"></script>
+<script src="/notes/obs.html/static/pako.js"></script>
+<script src="/notes/obs.html/static/search.js"></script>
+<script src="/notes/obs.html/static/dirtree.js"></script>
+
+
+
+
+                <!-- Onload tweaks -->
+                <script>
+                        const CURRENT_NODE = 'gsoc devlog (july)';
+                        const HTML_URL_PREFIX = '/notes';
+                        const PAGE_DEPTH = 1;
+                </script>
+        </head>
+
+<body class="theme-obs-light">
+        <div id="antiflash" style="display: none;"></div>
+        <script>
+                document.getElementById('antiflash').style.display = 'block';
+        </script>
+        <div id="search-master-div">
+    <div id="search-slab" king_ramses="return the slaaab">
+            <div id="search-controls">
+                    <input id="search_string" placeholder="Type to search notes" type="text" />
+                    <div class="tooltip" style="display: none;">
+                        <input type="checkbox" id="hard_search" name="hard" />
+                        <span class="tooltiptext">Hard search (require exact match)</span>
+                    </div>
+                    <div id="search-results-box">
+                        <div id="search-results"></div>
+                    </div>
+                    <div id="search-instructions">
+                        <div class="prompt-instruction mobile">
+                            <button onclick="toggle_id('search-master-div');"><b>Close</b> Search </button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("search-master-div").addEventListener('click', e => {
+            if(e.target !== e.currentTarget){
+                    return
+            }
+            toggle_id('search-master-div');
+    })
+    document.getElementById("search_string").addEventListener("input", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    }); 
+    document.getElementById("hard_search").addEventListener("click", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    });
+
+    window.addEventListener('keydown', e => {
+        if((e.key=='Escape'||e.key=='Esc'||e.keyCode==27)){
+            toggle_id('search-master-div');
+            return false;
+        } 
+    }, true);
+
+    function click_list_link(element){
+        element.parentElement.getElementsByTagName('a')[0].click()
+    }
+</script>
+
+        <div id="page_holder" class="flex_col">
+                <div id="header" class="header">
+    <div id="header_flex" class="flex_row">
+            <a href="/notes/index.html" id="homelink" title="Clear screen and go to homepage">CheerfulP's Notes</a>
+            <div id="menu_toggle_button" class="navbar-button requires_js" onclick="toggle_menu()">
+                    ≡
+            </div>
+            <div id="navbar" class="navbar requires_js">
+                    <a class="navbar-link" href="/notes/index.html" title="Home">Home</a>
+<a class="navbar-link" href="/notes/GSOC/GSOC.html" title="GSoC 2024">GSoC 2024</a>
+                    <div class="icon-tray">
+                            <div id="theme-button" class="theme-button requires_js" title="Change theme" onclick="toggle_theme_popup(this)">
+    T
+</div>
+<script>
+    function toggle_theme_popup(el){
+        // make theme button show that it's active by adding the .active class
+        toggle(el);
+
+        // show the theme selector
+        toggle_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            toggle(pu);
+        }
+    }
+
+    function disable_theme_popup(){
+        disable_id('theme-button');
+
+        // show the theme selector
+        disable_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            disable(pu);
+        }
+    }
+</script>
+                                    <div onclick="openSearch()" class="theme-button requires_js">
+            <img src = "/notes/obs.html/static/search.svg" alt="Search notes" title="Search notes" style="margin: 4px;"/>
+        </div>
+        <script>
+            function openSearch(){
+                // toggle search popup and continue with extra code if it is enabled this time
+                if (toggle_id('search-master-div')){
+                    // get input field and temporarily disable it
+                    let ss = document.getElementById('search_string');
+                    ss.value = 'Seach data initializing...';
+                    ss.readOnly = true; 
+
+                    // load search data if not yet done so
+                    setTimeout(function(){
+                        LoadSearchData()
+
+                        // clear input and put focus on it so that we can start typing immediately
+                        ss.value = '';
+                        ss.readOnly = false; 
+                        ss.focus()
+                        ss.select()
+                    }, 100);
+                }
+            }
+        </script>
+                                    <div class="graph_header_div requires_js">
+            <a id="graph_link" class="system-link" href="/notes/obs.html/graph/index.html?node=gsoc devlog (july)" title="Open fullpage Graph">
+                    <img class="graph_header_div_svg" src = "/notes/obs.html/static/graph.svg" alt="Open fullpage Graph" style="margin: 2px; width: 17px;"/>
+            </a>
+        </div>
+                                    <div >
+            <a id="dirtree_link" class="system-link" href="/notes/obs.html/dir_index.html" title="View directory tree">
+                    <img src = "/notes/obs.html/static/dirtree.svg" style="width: 12px; padding: 4px;" alt="Directory tree link"/>
+            </a>
+        </div>
+                            <div>
+    <a href="/notes/obs.html/tags/index.html" title="Open tag view">
+            <img src = "/notes/obs.html/static/hashtag.svg" alt="RSS Feed link" style="width: 24px; margin-left: -2px; margin-top: -2px;"/>
+    </a>
+</div>
+                                    <div>
+            <a id="rss_link" class="system-link" href="/notes/obs.html/rss/feed.xml" title="RSS Feed link">
+                    <img src = "/notes/obs.html/static/rss.svg" alt="RSS Feed link"/>
+            </a>
+        </div>
+                    </div>
+                    <div style="display: flex; flex-direction:column">
+                        <div id="left_pane_toggle_nav" class="left_pane_toggle_nav">Toggle Directory Tree Pane</div>
+                        <div id="right_pane_toggle_nav" class="right_pane_toggle_nav">Toggle Table of Contents Pane</div>
+                    </div>
+            </div>
+    </div>
+    <div class="popup" id="theme-popup">
+    <label for="cars">Theme </label>
+
+    <select name="theme" id="theme" onchange="set_theme(this.value)">
+      <option value="obs-light" selected="selected">obsidian-light</option>
+      <option value="obs-dark">obsidian-dark</option>
+    </select> 
+</div>
+</div>
+                <div class="flex_row">
+                        <div id="left_pane" class="left_pane active">
+    <div id="left_pane_fold_header" class="left_pane_fold_header fold_header">x</div>
+    <div id="left_pane_content" class="left_pane_content">
+            <div id="dirtree"><button id="folder-1" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>GSOC</button>
+<div id="folder-container-1" class="dir-container requires_js active" path="/notes/GSOC">
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/notes/GSOC/GSOC.html"  >GSOC</a></li>
+		<li><div class="file-icon"></div><a class="" href="/notes/GSOC/GSoC Changelog.html"  >GSoC Changelog</a></li>
+		<li><div class="file-icon"></div><a class="" href="/notes/GSOC/GSoC Devlog (August).html"  >GSoC Devlog (August)</a></li>
+		<li><div class="file-icon"></div><a class="active current_page_dirtree" href="/notes/GSOC/GSoC Devlog (July).html"  >GSoC Devlog (July)</a></li>
+		<li><div class="file-icon"></div><a class="" href="/notes/GSOC/GSoC Devlog (June).html"  >GSoC Devlog (June)</a></li>
+		<li><div class="file-icon"></div><a class="" href="/notes/GSOC/GSoC Devlog (May).html"  >GSoC Devlog (May)</a></li>
+		<li><div class="file-icon"></div><a class="" href="/notes/GSOC/GsoC Research Links.html"  >GsoC Research Links</a></li>
+		<li><div class="file-icon"></div><a class="" href="/notes/GSOC/Project Design.html"  >Project Design</a></li>
+		<li><div class="file-icon"></div><a class="" href="/notes/GSOC/Project Motivation.html"  >Project Motivation</a></li>
+		<li><div class="file-icon non-md-file"></div><a class="" href="/notes/GSOC/Waycrate_GSOC_2024.pdf"  class="external-link">Waycrate_GSOC_2024.pdf</a></li>
+	</ul>
+</div>
+<button id="folder-2" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>_attachments</button>
+<div id="folder-container-2" class="dir-container requires_js " path="/notes/_attachments">
+	<ul class="dir-list">
+		<li><div class="file-icon non-md-file"></div><a class="" href="/notes/_attachments/Pasted image 20240619212710.png"  class="external-link">Pasted image 20240619212710.png</a></li>
+		<li><div class="file-icon non-md-file"></div><a class="" href="/notes/_attachments/Pasted image 20240730174837.png"  class="external-link">Pasted image 20240730174837.png</a></li>
+		<li><div class="file-icon non-md-file"></div><a class="" href="/notes/_attachments/Pasted image 20240730180003.png"  class="external-link">Pasted image 20240730180003.png</a></li>
+		<li><div class="file-icon non-md-file"></div><a class="" href="/notes/_attachments/Pasted image 20240730180043.png"  class="external-link">Pasted image 20240730180043.png</a></li>
+		<li><div class="file-icon non-md-file"></div><a class="" href="/notes/_attachments/proposal_image1.png"  class="external-link">proposal_image1.png</a></li>
+		<li><div class="file-icon non-md-file"></div><a class="" href="/notes/_attachments/wayshot-2024_05_14-18_34_28.png"  class="external-link">wayshot-2024_05_14-18_34_28.png</a></li>
+	</ul>
+</div>
+<ul class="dir-list">
+	<li><div class="file-icon"></div><a class="" href="/notes/index.html"  >index</a></li>
+</ul>
+</div>
+    </div>
+</div>
+                        <div class="container">
+                                <div class="content"><h1 id="weeks-1-2">Weeks 1-2</h1>
+<div class="toc">
+<ul>
+<li><a href="#weeks-1-2" class="anchor-link">Weeks 1-2</a></li>
+<li><a href="#weeks-3-5" class="anchor-link">Weeks 3-5</a><ul>
+<li><a href="#dmabuf-opengl-texture-pipeline-mvp-implementation" class="anchor-link">DMABUF-&gt; OpenGL Texture Pipeline MVP Implementation</a></li>
+<li><a href="#what-next" class="anchor-link">What Next?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Most of this time was spent catching up on OpenGL, EGL and the interactions thereof. <br />
+Some useful resources I perused:   </p>
+<ul>
+<li><a href="https://learnopengl.com/" class="external-link">https://learnopengl.com/</a> for learning the foundational OpenGL concepts along with a simple triangle demo.   </li>
+<li><a href="https://registry.khronos.org/EGL/" class="external-link">https://registry.khronos.org/EGL/</a> the EGL specs. EGL doesn't have as many resources as OpenGL to learn from so often you have to look at the base specs themselves. The particular extensions I had to use in my project were described by:   <ul>
+<li><a href="https://registry.khronos.org/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import.txt" class="external-link">https://registry.khronos.org/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import.txt</a> for converting a GBM BufferObject into an EGLImage   </li>
+<li><a href="https://registry.khronos.org/OpenGL/extensions/OES/OES_EGL_image_external.txt" class="external-link" class="external-link">https://registry.khronos.org/OpenGL/extensions/OES/OES_EGL_image_external.txt</a> : for importing the EGLImage as an usable GL texture   </li>
+</ul>
+</li>
+</ul>
+<p>Also invaluable was the <a href="https://www.kernel.org/doc/html//latest/userspace-api/dma-buf-alloc-exchange.html#exchanging-pixel-buffers" class="external-link" title="Permalink to this heading">Exchanging pixel buffers</a> document which helped me make sense of the various parameters demanded by the above functions.    </p>
+<h1 id="weeks-3-5">Weeks 3-5</h1>
+<h2 id="dmabuf-opengl-texture-pipeline-mvp-implementation">DMABUF-&gt; OpenGL Texture Pipeline MVP Implementation</h2>
+<p>I decided to tackle this part of the project in the same manner that I tackled the first phase, by first building an MVP to get the pipeline working and then extracting the work back into libwayshot. For this phase, my mentor @ShinyZenith's educational project <a href="https://github.com/Shinyzenith/wayland-egl-ctx" class="external-link">wayland-egl-ctx</a> proved to be invaluable. It already had a lot of the finicky EGL and OpenGL setup code for me to build off of.    </p>
+<p>With this solid foundation in place, I modified the demo to build a rectangle rather than a triangle.<img alt="" src="/notes/_attachments/Pasted%20image%2020240730174837.png" /> <br />
+As my first experience dealing directly with C code under unsafe blocks, I messed up the variable types and passed a wrong array size to some of the GL code. Debugging this was a good learning experience.   </p>
+<p>With the rectangle rendering in place, all that was left was turning the screen-capture into a texture and binding it to this rectangle.    </p>
+<p>The crux of this step is the <a href="https://docs.rs/khronos-egl/latest/khronos_egl/api/trait.EGL1_5.html#tymethod.eglCreateImage" class="external-link">eglCreateImage</a> function. Pass the right constants and parameters to it and returns an EGLImage containing the required data.    </p>
+<p>Actually implementing that step proved to be challenging. I quickly got the function call compiling but it kept failing with a undescriptive "BadParameter" error message.   </p>
+<p>After trying out various permutations and combinations of the parameters for hours I gave up and decided to properly debug it via GDB. Tunneling down the function call stack finally gave me the root of the error: a failing ioctl call deep in libdrm. It had an errno of 9 "Bad file descriptor" which clued me into what the actual issue was. I was using .as_raw_fd() to obtain the dmabuf file descriptors but this caused the fd to be invalid by the time it was used in eglCreateImage. Using into_raw_fd() immediately solved the issue at the cost of a lot of time spent debugging. The debugging experience I gained in this phase was entirely worth it.   </p>
+<p>With the EGLImage in hand, it was finally time to convert it and bind it to a texture. Doing this required the somewhat verbose <a href="https://registry.khronos.org/OpenGL/extensions/OES/OES_EGL_image_external.txt" class="external-link" class="external-link">EGLImageTargetTexture2DOES</a>function. The name is actually pretty comprehensible if you look at it for a while:   </p>
+<ul>
+<li>EGLImage is the source   </li>
+<li>It Targets a GL Texture   <ul>
+<li>This GL texture is 2D   </li>
+</ul>
+</li>
+<li>OES stands for OpenGL ES    </li>
+</ul>
+<p>This step thankfully went smoothly and before I knew I had the MVP working: <br />
+<img alt="" src="/notes/_attachments/Pasted%20image%2020240730180003.png" /> <br />
+Messing around in the fragment shader gave me color inversion: <br />
+<img alt="" src="/notes/_attachments/Pasted%20image%2020240730180043.png" /> <br />
+With the MVP now functional, I committed it to the main project under the examples folder in libwayshot.    </p>
+<p>I also decided to try out continuously refreshing the image in the texture to create a live screen mirror. It worked but I the performance was disappointing. I was not entirely surprised by this outcome - as discussed in  last month's devlog, libwayshot is still a screen shot library rather than a screen capture library and changing this will require some deeper changes in it's structure to reduce repetitive allocations and setup. This topic merits some discussion with the mentors.   </p>
+<h2 id="what-next">What Next?</h2>
+<p>With one month of GSoC remaining, it's time to move on to the the final stage of this project: implementing the dmabuf version of the high-level API. There are also a few other todos:   </p>
+<ul>
+<li>Proper DRM modifier handling, the present code only works for single planar formats, it also fails on the wlroots Vulkan renderer for unclear reasons. I'm presently going along with whatever format GBM chooses as it's default but to be correct we may need to query the available formats via linux_dmabuf_feedback and pass that list to GBM. linux_dmabuf_feedback also has the concept of "main device" and "tranche device" which I haven't fully gotten my head around. One issue here is that I don't actually have the hardware to test other formats and modifiers.   </li>
+<li>Merging textures from multiple displays in a way analogous to how it is done with DynamicImage. I'm not sure we should actually be doing this at the libwayshot layer of abstraction, it seems to me to be a application level concern when were passing around textures. I think this can be done after buidling the Dmabuf-&gt;GL texture conversion API for the individual displays.   </li>
+<li>Verifying memory safety for GL, EGL and GBM handling code. I'll try to be careful but ultimately I have little experience dealing with Rust FFI and more experienced eyes will be very helpful for this.</li>
+</ul></div>
+<div class="note-footer">
+<div class="backlinks">
+<h2>Backlinks</h2>
+<ul>
+	<li><a class="backlink" href="/notes/GSOC/GSOC.html">gsoc</a></li>
+</ul>
+</div>
+
+<div class="tags">
+
+</div>
+
+</div>
+<div class="graph requires_js ">
+    <div id="A151971796748493266386533703714205238747{level}" class="graph_div"></div>
+
+    <div class="graph-instructions" id="D151971796748493266386533703714205238747{level}">
+        Left-click: follow link, Right-click: select node, Scroll: zoom
+    </div>
+    
+    <div class="graph-button-row" style="display:flex;">
+        <button class="graph_button graph_show_button" id="B151971796748493266386533703714205238747{level}" level="{level}" note_temp_id="151971796748493266386533703714205238747" onclick="window.ObsHtmlGraph.run(this, '151971796748493266386533703714205238747', 'gsoc devlog (july)');">
+            Show Graph
+        </button>
+        <button class="graph_button graph_type_button" id="C151971796748493266386533703714205238747{level}" style="flex:1" onclick="window.ObsHtmlGraph.switch_graph_type(this);">
+            2D
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    if (window.ObsHtmlGraph == undefined){
+        import('/notes/obs.html/static/graph.js').then((Module) => {
+            window.ObsHtmlGraph = Module;
+            window.ObsHtmlGraph.arm_page(document.getElementById('page_holder'))
+        })
+    }
+</script>
+
+
+
+
+                                <!-- end content -->
+                        </div>
+                        <div class="container_filler">
+                        </div>
+                        <div id="right_pane" class="right_pane active">
+    <div id="right_pane_fold_header" class="right_pane_fold_header fold_header">x</div>
+    <div id="right_pane_content" class="right_pane_content">
+            
+    </div>
+</div>
+                </div>
+        </div>
+
+        <script>
+                function handle_toggle_side_bar(e){
+                        let header;
+                        let pane; 
+                        let target = e.target
+
+                        // switch out the navbar button click for a header click
+                        if (target.id == 'left_pane_toggle_nav'){
+                                target = document.getElementById('left_pane_fold_header')
+                        }
+                        else if (target.id == 'right_pane_toggle_nav'){
+                                target = document.getElementById('right_pane_fold_header')
+                        }
+
+                        // get header and pane
+                        if (target.classList.contains('fold_header')) {
+                                header = target;
+                                pane = target.parentElement;
+                        }
+                        else {
+                                pane = target;
+                                header = target.getElementsByClassName('fold_header')[0];
+                        }
+                        toggle_side_bar(pane, header, true)
+                        e.stopPropagation();
+                }
+                function handle_toggle_side_bar_button(e){
+                        document.getElementById('menu_toggle_button').click()
+                        handle_toggle_side_bar(e);
+                }
+
+                function toggle_side_bar(pane, header, save) {
+                        let active = (pane.classList.contains('active'))
+                        if (active){
+                                disable_side_bar(pane, header, save);
+                        }
+                        else {
+                                enable_side_bar(pane, header, save);
+                        }
+                }
+                function enable_side_bar(pane, header, save){
+                        pane.classList.add('active');
+                        pane.removeEventListener('click', handle_toggle_side_bar);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, true) }
+                }
+                function disable_side_bar(pane, header, save){
+                        pane.classList.remove('active');
+                        pane.addEventListener('click', handle_toggle_side_bar);
+                        header.removeEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, false) }
+                }
+                function set_correct_header_symbol(header){
+                        let pane = header.parentElement;
+                        let symbol = [['>', '<'],['<', '>']]
+                        symbol = symbol[Number(header.classList.contains('right_pane_fold_header'))][Number(pane.classList.contains('active'))];
+                        console.log(symbol);
+                        header.innerHTML = symbol
+                        return header;
+                }
+                function panel_folding_get_panel_name(header){
+                        return ['left', 'right'][Number(header.classList.contains('right_pane_fold_header'))]
+                }
+                function save_panel_folding_state(header, active){
+                        ls_set('pane_folding_state_'+panel_folding_get_panel_name(header), Number(active));
+                }
+                function load_panel_folding_state(panel_name){
+                        val = ls_get('pane_folding_state_'+panel_name)
+                        if (!val){ return {'exists': false, 'value': null}}
+                        return {'exists': true, 'value': Boolean(Number(val))}
+                }
+                function set_pane_folding_start(left_header, right_header){
+                        // small screen = closed
+                        let right_pane_enabled = true;
+                        let left_pane_enabled = true;
+                        let w = window.visualViewport.width
+                        if (w < 1000){
+                                left_pane_enabled = false
+                        }
+                        if (w < 800){
+                                right_pane_enabled = false
+                        }
+
+                        // get saved values if present
+                        let rval = load_panel_folding_state('right')
+                        if (rval['exists']){
+                                right_pane_enabled = rval['value']
+                        }
+                        let lval = load_panel_folding_state('left')
+                        if (lval['exists']){
+                                left_pane_enabled = lval['value']
+                        }
+
+                        // default = enabled, so we only need to disable
+                        if (!left_pane_enabled){
+                                disable_side_bar(document.getElementById('left_pane'), document.getElementById('left_pane_fold_header'))
+                        }
+                        if (!right_pane_enabled){
+                                disable_side_bar(document.getElementById('right_pane'), document.getElementById('right_pane_fold_header'))
+                        }
+                }
+
+                function init_pane_folding(header){
+                        set_correct_header_symbol(header);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                }
+                
+                
+                set_pane_folding_start()
+                init_pane_folding(document.getElementById('left_pane_fold_header'));
+                init_pane_folding(document.getElementById('right_pane_fold_header'));
+
+                document.getElementById('left_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+                document.getElementById('right_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+        </script>
+
+        <script src="/notes/obs.html/static/load_dirtree_footer.js" type="text/javascript"></script>
+
+        
+
+
+
+
+</body>
+</html>

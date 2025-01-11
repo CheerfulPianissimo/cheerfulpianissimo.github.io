@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional and marginal distributions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Conditional and marginal distributions</div>
+    <div class="topic-info">Topic Number: 1.7</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's course text on "Conditional and Marginal Distributions" tailored for a reinforcement learning course, drawing from the provided context:
+
+**Conditional and Marginal Distributions**
+
+In reinforcement learning, we often deal with situations where the probability of an event depends on the occurrence of another event. Understanding conditional and marginal probabilities is crucial for modeling and reasoning about these dependencies.
+
+**Conditional Probability**
+
+Quite often we are interested in determining whether two events, *A* and *B*, are related in the sense that knowledge about the occurrence of one, say *B*, alters the likelihood of occurrence of the other, *A*. This requires that we find the conditional probability, of event A given that event B has occurred. The conditional probability is defined by:
+
+P(A | B) = P(A ∩ B) / P(B)   for P(B) > 0
+
+*Where:*
+
+*   P(A | B) is the conditional probability of event A occurring given that event B has occurred.
+*   P(A ∩ B) is the probability of both events A and B occurring (the joint probability).
+*   P(B) is the probability of event B occurring.
+
+Knowledge that event B has occurred implies that the outcome of the experiment is in the set B. In computing P(A | B), we can therefore view the experiment as now having the reduced sample space B. The event A occurs in the reduced sample space if and only if the outcome is in A ∩ B. The formula above simply renormalizes the probability of events that occur jointly with B. If we let A = B, Eq (2.27) gives P(B | B) = 1 as required. It is easy to show that for fixed B, P(A | B) satisfies the axioms of probability.
+
+*Example:* Consider a simple Markov Reward Process (as seen in Example 6.4). Let's say event *A* is "the process starts in state A" and event *B* is "the process transitions to state B".  We might ask, "What is the probability of the process transitioning to state B, given it started in state A?" This is a conditional probability: P(B | A).
+
+**Intuition and Importance**
+
+The conditional probability is very useful in RL, as it allows us to:
+
+*   **Update Beliefs:** When we observe a transition (e.g., moving from state *s* to *s'*), we are interested in the conditional probability of the next state *s'* given the current state *s* and the action *a* taken. This conditional probability is part of the model of the environment.
+*   **Make Predictions:** In model-based reinforcement learning we need to be able to reason about the next state given the current state and action, so we need to be able to calculate the probability of a given next state.
+*   **Reason about Policies:** Conditional probabilities can be used to calculate the probability of taking a particular action *a* given a state *s* under a policy.
+
+**Marginal Probability**
+
+The concept of marginal probability doesn't appear explicitly in the provided text, but it's a key concept when dealing with conditional probabilities and is necessary for a complete understanding of the topic. So, we'll add this concept to the discussion.
+
+The marginal probability of an event *A*, often simply called the probability of *A* (P(A)) is the probability of that event occurring without considering any other specific event. You can think of it as the probability "on the margin," i.e., without reference to any other event.
+
+*Example:* If we have a joint probability distribution over two random variables *X* and *Y*, the marginal probability of X, denoted as P(X), is the probability of X taking on a specific value, summed over all possible values of Y.
+
+**Relationship between Conditional and Marginal Probability**
+
+The conditional probability can be used to calculate the marginal probability as follows:
+
+If we have a set of mutually exclusive and exhaustive events B1, B2, ..., Bn, then we can calculate the marginal probability of A as:
+
+P(A) = P(A | B1)P(B1) + P(A | B2)P(B2) + ... + P(A | Bn)P(Bn)
+
+This is often called the *law of total probability*.
+
+*Example:* Imagine you have a policy that chooses actions based on the current state. The marginal probability of taking action *a* would be the sum of the conditional probability of taking action *a* in each state *s* weighted by the probability of being in that state.
+
+**Why are both important in RL?**
+
+1.  **Model Learning**: When you're learning a model of the environment (e.g., transition probabilities), you need conditional probabilities to understand how the state changes.
+2.  **Policy Evaluation**: To evaluate a policy, you need to understand the probabilities of events given your policy.
+3.  **Planning**: When planning, you often need to reason about the probabilities of sequences of events.
+4.  **Bayesian Approach**: In a Bayesian approach to RL, we often use conditional probabilities to update our belief about the state or the model.
+
+**In Summary**
+
+*   Conditional probability describes the likelihood of an event given that another event has already occurred.
+*   Marginal probability describes the probability of an event without consideration of other events.
+*   The law of total probability connects conditional and marginal probabilities.
+*   Both concepts are fundamental for understanding and applying many reinforcement learning algorithms.
+
+This text incorporates the material from the given documents, especially the definition of conditional probability and its interpretation, while also adding the concept of marginal probability, which is important for a full understanding in this context.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

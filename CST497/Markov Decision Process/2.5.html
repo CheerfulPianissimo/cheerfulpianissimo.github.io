@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns and Episodes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Returns and Episodes</div>
+    <div class="topic-info">Topic Number: 2.5</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a draft of course text on "Returns and Episodes" for a Reinforcement Learning course, drawing from the provided material and expanding for clarity:
+
+**Course Text: Returns and Episodes in Reinforcement Learning**
+
+**Introduction**
+
+In reinforcement learning, an agent interacts with an environment to achieve a goal. The agent learns by maximizing the cumulative reward it receives over time. To formalize this idea, we introduce the concept of the *return*, which is a specific function of the sequence of rewards received by the agent. The way we define the return, and thus the overall goal, depends on whether the task is *episodic* or *continuing*.
+
+**3.3 Returns**
+
+The objective of a reinforcement learning agent is to maximize the cumulative reward it receives in the long run. The agent's goal should be something over which it has imperfect control, such as the reward source being outside of the agent's control. The return, denoted as *Gt*, is defined as some specific function of the reward sequence *Rt+1, Rt+2, Rt+3,...*.
+
+**3.3.1 Episodic Tasks**
+
+In *episodic tasks*, the agent-environment interaction naturally breaks down into a sequence of separate episodes. Each episode consists of a finite sequence of time steps, such as plays of a game, trips through a maze, or any sort of repeated interactions. Each episode ends in a special state called the *terminal state*, followed by a reset to a standard starting state or to a sample from a standard distribution of starting states.
+
+For episodic tasks, the return *Gt* is often defined as the sum of the rewards received during the episode:
+
+```
+Gt = Rt+1 + Rt+2 + Rt+3 + ... + RT
+```
+where *T* is the final time step of the episode.
+
+In episodic tasks, we sometimes need to distinguish between the set of all non-terminal states, denoted *S*, and the set of all states plus the terminal state, denoted *S+*.
+
+**3.3.2 Continuing Tasks**
+
+In *continuing tasks*, the agent-environment interaction does not break naturally into identifiable episodes but goes on continually without limit. Examples include continual process-control tasks or the operation of a long-lived robot. If we were to use the same return formulation as in episodic tasks (simple sum of rewards), the return could become infinite since T = ∞. For instance, if the agent received +1 at each time step, the return would be an infinite sum.
+
+**3.4 Unified Notation for Episodic and Continuing Tasks**
+
+To handle both episodic and continuing tasks with a single notation, we introduce the concept of a special absorbing state that transitions only to itself and that generates only rewards of zero. This allows us to effectively treat episode termination as the entering of such a state.
+
+**3.4.1 Notation for Episodic Tasks**
+
+To be precise about episodic tasks, we need to consider a series of episodes, each of which consists of a finite sequence of time steps. We number the time steps of each episode starting anew from zero. Therefore, we have to refer not just to *St*, the state representation at time *t*, but to *St,i*, the state representation at time *t* of episode *i*. Similarly, we have *At,i* for the action, *Rt,i* for the reward, *πt,i* for the policy, *Ti* for the terminal time step of episode *i*, etc. However, when discussing episodic tasks, we will almost never have to distinguish between different episodes. We will almost always be considering a single episode, or stating something that is true for all episodes. Therefore, we will abuse notation slightly by dropping the explicit reference to the episode number. That is, we will write *St* to refer to *St,i*, and so on, unless it is necessary to avoid confusion.
+
+**3.4.2 Unifying with Absorbing States**
+
+The definition of return as a finite sum for episodic tasks and an infinite sum for continuing tasks can be unified by considering episode termination to be the entering of a special absorbing state that transitions only to itself and generates only rewards of zero. This allows us to treat episodic tasks as a special case of continuing tasks, where the agent eventually enters a state that always results in zero reward.
+
+**Example: Pole Balancing**
+
+The example of pole balancing helps illustrate how a task can be treated as either episodic or continuing:
+
+*   **Episodic:** The reward could be +1 for every time step on which failure did not occur, so that the return at each time would be the number of steps until failure.
+*   **Continuing:** The reward would be -1 on each failure and zero at all other times. The return at each time would then be related to -γK, where K is the number of time steps before failure.
+
+In either case, the return is maximized by keeping the pole balanced for as long as possible.
+
+**Key Concepts**
+
+*   **Return (Gt):** A specific function of the reward sequence that the agent tries to maximize.
+*   **Episodic Task:** A task that naturally breaks into a sequence of separate episodes.
+*   **Continuing Task:** A task that does not break into episodes and continues indefinitely.
+*   **Terminal State:** A special state in episodic tasks that ends an episode.
+*   **Absorbing State:** A state that transitions only to itself and generates only rewards of zero, used to unify episodic and continuing tasks.
+
+**Conclusion**
+
+Understanding the concepts of returns, episodic tasks, and continuing tasks is fundamental to reinforcement learning. The distinction between these two types of tasks affects how we define the return and what algorithms we use to solve the problem. By introducing the absorbing state, we can use a single notation and framework to describe both kinds of tasks.
+
+**Explanation of Changes and Additions**
+
+*   **Structure:** The text is reorganized for better flow in a course setting. It starts with an introduction and ends with a conclusion.
+*   **Clarity:** I have added more explanatory language to clarify concepts, particularly with terms like "absorbing state."
+*   **Expansion:**  I have expanded the explanation of episodic tasks (e.g., the inclusion of S and S+) and continuing tasks, giving better examples and clarifying the issue of infinite sums.
+*   **Example:** The pole balancing example is used to show how a problem can be formulated both ways.
+*   **Key Concepts:** These are listed for easy reference and review.
+*   **Attribution:** The text is based on the provided material and concepts are attributed to the text by reference to the section numbers.
+
+This text is designed to be clear, comprehensive, and suitable for a college-level course on reinforcement learning.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimal Policies and Optimal Value Functions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Optimal Policies and Optimal Value Functions</div>
+    <div class="topic-info">Topic Number: 2.8</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on "Optimal Policies and Optimal Value Functions" for a Reinforcement Learning course, drawing from the provided context:
+
+**Optimal Policies and Optimal Value Functions**
+
+In the realm of Markov Decision Processes (MDPs), our primary goal is to discover the *best* way for an agent to behave in an environment to maximize its cumulative reward. This leads us to the concepts of optimal policies and optimal value functions.
+
+**Optimal Policy**
+
+A policy, denoted as π, defines how an agent chooses actions given a state.  An *optimal policy*, denoted as π*, is a policy that achieves the best possible performance across all states.  Formally, we can define a partial ordering over policies:
+
+π ≥ π' if v<sup>π</sup>(s) ≥ v<sup>π'</sup>(s), for all states *s*.
+
+This means that policy π is considered better than or equal to policy π' if, for every state, the expected cumulative reward obtained under policy π is greater than or equal to that obtained under policy π'.
+
+A key theorem in MDPs states:
+
+*For any Markov Decision Process, there exists an optimal policy π* that is better than or equal to all other policies, π* ≥ π, for all policies π.*
+
+This theorem assures us that there is always at least one policy that is the best possible.
+
+**Optimal Value Functions**
+
+Associated with any policy π is a value function, v<sup>π</sup>(s), which estimates the expected cumulative reward starting from state *s* and following policy π. The *optimal value function*, denoted as v*(s), is the value function that is achieved by any optimal policy π*. That is:
+
+v<sup>π*</sup>(s) = v*(s)
+
+The optimal value function gives us the maximum expected cumulative reward obtainable from any state.
+
+Similarly, we have the *optimal action-value function*, denoted as q*(s,a), which gives the maximum expected cumulative reward starting from state *s*, taking action *a*, and then following an optimal policy. It is defined as:
+
+q<sup>π*</sup>(s,a) = q*(s,a)
+
+**Relationship between Optimal Policies and Optimal Value Functions**
+
+All optimal policies achieve the optimal value function, v*(s), and the optimal action-value function, q*(s,a). This means that when following an optimal policy, the value of any state is always equal to the optimal value of that state, and similarly for the action values.
+
+**Policy Improvement**
+
+A common strategy for finding an optimal policy is to iteratively improve a current policy.  We can improve a policy by acting *greedily* with respect to the action-value function of the current policy.  Given a policy π, we can define a new policy π' as:
+
+π'(s) = argmax<sub>a∈A</sub> q<sup>π</sup>(s,a)
+
+This means that in each state *s*, the new policy π' chooses the action that maximizes the action-value function q<sup>π</sup> for the current policy π.
+
+This improvement step guarantees that the value of any state under the new policy will be better than or equal to the value of the same state under the original policy:
+
+v<sup>π'</sup>(s) ≥ v<sup>π</sup>(s)
+
+This is because:
+
+v<sup>π</sup>(s) ≤ q<sup>π</sup>(s, π'(s)) = max<sub>a∈A</sub> q<sup>π</sup>(s, a)
+
+The above inequality is then extended to show that the value of the new policy will always be equal to or greater than the old policy:
+
+v<sup>π</sup>(s) ≤ q<sup>π</sup>(s,π′(s)) = E<sub>π'</sub>[R<sub>t+1</sub> + γv<sup>π</sup>(S<sub>t+1</sub>) | S<sub>t</sub> = s]
+≤ E<sub>π'</sub>[R<sub>t+1</sub> + γq<sup>π</sup>(S<sub>t+1</sub>,π′(S<sub>t+1</sub>)) | S<sub>t</sub> = s]
+≤ E<sub>π'</sub>[R<sub>t+1</sub> + γR<sub>t+2</sub> + γ<sup>2</sup>q<sup>π</sup>(S<sub>t+2</sub>,π′(S<sub>t+2</sub>)) | S<sub>t</sub> = s]
+≤ E<sub>π'</sub>[R<sub>t+1</sub> + γR<sub>t+2</sub> + ... | S<sub>t</sub> = s] = v<sup>π′</sup>(s)
+
+This improvement process is a key component of algorithms like Policy Iteration, which we'll discuss later.
+
+**Example: Student MDP**
+
+Consider a simplified student MDP where a student can choose to study, go on Facebook, sleep, quit, or go to the pub. The goal is to maximize their academic performance. The notes provided an example with specific rewards and transition probabilities between actions. Optimal policy would be the one that maximizes the expected reward for each state. In the given notes, the optimal value function is shown with values for q*: q* = 5, 6, 6, 5, 8, 0, 10, and 8.4. Note that the optimal policy for γ=1 is to choose the action with the highest q* value for each state.
+
+**In Summary:**
+
+*   Optimal policies aim to maximize cumulative reward.
+*   Optimal value functions represent the maximum possible value achievable from any state, or state-action pair.
+*   An optimal policy ensures that the value of each state (or state-action pair) is equal to the optimal value for that state.
+*   Policy improvement is a method for finding better policies.
+
+This provides a foundation for understanding the core concepts of optimality in Reinforcement Learning. We will build upon this foundation as we explore specific algorithms that allow us to discover these optimal policies and value functions.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

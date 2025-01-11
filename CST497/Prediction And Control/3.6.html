@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Control, Monte Carlo Control without Exploring Starts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Monte Carlo Control, Monte Carlo Control without Exploring Starts</div>
+    <div class="topic-info">Topic Number: 3.6</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a draft of course text on "Monte Carlo Control, Monte Carlo Control without Exploring Starts," drawing from the provided material and aiming for a detailed explanation:
+
+**Module: Monte Carlo Control**
+
+**Topic: Monte Carlo Control, Monte Carlo Control without Exploring Starts**
+
+**Introduction**
+
+In previous modules, we explored Monte Carlo (MC) methods for *prediction*, where we evaluate a given policy. Now, we turn to *control*, where the goal is to find the optimal policy. Monte Carlo control methods learn directly from episodes of experience, requiring no knowledge of the underlying Markov Decision Process (MDP) transitions or rewards. This makes them a powerful model-free approach, however, they can only be applied to episodic MDPs where all episodes must terminate. The core idea remains the same: value is estimated as the mean return. But now we must also grapple with the exploration-exploitation trade-off.
+
+**Monte Carlo Control with Exploring Starts**
+
+A straightforward approach to Monte Carlo control relies on the assumption of "exploring starts." This means that each episode begins at a state-action pair selected at random. If we explore all possibilities, we can gradually learn the best policy. This is done by iteratively evaluating and improving the policy.
+
+*   **Policy Evaluation:** We estimate the action-value function, Q(s, a), which represents the expected return starting from state *s*, taking action *a*, and following a policy thereafter. In Monte Carlo methods, we average the returns obtained after visiting a state-action pair.
+*   **Policy Improvement:** Once we have an estimate of Q(s, a), we can improve the policy by making it greedy with respect to the Q-values. This means for each state, we choose the action that maximizes the estimated return:
+
+    ```
+    π(s) = argmax_a Q(s, a)
+    ```
+    where ties are broken arbitrarily.
+*   **Iteration:** These evaluation and improvement steps are repeated iteratively. With each iteration, the policy becomes more optimal.
+
+**Limitations of Exploring Starts**
+
+The exploring starts assumption is often unrealistic. In many practical scenarios, we cannot guarantee that we will start an episode from every possible state-action pair. This limits the applicability of the basic exploring starts method.
+
+**Monte Carlo Control Without Exploring Starts: Off-Policy Methods**
+
+To address the limitations of exploring starts, we need *off-policy* Monte Carlo control methods. These methods allow us to learn about the optimal policy (*target policy*), even when we are following a different policy (*behavior policy*) to generate experience.
+
+**Importance Sampling**
+
+The key idea behind off-policy Monte Carlo control is *importance sampling*. This technique allows us to use returns generated from the behavior policy (µ) to evaluate the target policy (π).
+
+*   **Weighted Importance Sampling:** Importance sampling works by weighting returns based on the similarity between the target and behavior policies. Specifically, we calculate a *weight* (or *importance sampling ratio*) for each time step in an episode, that is the product of the ratios of the target and behavior policy for each action taken in the episode:
+
+   ```
+   W =  π(At |St ) / µ(At |St ) * π(At+1|St+1) / µ(At+1|St+1) ... π(AT |ST ) / µ(AT |ST )
+   ```
+
+   The return (G) is then scaled by this cumulative weight, and used to update the value function.
+   This importance sampling correction of the return allows to use data collected under one policy to update value estimates with respect to another policy.
+*   **Weighted Averaging:** When we have multiple returns for the same state-action pair, we compute a weighted average. This is a slightly different incremental update approach from the prediction case in the on-policy case. (see incremental implementation below)
+
+**Off-Policy Every-Visit MC Control Algorithm (Weighted Importance Sampling)**
+
+Here's the algorithm described in Figure 5.10 from the provided text:
+
+1.  **Initialization:**
+    *   For all states *s* and actions *a*:
+        *   Initialize Q(s, a) arbitrarily.
+        *   Initialize C(s, a) = 0.
+    *   Initialize π(s) to be a deterministic policy that is greedy with respect to Q (breaks ties arbitrarily).
+
+2.  **Repeat Forever:**
+    *   Generate an episode using any soft behavior policy (µ):
+        *   S0, A0, R1, ..., ST-1, AT-1, RT, ST
+    *   G ← 0
+    *   W ← 1
+    *   **For** t = T-1, T-2, ..., 0:
+        *   G ← γG + Rt+1
+        *   C(St, At) ← C(St, At) + W
+        *   Q(St, At) ← Q(St, At) + W / C(St, At) * [G - Q(St, At)]
+        *   π(St) ← argmax_a Q(St, a) (break ties arbitrarily)
+        *   W ← W * π(At|St) / µ(At|St)
+        *   **If** W = 0 **then** ExitForLoop
+
+**Explanation**
+
+*   The algorithm initializes the Q-values and a cumulative weight variable *C*. The target policy *π* is initialized to be greedy with respect to the Q-values.
+*   An episode is generated using the soft behavior policy, *µ*.
+*   The algorithm iterates backwards through the episode, calculating the return, *G*.
+*   The cumulative weight *C* is updated with the current weight, and the Q-value is updated using a weighted average based on the importance sampling ratio.
+*   The target policy is improved to be greedy with respect to the updated Q-values.
+*   The importance sampling weight is updated. If the weight becomes zero, this means the target policy would not have taken an action that the behavior policy did, and the remainder of the episode is ignored.
+*  This process is repeated, and the policy *π* converges to an optimal policy at all encountered states.
+
+**Incremental Implementation**
+
+As stated in the text, we can implement MC methods incrementally. This is useful because we don't have to store complete episodes and recalculate everything when a new episode is obtained. The update rules are:
+
+*   **Value Update:**
+    ```
+    Vn+1 = Vn + Wn / Cn [Gn - Vn]
+    ```
+*   **Cumulative Weight Update:**
+    ```
+    Cn+1 = Cn + Wn+1
+    ```
+    where *V* is the value of a state, *G* is the return, and *W* is the importance sampling weight. *C* represents the cumulative weight, and *n* represents the episode number. *C* is initialized at 0, and V1 is arbitrary.
+
+**Key Points**
+
+*   Off-policy methods allow us to learn about the optimal policy without having to follow it.
+*   Importance sampling is used to correct for differences between the behavior and target policies.
+*   Weighted importance sampling is a more stable version of importance sampling.
+*   MC methods can be implemented incrementally.
+*   Off policy methods can have dramatically high variance.
+
+**Truncated Returns**
+
+The text also mentions an issue with long episodes and discounted returns. With a discount factor (γ) significantly less than 1, the importance sampling ratio becomes a product of many factors. While the later factors do not change the expected update, they can add enormous variance, possibly even infinite variance. The text suggests using only the first factor of the ratio instead of the whole thing, but it does not go into detail about how to implement it.
+
+**Conclusion**
+
+Monte Carlo control provides powerful tools for learning optimal policies without requiring a model of the environment. Off-policy methods, using techniques like importance sampling, allow us to learn from a broader range of experience, making them more practical than methods that require exploring starts. However, they can suffer from high variance, which must be considered when applying them.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lambda-return , TD(Lambda)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">The Lambda-return , TD(Lambda)</div>
+    <div class="topic-info">Topic Number: 5.5</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on the lambda-return and TD(λ), drawing directly from the provided material and expanding for clarity:
+
+**The Lambda-Return and TD(λ)**
+
+In our exploration of temporal-difference (TD) learning, we've seen how TD(0) updates its value estimates based on a one-step lookahead. However, we can generalize this to consider multiple steps into the future, leading to a more flexible and powerful approach. This is where the concept of the *λ-return* and the TD(λ) algorithm comes in.
+
+**n-Step Returns**
+
+Before introducing the λ-return, let's revisit the idea of n-step returns. In TD(0), we use a one-step return, G(1)t, defined as:
+
+   G(1)t = Rt+1 + γV(St+1)
+
+where Rt+1 is the reward received after taking an action at time t, γ is the discount factor, and V(St+1) is the estimated value of the next state. We can extend this to consider n steps into the future:
+   
+   G(n)t = Rt+1 + γRt+2 + ... + γn−1Rt+n + γnV(St+n)
+
+This is the n-step return, which considers rewards received up to n steps and the estimated value of the state n steps into the future. Notice how, as *n* increases, we are looking further into the future. For example, for n=2:
+
+    G(2)t = Rt+1 + γRt+2 + γ2V(St+2)
+
+And, if we consider an infinite number of steps ahead, we arrive at the Monte Carlo return:
+
+    G(∞)t = Rt+1 + γRt+2 + ... + γT−1RT
+
+where *T* is the terminal step.
+
+**The λ-Return**
+
+The λ-return, denoted Gλt, provides a way to combine all these n-step returns.  Rather than committing to a specific n-step return, we take a weighted average of all possible n-step returns.  This weighting is done using the parameter λ (lambda), with weights given by (1-λ)λn-1. The λ-return is calculated as follows:
+
+    Gλt = (1 − λ) ∑n=1∞ λn−1G(n)t
+
+Here, λ is a parameter between 0 and 1. When λ = 0, the λ-return is equivalent to the one-step return G(1)t, and this is the same as TD(0). When λ = 1, the λ-return is equivalent to the Monte Carlo return, G(∞)t .  For intermediate values of λ, the λ-return smoothly interpolates between the TD(0) and the Monte Carlo return.
+
+**TD(λ) Algorithm**
+
+TD(λ) is a temporal-difference learning algorithm that uses the λ-return as its target for updating the value estimates. The update rule for TD(λ) is given as:
+
+    V(St) ← V(St) + α(Gλt − V(St))
+
+where α is the learning rate. The core idea is that instead of using just a one-step TD prediction or waiting until the end of the episode (as in MC), we use a weighted average of all possible n-step predictions.
+
+**Intuition and Impact of λ**
+
+* **λ = 0:** In this case, TD(λ) becomes TD(0). The update focuses entirely on the immediate reward and the value of the next state, leading to fast updates but potentially biased estimates.
+
+* **λ = 1:**  In this case, TD(λ) becomes equivalent to Monte Carlo. Updates are based on the complete return from an episode, leading to unbiased estimates but potentially high variance and waiting until the end of the episode to update.
+
+* **0 < λ < 1:**  This is the sweet spot.  By varying λ, we can control the balance between TD’s bootstrapping and MC’s complete return.  Lower values of λ emphasize shorter-term predictions, while higher values look further into the future, giving more accurate estimates over time.
+
+In essence, TD(λ) provides a flexible framework that can be tuned using λ to achieve a desired bias-variance trade-off, adapting to the characteristics of the problem at hand. The power of TD(λ) lies in the fact that different values of λ can produce different learning behaviors that are better suited for certain environments.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

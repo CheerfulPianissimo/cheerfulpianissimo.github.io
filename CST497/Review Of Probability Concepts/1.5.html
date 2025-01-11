@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expectation of random variables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Expectation of random variables</div>
+    <div class="topic-info">Topic Number: 1.5</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's course text on the "Expectation of Random Variables" topic, drawing from the provided context and expanding where necessary for clarity:
+
+**Expectation of Random Variables**
+
+In reinforcement learning, we often deal with random variables, especially when modeling the environment or the outcomes of actions. Understanding the expectation of these random variables is crucial for making informed decisions and predictions.
+
+**What is Expectation?**
+
+The expectation (also known as the expected value or mean) of a random variable represents the average value we would expect to observe if we sampled from its distribution many times. It's a weighted average where each possible value is weighted by its probability.
+
+**Formal Definition**
+
+Let *X* be a discrete random variable that can take on the values *x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>...* with corresponding probabilities *P(X=x<sub>1</sub>), P(X=x<sub>2</sub>), P(X=x<sub>3</sub>)...*. The expectation of *X*, denoted as *E[X]*, is defined as:
+
+   *E[X] = Σ<sub>i</sub> x<sub>i</sub> * P(X=x<sub>i</sub>)*
+
+Where the summation is over all possible values of *X*.
+
+For a continuous random variable *X* with probability density function *f(x)*, the expectation is given by the integral:
+
+   *E[X] = ∫ x * f(x) dx*
+
+Where the integral is taken over the entire domain of *X*.
+
+**Why is Expectation Important?**
+
+*   **Predicting Average Outcomes:** The expectation provides a single value that summarizes the central tendency of a random variable. This is particularly useful when evaluating the performance of an agent or making predictions about future rewards.
+*   **Decision Making:** In reinforcement learning, agents often make decisions based on expected rewards. For example, an agent might choose the action that maximizes the expected sum of future rewards.
+*   **Analyzing Algorithms:** The concept of expectation is used extensively in analyzing the convergence and performance of reinforcement learning algorithms.
+
+**Example:**
+
+Let's consider Example 6.4, "You are the Predictor," from the provided text.  We are trying to predict the return for a Markov reward process.  Specifically, we are given several episodes.  In state B, six out of eight times the process terminated immediately with a return of 1, and the other two times in B the process terminated immediately with a return of 0.  The value for state B, denoted V(B), is the expected return when in state B.  In this case, the expected return is:
+
+V(B) = (6/8) * 1 + (2/8) * 0 = 3/4
+
+**Incremental Mean**
+
+The provided context also shows a way to incrementally calculate the mean (expectation) of a sequence of values:
+
+µ<sub>k</sub> = µ<sub>k-1</sub> + (1/k)(x<sub>k</sub> - µ<sub>k-1</sub>)
+
+Where:
+
+*   µ<sub>k</sub> is the mean of the first *k* values
+*   µ<sub>k-1</sub> is the mean of the first *k-1* values
+*   x<sub>k</sub> is the *k*<sup>th</sup> value
+
+This is a very useful property, especially in online learning, where data arrives sequentially.
+
+**Example of Incremental Mean:**
+
+Let's say we have the following sequence of returns for state B:  1, 1, 1, 1, 1, 1, 0, 0. We are computing the mean as we see the values.
+
+*   k=1: µ<sub>1</sub> = 1
+*   k=2: µ<sub>2</sub> = 1 + (1/2)(1 - 1) = 1
+*   k=3: µ<sub>3</sub> = 1 + (1/3)(1 - 1) = 1
+*   k=4: µ<sub>4</sub> = 1 + (1/4)(1 - 1) = 1
+*   k=5: µ<sub>5</sub> = 1 + (1/5)(1 - 1) = 1
+*   k=6: µ<sub>6</sub> = 1 + (1/6)(1 - 1) = 1
+*   k=7: µ<sub>7</sub> = 1 + (1/7)(0 - 1) = 6/7
+*   k=8: µ<sub>8</sub> = 6/7 + (1/8)(0 - 6/7) = 3/4
+
+**Relationship to Monte Carlo**
+
+The incremental mean calculation is directly related to Monte Carlo methods. Monte Carlo learning involves averaging returns from multiple episodes to estimate the value of states. The incremental mean provides an efficient way to update these estimates as new episodes are observed.
+
+**Key Takeaways**
+
+*   The expectation of a random variable represents its average value.
+*   It's a key concept for prediction, decision-making, and algorithm analysis in reinforcement learning.
+*   Expectation can be calculated from probability distributions or approximated using sampling techniques.
+*   The incremental mean provides an efficient way to update running averages as new data becomes available.
+
+**Additional Notes (Not in Original Text but Important for Reinforcement Learning)**
+
+*   **Conditional Expectation:**  We will often deal with the conditional expectation, *E[X|Y]*, which is the expected value of *X* given that we know the value of another variable *Y*. This is critical when considering state-action pairs in reinforcement learning.
+*   **Law of Total Expectation:** This law states that *E[X] = E[E[X|Y]]*, which can be useful for simplifying complex expectation calculations.
+
+This explanation of the expectation of random variables, drawing from the provided documents and extending the explanation, would serve well as a section in a college course on reinforcement learning. It covers the core concepts and explains their importance in the context of the field.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

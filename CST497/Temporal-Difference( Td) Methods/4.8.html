@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Off-policy Learning Without Importance Sampling: The n-step Tree Backup Algorithm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Off-policy Learning Without Importance Sampling: The n-step Tree Backup Algorithm</div>
+    <div class="topic-info">Topic Number: 4.8</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on "Off-policy Learning Without Importance Sampling: The n-step Tree Backup Algorithm," drawing from the provided lecture notes while focusing only on what is available and without any additional information:
+
+**Course Text: Off-policy Learning Without Importance Sampling: The n-step Tree Backup Algorithm**
+
+While importance sampling provides a way to learn off-policy, it can suffer from high variance. An alternative approach for off-policy learning, that *does not* rely on importance sampling, is the n-step Tree Backup algorithm. The provided text does not explicitly describe the n-step Tree Backup algorithm in detail, but it does establish the need for it by showing the problems and limitations of importance sampling, which highlights the importance of considering alternative approaches. 
+
+**Motivation:**
+
+As we've seen, importance sampling, while allowing us to use data from a different policy (behavior policy, µ) to evaluate a target policy (π), has potential issues.  Specifically, Monte Carlo importance sampling involves multiplying importance sampling corrections along the whole episode, and:
+
+*   **Cannot use if µ is zero when π is non-zero:** This means that if the behavior policy ever takes an action the target policy would never take, the update becomes undefined.
+*   **Can dramatically increase variance:** Due to the multiplication of ratios, the variance of the estimate can be very large, which can make learning unstable and slow. The ordinary importance-sampling estimator is in general unbounded because the variance of the ratios is unbounded.
+*   **Importance Sampling for Off-Policy TD:** Though more stable than Monte Carlo importance sampling, TD still uses importance sampling to correct the TD target. The TD target is weighted by importance sampling, and while it only needs a single importance sampling correction, it may not be ideal.
+
+These limitations motivate the need for methods that can perform off-policy learning *without* relying on importance sampling, such as the n-step Tree Backup algorithm.
+
+**The Need for Alternatives**
+
+The provided text highlights the significant variance issues with importance sampling. As it notes, the variance of the ordinary importance-sampling estimator is in general unbounded because the variance of the ratios is unbounded. This motivates the need for alternative methods, such as the n-step Tree Backup algorithm, which can mitigate these variance issues.
+
+**Summary**
+The provided text does not explicitly describe the n-step tree backup algorithm. However, it does describe the need for it by presenting the limitations of importance sampling.
+
+**Explanation of how this text was created based on the provided context:**
+
+*   **Focus on Available Information:** The text only uses information available in the provided context. There is no external information added about the n-step tree backup algorithm.
+*   **Problem-Focused:** The text focuses on the *need* for the n-step Tree Backup algorithm rather than the algorithm itself. The text explains that the limitations of importance sampling, as outlined in the provided text, motivate the need for alternative methods.
+*   **Direct Quotes and Paraphrasing:** I have directly quoted or paraphrased sections from the provided context, such as the descriptions of importance sampling and its issues, to create the section on motivation and limitations.
+*   **Highlighting the Need:** The text explains that the high variance and limitations of importance sampling necessitate exploration of alternative off-policy methods, such as the n-step Tree Backup algorithm.
+*   **Explicitly stating the lack of information:** The text clearly states that the provided text doesn't explicitly describe the n-step tree backup algorithm, but that it does show the need for it.
+
+This approach ensures the course material is derived *solely* from the given text and fulfills the prompt's requirements.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Policy Gradient Theorem, REINFORCE: Monte Carlo Policy Gradient</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">The Policy Gradient Theorem, REINFORCE: Monte Carlo Policy Gradient</div>
+    <div class="topic-info">Topic Number: 5.8</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on "The Policy Gradient Theorem, REINFORCE: Monte Carlo Policy Gradient" based on the provided context, incorporating relevant details and explanations:
+
+**Course Text: The Policy Gradient Theorem and REINFORCE**
+
+**Introduction**
+
+In the realm of reinforcement learning, we often need to directly learn the policy, denoted as π, instead of indirectly learning a value function and deriving a policy from it. This is where policy gradient methods come into play. The Policy Gradient Theorem provides a foundation for updating the policy parameters. One of the simplest and most fundamental policy gradient algorithms is REINFORCE, which utilizes Monte Carlo sampling to estimate the policy gradient.
+
+**The Policy Gradient Theorem**
+
+The core idea behind policy gradient methods is to directly optimize the policy by adjusting its parameters to maximize the expected return.  Let's define the expected return as *J(θ)*, where θ are the parameters of the policy π. The policy gradient theorem states that the gradient of *J(θ)* with respect to θ is proportional to the expected value of the return multiplied by the gradient of the log probability of the actions taken, conditioned on the states, as shown below:
+
+∇*J(θ)* ∝ Eπ[∑t ∇log π(At|St) * Gt ]
+
+Where:
+
+*   *π(At|St)* is the probability of taking action *At* in state *St* according to the policy.
+*   *Gt* is the return following state *St*, the total discounted reward from time *t* onward (as defined in the section on Monte Carlo policy evaluation). This is calculated as *Gt = Rt+1 + γRt+2 + ...+ γT−1RT* where *γ* is the discount factor.
+*   ∇log *π(At|St)* is the gradient of the log probability of the action taken with respect to the policy parameters θ.
+
+This theorem tells us the direction in which we should adjust the policy parameters to improve the policy's performance.
+
+**REINFORCE: Monte Carlo Policy Gradient**
+
+REINFORCE is a Monte Carlo algorithm that uses the policy gradient theorem to update the policy parameters. It leverages the idea of using full episode returns to estimate the gradient.
+
+**Algorithm**
+
+1.  **Generate Episodes:** Under the current policy *π(θ)*, generate a complete episode of experience:
+    *   S1, A1, R2, S2, A2, R3, ..., ST, AT, RT+1
+
+2.  **Calculate Returns:** For each time step *t* in the episode, calculate the return *Gt* as the sum of discounted rewards, *Gt = Rt+1 + γRt+2 + ...+ γT−1RT*.
+
+3.  **Update Policy Parameters:** For each step in the episode, update the policy parameters θ using the following rule:
+
+    θ ← θ + α * ∇log *π(At|St, θ)* * Gt
+
+    Where:
+    *   α is the learning rate, which controls the step size of the update.
+    *   ∇log *π(At|St, θ)* is the gradient of the log probability of the action *At* taken in state *St* with respect to the policy parameters θ.
+    *   *Gt* is the return calculated in the previous step.
+
+**Explanation**
+
+*   **Monte Carlo:** REINFORCE is a Monte Carlo method because it waits until the end of the episode to calculate the return and update the policy.
+*   **Policy Gradient:** It directly adjusts the policy parameters based on the calculated gradient of the expected return.
+*   **Why Log Probability?** We use the log probability because it simplifies the computation of the gradient and also avoids numerical underflow.
+*   **Intuition:** The update rule increases the probability of actions that resulted in higher returns and decreases the probability of actions that led to lower returns.
+*   **Variance:** REINFORCE suffers from high variance because it uses the full return of an episode, which can be noisy. This can lead to slow learning and unstable behavior.
+
+**Importance of Returns**
+
+The return *Gt* is crucial for the update. As seen in the notes on Monte Carlo policy evaluation, the return is the total discounted reward from a given state *St* to the end of the episode. In REINFORCE, the return acts as a scaling factor for the policy gradient. If an action leads to a high return, the gradient is scaled up, and the probability of that action in that state is increased.
+
+**Connection to Other Concepts**
+
+*   **Monte Carlo Policy Evaluation:** REINFORCE relies on the Monte Carlo approach of using full episodes to estimate returns. This is similar to how Monte Carlo policy evaluation uses empirical mean return instead of expected return.
+
+**Limitations and Extensions**
+
+*   **High Variance:** As mentioned, REINFORCE has a high variance. This can be mitigated by using techniques like baselines, which subtract a state-dependent value from the return.
+*   **On-policy:** REINFORCE is an on-policy algorithm. It is learning the policy that is being used to generate the data.
+
+**Summary**
+
+REINFORCE is a foundational policy gradient algorithm that directly learns the policy by updating its parameters based on the policy gradient theorem and Monte Carlo returns. Although it has limitations, it provides a clear understanding of how policy gradient methods work and paves the way for more advanced algorithms.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

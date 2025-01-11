@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n-step Truncated Lambda-return Methods, Sarsa(Lambda)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">n-step Truncated Lambda-return Methods, Sarsa(Lambda)</div>
+    <div class="topic-info">Topic Number: 5.6</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on "n-step Truncated Lambda-return Methods, Sarsa(λ)", drawing from the provided lecture notes, and expanding for clarity and detail, while removing non-textual elements and credits:
+
+**Course Text: n-step Truncated Lambda-return Methods: Sarsa(λ)**
+
+**Introduction**
+
+In previous sections, we've explored Temporal Difference (TD) learning methods, including Sarsa, which updates its action-value estimates based on the very next reward and state. We also looked at n-step methods, which consider n future rewards before updating. However, these methods have limitations. Sarsa only looks one step ahead, which can be inefficient, and n-step methods have a fixed lookahead, which might not be optimal. To address this, we introduce Sarsa(λ), which combines the benefits of both approaches by averaging across multiple n-step returns using a weighting factor.
+
+**n-Step Returns**
+
+Before we delve into Sarsa(λ), let's revisit the concept of n-step returns. The n-step return considers n future rewards and the estimated value of the state n-steps in the future.
+
+*   **1-step return (Sarsa):** This is the standard TD update, considering only the immediate reward and the estimated value of the next state.
+    
+    ```
+    q(1)t = Rt+1 + γQ(St+1, At+1)
+    ```
+    where R<sub>t+1</sub> is the reward received at time t+1, γ is the discount factor, Q(S<sub>t+1</sub>, A<sub>t+1</sub>) is the estimated action-value for the state and action at time t+1.
+*   **2-step return:** This considers the next two rewards and the estimated value of the state two steps in the future.
+    
+    ```
+    q(2)t = Rt+1 + γRt+2 + γ2Q(St+2, At+2)
+    ```
+*   **n-step return:**  Generalizing this, the n-step return is given by:
+    
+    ```
+    q(n)t = Rt+1 + γRt+2 + ... + γn-1Rt+n + γnQ(St+n, At+n)
+    ```
+    where R<sub>t+i</sub> is the reward received at time t+i, γ is the discount factor, Q(S<sub>t+n</sub>, A<sub>t+n</sub>) is the estimated action-value for the state and action at time t+n.
+
+    Notably, as n approaches infinity, this becomes the Monte Carlo return.
+    
+    ```
+    q(∞)t = Rt+1 + γRt+2 + ...+ γT−1RT
+    ```
+    where T is the terminal state.
+
+**n-step Sarsa Update**
+
+n-step Sarsa updates the action-value estimate Q(s,a) towards the n-step Q-return:
+
+```
+Q(St, At) ← Q(St, At) + α (q(n)t - Q(St, At))
+```
+
+where α is the learning rate, and q(n)t is the n-step return calculated as described above.
+
+**Sarsa(λ): Combining Multiple n-step Returns**
+
+Sarsa(λ) addresses the limitations of fixed n-step methods by combining all possible n-step returns using a weighting factor, λ (lambda).  This weighting is exponential, giving more weight to shorter-step returns.
+
+**Forward View Sarsa(λ)**
+
+The core concept of Sarsa(λ) is to define the λ-return, denoted as qλ. This return combines all n-step Q-returns, q(n)t, using the weights (1 - λ)λ<sup>n-1</sup>.
+
+```
+qλt = (1 −λ) ∑n=1∞ λn−1q(n)t
+```
+
+*   λ (lambda) controls how much we look into the future.  λ is a value between 0 and 1.
+    *   λ = 0: This corresponds to the 1-step Sarsa, since only the first term in the summation is non-zero.
+    *   λ = 1: This corresponds to the Monte Carlo return, giving equal weight to all future rewards.
+    *   Values between 0 and 1: Interpolates between 1-step Sarsa and Monte Carlo, giving more weight to returns closer to the current time step.
+
+**Forward-view Sarsa(λ) Update**
+
+The update rule for Sarsa(λ) is:
+
+```
+Q(St, At) ← Q(St, At) + α (qλt - Q(St, At))
+```
+This is similar to the n-step Sarsa update, but now we use the λ-return, qλt instead of the n-step return, q(n)t.
+
+**Intuition**
+
+Sarsa(λ) can be viewed as a way to average over different lookahead horizons. The parameter λ provides a way to control the trade-off between bias and variance. Lower values of λ result in higher bias but lower variance, while higher values of λ result in lower bias but higher variance.
+
+**Why Sarsa(λ)?**
+
+*   **Efficiency:** By considering multiple lookahead steps, Sarsa(λ) can learn more efficiently than standard 1-step Sarsa.
+*   **Flexibility:** The λ parameter allows fine-tuning the learning process to specific problem characteristics.
+*   **Stability:** Sarsa(λ) generally provides a more stable learning process than single n-step methods.
+
+**Convergence of Sarsa**
+
+It is important to note that Sarsa converges to the optimal action-value function, Q(s,a) → q*(s,a), under certain conditions:
+
+*   **GLIE (Greedy in the Limit with Infinite Exploration) sequence of policies π<sub>t</sub>(a|s):**  Ensures that all state-action pairs are visited infinitely often.
+*   **Robbins-Monro sequence of step-sizes α<sub>t</sub>:** Learning rate should be such that the sum of the learning rates is infinite, and the sum of the squares of the learning rates is finite.
+    
+    ```
+    ∑t=1∞ αt = ∞
+    ∑t=1∞ α2t < ∞
+    ```
+
+**Conclusion**
+
+Sarsa(λ) offers a powerful and versatile approach to reinforcement learning by combining the benefits of n-step returns with an exponential weighting, controlled by the λ parameter. This method provides a way to balance bias and variance, leading to more efficient and stable learning.
+
+**Further Considerations**
+
+*   **Replacing Traces:** Sarsa(λ) can be implemented with replacing traces, which is a more efficient way to handle credit assignment.
+*   **Dutch Traces:** Another way to handle credit assignment is with dutch traces.
+*   **On-line Updates:** True on-line versions of Sarsa(λ) can be implemented.
+
+This detailed explanation, combined with the equations and concepts from the lecture notes, provides a solid understanding of Sarsa(λ) and its applications.  The convergence conditions highlight the importance of proper parameter settings.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

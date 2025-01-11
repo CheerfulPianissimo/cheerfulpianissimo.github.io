@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Estimation of Action Values</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Monte Carlo Estimation of Action Values</div>
+    <div class="topic-info">Topic Number: 3.5</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a section on "Monte Carlo Estimation of Action Values" suitable for a reinforcement learning course, drawing from the provided text:
+
+**Monte Carlo Estimation of Action Values**
+
+Monte Carlo (MC) methods offer a way to learn directly from episodes of experience without needing a model of the environment's transitions or rewards (Model-Free). MC methods are used for both prediction (estimating value functions) and control (finding optimal policies). This section focuses on how MC methods estimate action values, also known as Q-values, which represent the expected return starting from a given state and taking a particular action.
+
+**Key Concepts:**
+
+*   **Episodes:** MC methods operate on complete episodes of interaction with the environment. An episode is a sequence of states, actions, and rewards that ends in a terminal state.
+    *   *From the provided text:* "MC methods learn directly from episodes of experience."
+    *   *From the provided text:* "All episodes must terminate"
+    *   *From the provided text:* "MC learns from complete episodes: no bootstrapping"
+
+*   **Returns:** Instead of averaging rewards as in simpler methods, MC methods average *returns*. A return is the total discounted reward from a given time step until the end of the episode.
+    *   *From the provided text:* "Whereas in Chapter 2 we averaged rewards, in Monte Carlo methods we average returns."
+
+*   **Action-Value Function (Q-function):** MC methods estimate the action-value function, denoted as Q(s, a), which represents the expected return starting from state 's', taking action 'a', and following a given policy thereafter.
+
+**Incremental Implementation**
+
+MC methods can be implemented incrementally, meaning that the estimates are updated after each episode. This is similar to the incremental averaging techniques discussed previously in the course, but with one key difference: we average returns instead of rewards.
+
+*   *From the provided text:* "Monte Carlo prediction methods can be implemented incrementally, on an episode-by-episode basis..."
+*   *From the provided text:* "In all other respects exactly the same methods as used in Chapter 2 can be used for on-policy Monte Carlo methods."
+
+**On-Policy vs. Off-Policy Methods**
+
+MC methods can be applied in two main ways:
+
+*   **On-Policy:** In on-policy methods, the same policy that is being evaluated is also used to generate the experience. In this case we simply average the returns obtained from following the policy.
+    *   *From the provided text:* "...applies as well to the on-policy case just by choosing the target and behavior policies as the same."
+*   **Off-Policy:** In off-policy methods, a different policy (the *behavior policy*) is used to generate experience, while a different policy (the *target policy*) is being evaluated. This is useful for learning about one policy while exploring with another.
+
+**Off-Policy Monte Carlo and Importance Sampling**
+
+When using off-policy MC methods, we need to account for the difference between the behavior policy and the target policy. This is done using **importance sampling**.
+
+*   *From the provided text:* "For oﬀ-policy Monte Carlo methods, we need to separately consider those that use ordinary importance sampling and those that use weighted importance sampling."
+
+    *   **Ordinary Importance Sampling:** Returns are scaled by an *importance sampling ratio* that reflects the relative likelihood of the episode occurring under the target policy versus the behavior policy. These scaled returns are then averaged.
+        *   *From the provided text:* "In ordinary importance sampling, the returns are scaled by the importance sampling ratio ρT(t)t (5.3), then simply averaged."
+
+    *   **Weighted Importance Sampling:** Weighted importance sampling uses a weighted average of returns, where each return is weighted by the importance sampling ratio. This method often has lower variance than ordinary importance sampling. The update rule in this case is:
+        
+        Vn+1 = Vn + (Wn / Cn) * [Gn - Vn]
+        Cn+1 = Cn + Wn+1
+        
+        where:
+            *   Vn is the estimate of the value function after n episodes.
+            *   Gn is the return for the nth episode
+            *   Wn is the importance sampling ratio for the nth episode.
+            *   Cn is the cumulative sum of the weights.
+        *   *From the provided text:* "Here we have to form a weighted average of the returns, and a slightly diﬀerent incremental algorithm is required."
+
+**Algorithm for Off-Policy MC Control (Weighted Importance Sampling)**
+
+The provided text includes pseudocode for an off-policy every-visit MC control algorithm using weighted importance sampling, which is used to estimate action values. This algorithm is summarized below:
+
+1.  **Initialization:**
+    *   Initialize Q(s, a) arbitrarily for all states 's' and actions 'a'
+    *   Initialize C(s, a) = 0 for all states 's' and actions 'a'
+    *   Initialize a deterministic policy π that is greedy with respect to Q
+
+2.  **Repeat Forever:**
+    *   Generate an episode using a soft policy µ: S0, A0, R1, ..., ST-1, AT-1, RT, ST
+    *   Initialize G = 0, W = 1
+    *   **For t = T-1, T-2, ... , 0:**
+        *   G = γG + Rt+1 (calculate discounted return)
+        *   C(St, At) = C(St, At) + W
+        *   Q(St, At) = Q(St, At) + (W / C(St, At)) * [G - Q(St, At)]
+        *   π(St) = argmax\_a Q(St, a) (update policy to be greedy)
+        *   W = W * (π(At | St) / µ(At | St)) (update importance sampling ratio)
+        *   If W == 0 then break
+
+**Key Considerations:**
+
+*   **Variance:** Importance sampling can dramatically increase the variance of estimates. The text highlights the issue of importance sampling ratios multiplying over long episodes, which can lead to high variance and sometimes even infinite variance. This highlights the challenge of off-policy learning.
+    *   *From the provided text:* "Importance sampling can dramatically increase variance"
+
+*   **Truncated Returns:** A technique for reducing the variance of importance sampling is to use truncated returns, where the importance sampling ratio is applied only to the relevant part of the return and not the entire episode. This can be particularly useful when using discounting.
+    *    *From the provided text:* "So far our oﬀ-policy methods have formed importance-sampling ratios for returns considered as unitary wholes...it is really only necessary to scale by the ﬁrst factor... These later factors are all independent of the return and of expected value 1; they do not change the expected update, but they add enormously to its variance."
+
+**Summary**
+
+Monte Carlo methods provide a powerful way to learn action values directly from experience, without relying on a model of the environment. While straightforward in concept, they can pose challenges when using off-policy methods. Understanding the use of importance sampling and its limitations is crucial for effective application of MC methods in reinforcement learning.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

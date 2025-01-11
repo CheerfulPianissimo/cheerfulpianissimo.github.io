@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy Approximation and its Advantages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Policy Approximation and its Advantages</div>
+    <div class="topic-info">Topic Number: 5.7</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's course text on "Policy Approximation and its Advantages" for a Reinforcement Learning course, drawing from the provided materials and expanding on the key concepts:
+
+**Policy Approximation and its Advantages**
+
+In many real-world reinforcement learning problems, the state space and action space are too large to represent the value function or policy explicitly in a lookup table. This limitation necessitates the use of *policy approximation*, where we use parameterized functions to represent these entities. Instead of storing a value or policy for each state or state-action pair individually, we use a function (e.g., a neural network, linear model, or decision tree) to *approximate* these values or policies based on the inputs they receive.
+
+**Why Policy Approximation?**
+
+1.  **Handling Large State and Action Spaces:** As mentioned above, in many real-world scenarios, the number of possible states and actions is incredibly large, making tabular methods impractical. Policy approximation enables us to handle these high-dimensional spaces by generalizing from observed states and actions to unseen ones.
+2. **Generalization:** When using parameterized functions, the learning process can generalize to unseen states and actions based on the underlying structure present in the approximation function. This is a crucial aspect of scaling reinforcement learning to complex environments.
+3.  **Compact Representation:** Instead of storing enormous lookup tables, we can store a relatively small set of parameters that define the approximation function. This reduces memory requirements and computational costs, and allows for easier storage and transmission of the agent's policy.
+4. **Continuous State and Action Spaces:**  Tabular methods are not easily applicable to continuous state and action spaces. Policy approximation allows us to handle this by using functions that can accept continuous values as input.
+5.  **Improved Learning Speed:** By using function approximators, we can often achieve faster learning than tabular methods, especially when there are underlying patterns in the state and action spaces that the function can exploit.
+
+**Key Approaches to Policy Approximation:**
+
+The provided text highlights two main areas of policy approximation:
+
+1.  **Actor-Critic Methods**: These methods use two separate function approximators:
+    *   **Actor**: The actor represents the policy (i.e., the function that maps states to actions). The actor learns to choose actions that maximize the expected reward. The text refers to updating the actor using an eligibility trace for each state-action pair.
+    *   **Critic**: The critic estimates the value function (either state-value or action-value). The critic helps the actor learn by providing feedback on the quality of the actor’s actions. The text refers to TD learning algorithms to update the critic.
+
+    The text provides equations for updating the actor's preferences (denoted as H) using eligibility traces for each state-action pair:
+
+        *  **Basic Update** (using Sarsa(λ) inspired trace):
+           Ht+1(s,a) = Ht(s,a) + αδtEt(s,a)
+            where:
+            *   `Ht(s,a)` is the preference for taking action *a* in state *s* at time *t*.
+            *   `δt` is the TD error.
+            *   `α` is the step-size parameter.
+            *   `Et(s,a)` is the eligibility trace for the state-action pair (s,a).
+
+         *  **Advanced Update** (using policy-weighted trace):
+           Ht+1(s,a) = Ht(s,a) + αδtEt(s,a)
+           where:
+              *   The eligibility trace is updated based on:
+                 Et(s,a) =
+                  { γλEt−1(s,a) + 1−πt(St,At) if s=St and a= At;
+                    γλEt−1(s,a) otherwise,
+              *  `πt(St,At)` is the probability of taking action `At` in state `St` at time `t` according to the current policy.
+              *   `γ` is the discount factor, and `λ` is the trace decay parameter.
+
+    This approach allows for more nuanced updates to the actor, taking into account the probability of the selected action.
+
+2. **R-Learning:** This is an off-policy temporal difference (TD) control method designed for undiscounted, continuous tasks, focusing on maximizing the *average reward* instead of the total discounted reward.
+
+    *   **Average Reward Setting**: In this setting, the goal is to maximize the long-term average reward received by the agent, rather than the sum of discounted rewards. This is useful when we have no natural end to the task.
+    *   **Off-Policy Learning**: R-Learning can learn from experiences generated by a different policy than the one being improved. This allows it to explore the environment more effectively.
+    *   **Algorithm**: The R-learning algorithm maintains an estimate of the average reward (`R`) and action values (`Q(s,a)`). Key steps are:
+        1.  Initialize `R` and `Q(s,a)` arbitrarily.
+        2.  Repeat:
+            *   Observe current state `S`.
+            *   Choose action `A` using a behavior policy (e.g., epsilon-greedy).
+            *   Take action `A`, observe reward `R`, and next state `S'`.
+            *   Compute the TD error: `δ = R - R + max_a Q(S', a) - Q(S, A)`.
+            *   Update the action value: `Q(S, A) = Q(S, A) + αδ`.
+            *   If `Q(S,A)` is the maximum action value for `S`: update the estimated average reward: `R = R + βδ`.
+        *   `α` and `β` are step-size parameters controlling the learning rate.
+
+**Advantages of Policy Approximation (Summarized):**
+
+*   **Scalability:** Handles large state and action spaces.
+*   **Generalization:** Learns from observed data and applies knowledge to unseen states and actions.
+*   **Memory Efficiency:** Uses function parameters instead of storing large tables.
+*   **Flexibility:** Applicable to continuous spaces, and can use powerful function approximators like neural networks.
+*   **Adaptability:** Allows for the use of more advanced learning methods, like actor-critic and off-policy methods.
+
+**Conclusion:**
+
+Policy approximation is a crucial tool in reinforcement learning, enabling us to tackle complex real-world problems. By using function approximators, we can learn effective policies even in very large state and action spaces, and it allows us to adapt to continuous or infinite scenarios that are impossible with tabular approaches. The use of methods like actor-critic and R-learning further expands the possibilities of policy approximation in reinforcement learning.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

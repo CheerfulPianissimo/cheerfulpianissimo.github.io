@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation and independence</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Correlation and independence</div>
+    <div class="topic-info">Topic Number: 1.8</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's course text on "Correlation and Independence" suitable for a reinforcement learning course, drawing from the provided material and expanding for clarity:
+
+**Correlation and Independence in Reinforcement Learning**
+
+In reinforcement learning, we often deal with multiple random variables, such as states, actions, and rewards. Understanding the relationships between these variables is crucial for designing effective learning algorithms. Two key concepts for this are correlation and independence.
+
+**1. Independence**
+
+Two random variables, X and Y, are considered *independent* if knowing the value of one does not provide any information about the value of the other. More formally, the joint probability of X and Y is equal to the product of their individual probabilities:
+
+    P(X = x, Y = y) = P(X = x) * P(Y = y)  (for discrete variables)
+
+    f(x, y) = f(x) * f(y) (for continuous variables)
+
+Where P() denotes probability and f() denotes probability density functions.
+
+If this relationship doesn't hold, then the variables are *dependent*.
+
+*Example*: Imagine flipping two fair coins. The outcome of the first coin flip (X) is independent of the outcome of the second coin flip (Y).
+    P(X = Heads, Y = Tails) = P(X=Heads) * P(Y=Tails) = 0.5 * 0.5 = 0.25
+
+**Important note**: Independence is a strong condition. If two variables are independent they are also uncorrelated (defined below). However the converse is not true, uncorrelated does not imply independence.
+
+**2. Correlation**
+
+Correlation measures the *linear* relationship between two random variables. It indicates the extent to which two variables tend to increase or decrease together. We can quantify the correlation using the *covariance* and the *correlation coefficient*.
+
+**2.1 Covariance**
+
+The covariance of two random variables, X and Y, denoted as COV(X, Y), quantifies how much they vary together. A positive covariance indicates that X and Y tend to increase together, a negative covariance indicates that when one increases the other tends to decrease, and a zero covariance suggests no linear relationship.
+
+The formula for covariance is:
+
+    COV(X, Y) = E[(X - E[X]) * (Y - E[Y])]
+
+Where E[X] and E[Y] are the expected values (means) of X and Y, respectively. This can also be expressed as:
+
+    COV(X, Y) = E[XY] - E[X]E[Y]
+
+*Note*: The units of covariance are the product of the units of X and Y, which makes it hard to interpret.
+
+**2.2 Correlation Coefficient**
+
+To make the measure of correlation more interpretable, we use the *correlation coefficient*, denoted by ρ(X, Y). The correlation coefficient normalizes the covariance by dividing it by the product of the standard deviations of X and Y:
+
+    ρ(X, Y) = COV(X, Y) / (σ(X) * σ(Y))
+
+Where σ(X) and σ(Y) are the standard deviations of X and Y.
+
+The correlation coefficient always falls between -1 and 1:
+
+*   ρ(X, Y) = 1: Perfect positive linear correlation. As X increases, Y increases proportionally.
+*   ρ(X, Y) = -1: Perfect negative linear correlation. As X increases, Y decreases proportionally.
+*   ρ(X, Y) = 0: No linear correlation. X and Y are *uncorrelated*.
+
+**2.3 Uncorrelatedness**
+
+Two random variables are considered *uncorrelated* if their correlation coefficient is zero (ρ(X, Y) = 0), which is equivalent to their covariance being zero (COV(X, Y) = 0).
+
+*Note*: Uncorrelatedness only means that there is no *linear* relationship between variables. There could still be a non-linear relationship.
+
+**Important Distinction**:
+
+*   **Independence implies Uncorrelatedness:** If X and Y are independent, then they are always uncorrelated (COV(X, Y) = 0). This is because E[XY] = E[X]E[Y] when X and Y are independent, making COV(X, Y) = E[XY] - E[X]E[Y] = 0.
+*   **Uncorrelatedness does not imply Independence:** If X and Y are uncorrelated, it doesn't necessarily mean they are independent. There might be a non-linear dependence between them.
+
+*Example:* Consider the example in the text where X = cos(θ) and Y = sin(θ), where θ is uniformly distributed between 0 and 2π. In this case, X and Y are uncorrelated (their covariance is 0) but are clearly not independent. If you know the value of X, you can infer the magnitude of Y, even if you don't know its sign.
+
+**3. Why Correlation and Independence Matter in Reinforcement Learning**
+
+*   **State Representation:** If two state variables are highly correlated, it might be redundant to include both in the state representation.
+*   **Action Selection:** The correlation between actions and future rewards is essential for learning optimal policies.
+*   **Exploration vs. Exploitation:** Understanding the independence of state transitions is critical to exploration strategies.
+*   **Feature Engineering:** Feature engineering often involves combining variables and understanding their correlation will help you to identify redundancies and reduce the number of features needed.
+
+**4. Estimating Covariance and Correlation**
+
+The provided text also mentions the need to estimate the covariance of random variables. In practice, we do this by using *sample* covariance from data. This involves collecting data points of X and Y, calculating their sample means and then applying the covariance formula to the data samples.
+
+**Conclusion**
+
+Correlation and independence are fundamental concepts when working with random variables and thus are vital in reinforcement learning. Understanding the difference between them and how to apply these concepts will enable you to design better algorithms and improve the performance of your agents.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

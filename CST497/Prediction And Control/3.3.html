@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy Iteration, Value Iteration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Policy Iteration, Value Iteration</div>
+    <div class="topic-info">Topic Number: 3.3</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text on "Policy Iteration and Value Iteration" based on the provided context, with explanations:
+
+**Lecture: Planning by Dynamic Programming - Policy Iteration and Value Iteration**
+
+**Introduction**
+
+In reinforcement learning, our goal is to find an optimal policy, which dictates the best action an agent should take in any given state to maximize its cumulative reward. Dynamic programming provides a way to approach this problem by systematically planning using a model of the environment. This section explores two key dynamic programming algorithms: Policy Iteration and Value Iteration.
+
+**Policy Iteration**
+
+Policy iteration is an approach that alternates between two key steps: policy evaluation and policy improvement.
+
+1.  **Policy Evaluation:**
+    *   Given a policy π, we evaluate the value function, *vπ*, which represents the expected cumulative reward starting from each state by following the policy π.
+    *   This is typically done using iterative methods, where we repeatedly update the value function until it converges.
+    *   **Convergence Criteria**: The provided text poses the question, "Does policy evaluation need to converge to *vπ*?". It notes that instead of waiting for full convergence, we can introduce a stopping condition, such as *ϵ*-convergence of the value function, or simply stop after a fixed number of iterations, *k*.
+    *   The text notes that for a small gridworld, *k*=3 iterations were sufficient to achieve an optimal policy in a specific example.
+2.  **Policy Improvement:**
+    *   Once the value function is (approximately) evaluated, we improve the policy by acting greedily with respect to the value function.
+    *   This means, for each state, we update the policy to select the action that leads to the highest expected cumulative reward.
+    *   This policy improvement step is guaranteed to either strictly improve the policy or leave it unchanged at an optimal policy.
+3.  **Iteration:** The policy evaluation and policy improvement steps are repeated until the policy converges, i.e., no further improvement is possible.
+
+**Key Question: When to Update the Policy?**
+
+The text raises an important point: "Why not update policy every iteration? i.e. stop after *k* = 1". This is a crucial question that leads us to Value Iteration. If we stop policy evaluation after just one iteration (k=1) and then directly update the policy, it turns out we get an algorithm called Value Iteration.
+
+**Value Iteration**
+
+Value iteration essentially combines the policy evaluation and policy improvement steps into one by updating the value function based on a single pass of looking ahead and acting greedily at every state. In practice, this often means that the policy is implicitly updated through the value function, and no explicit policy is stored or updated.
+
+*   Value iteration computes the optimal value function, *v*<sup>\*</sup>, by iteratively updating the value function using the Bellman optimality equation.
+*   The optimal policy can be extracted from the optimal value function once it has converged.
+
+**Relationship between Policy Iteration and Value Iteration**
+
+The provided text explains that "updating the policy every iteration (i.e. stop after k = 1)" in policy iteration is equivalent to value iteration. This indicates that value iteration can be considered a special case of policy iteration where policy evaluation only does one iteration.
+
+**Why These Methods Matter**
+
+Both policy iteration and value iteration are fundamental planning algorithms for solving Markov decision processes (MDPs). They provide a way to find the optimal policy by exploiting the structure of the underlying problem.
+
+**Note:** The provided text also mentions R-learning, an off-policy TD control algorithm for undiscounted, continuing tasks. It provides an example of an access control queuing task, it also introduces the concept of *on-policy learning*, and defines the term *policy*. These concepts are important in reinforcement learning, but they are not part of the dynamic programming planning algorithms, and were excluded.
+
+**Summary**
+
+In this section, we have explored:
+
+*   **Policy Iteration:** An algorithm that iterates between policy evaluation and policy improvement until convergence.
+*   **Value Iteration:** An algorithm that combines policy evaluation and improvement by updating the value function based on a single iteration of looking ahead and acting greedily.
+*   **Relationship:** Value iteration can be viewed as a specific form of policy iteration where policy evaluation is performed for just one iteration.
+
+These algorithms provide core tools for planning in reinforcement learning, and their understanding is foundational to more complex methods.
+
+**Explanation of how the content was extracted and organized:**
+
+*   **Focused on the Topic:** The text was built solely around policy and value iteration. Other topics that were present in the original document, such as R-learning were not included.
+*   **Direct Quotes and Paraphrasing:** Key phrases from the document were used directly (e.g., "Does policy evaluation need to converge to vπ?", "Why not update policy every iteration? i.e. stop after k = 1"). The rest was paraphrased and organized into a coherent lecture text.
+*   **Explanation of Concepts:** The text provides basic definitions of policy evaluation and policy improvement, and explains how they relate to the overall goal of finding an optimal policy.
+*   **Convergence Criteria:**  The various convergence criteria for policy evaluation, as discussed in the original text, were explicitly addressed.
+*   **Relationship between Policy and Value Iteration:** The text explicitly states the relationship between the two methods, based on the context.
+*   **Clear Structure:** The text is organized into sections, making it easy to follow, and providing a logical flow of information, typical of course text.
+
+This response provides a comprehensive explanation of policy and value iteration, using only the information provided in the original document, while maintaining the logical flow of a lecture text.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

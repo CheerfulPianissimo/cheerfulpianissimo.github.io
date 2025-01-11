@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REINFORCE with Baseline, Actor–Critic Methods</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">REINFORCE with Baseline, Actor–Critic Methods</div>
+    <div class="topic-info">Topic Number: 5.9</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's course text on "REINFORCE with Baseline, Actor-Critic Methods" based on the provided context, aiming for clarity and detail:
+
+**REINFORCE with Baseline, Actor-Critic Methods**
+
+In previous sections, we have explored methods that learn the values of states or state-action pairs, and then use these values to derive a policy, such as an ε-greedy policy. These are known as action-value methods. However, in this section, we will investigate methods that represent the policy directly, with its own weights, independent of any value function.
+
+**1. Policy Gradient Methods and REINFORCE**
+
+Policy gradient methods directly learn a policy, aiming to maximize the expected return. REINFORCE is a classic example of a Monte Carlo policy gradient method.  While the provided text does not directly delve into REINFORCE, it's important to understand its limitations to appreciate the need for baseline and actor-critic methods. REINFORCE uses the total return from an episode to update the policy, which can have high variance.  This high variance can lead to slow and unstable learning.
+
+**2. The Need for a Baseline**
+
+To reduce the variance in policy gradient methods like REINFORCE, a baseline is often introduced. The baseline is subtracted from the return to produce an advantage function, which determines whether the action taken was better or worse than the expected return in that state.  This allows for more stable and efficient learning. The baseline is typically a value function, estimating the expected return from the current state.
+
+**3. Actor-Critic Methods: A Hybrid Approach**
+
+Actor-critic methods are a significant step forward in policy-based reinforcement learning. They combine the strengths of both policy gradient methods (the actor) and value-based methods (the critic).
+
+  * **The Actor:** The actor is responsible for selecting actions based on the current policy, which is explicitly represented by its own weights.  It is the policy structure that is used to select actions.  This is what is learned by policy gradient methods like REINFORCE. The actor learns the optimal probabilities of selecting various actions, which can be particularly useful in competitive and non-Markov cases.
+  * **The Critic:** The critic evaluates the actions made by the actor. It learns an approximation of the value function, typically a state-value function (vπ). After each action selection, the critic assesses the new state to determine if things have gone better or worse than expected. This evaluation is expressed as a TD error (δt), which is the sole output of the critic.
+  * **Learning:** Learning is always on-policy: the critic must learn about and critique the policy currently being followed by the actor. The TD error from the critic drives the learning in both the actor and the critic.
+
+**4. Advantages of Actor-Critic Methods**
+
+According to the provided text, actor-critic methods have two main advantages:
+
+  * **Minimal Computation for Action Selection:** When dealing with a large or infinite number of possible actions (e.g., a continuous action space), methods that directly learn action values must search through this vast space to pick an action. Actor-critic methods, on the other hand, can learn a policy directly, eliminating the need for this extensive computation for each action selection. Since the policy is explicitly stored, this extensive computation may not be needed for each action selection.
+  * **Explicit Stochastic Policies:** Actor-critic methods can learn an explicitly stochastic policy, meaning they can learn the optimal probabilities of selecting various actions. This capability is valuable in competitive and non-Markovian environments.
+
+**5. Eligibility Traces in Actor-Critic Methods**
+
+To further enhance actor-critic methods, eligibility traces can be used, extending the methods introduced in the text. This is fairly straightforward.
+
+  * **Critic Traces:** The critic part of an actor-critic method is simply on-policy learning of vπ. The TD(λ) algorithm can be used for that, with one eligibility trace for each state.
+  * **Actor Traces:** The actor part needs to use an eligibility trace for each state-action pair. Thus, an actor-critic method needs two sets of traces, one for each state and one for each state-action pair.
+
+The basic update rule for actor preferences (H(s,a)), using eligibility traces, is given by:
+
+    Ht+1(s,a) = Ht(s,a) + αδtEt(s,a)
+    where:
+        δt is the TD error
+        Et(s,a) is the eligibility trace for state-action pair (s,a)
+        α is the learning rate
+
+The eligibility trace can be updated in a few ways. In the simplest case, the trace can be updated like in Sarsa(λ). More sophisticated updates include:
+
+    Et(s,a) = { γλEt−1(s,a) + 1−πt(St,At) if s=St and a= At;
+                  γλEt−1(s,a) otherwise,
+
+where πt(St,At) is the probability of selecting action At in state St.
+
+**6. Summary**
+Actor-critic methods represent a significant advancement in reinforcement learning by combining policy gradient methods with value-based methods.  They offer advantages in action selection in large action spaces, and the ability to learn stochastic policies. The use of eligibility traces further improves their performance and learning efficiency. While REINFORCE is a foundational algorithm for policy gradients, the addition of a baseline and the actor-critic architecture address the limitations of REINFORCE.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

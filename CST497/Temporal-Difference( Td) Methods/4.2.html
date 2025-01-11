@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimality of TD(0)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Optimality of TD(0)</div>
+    <div class="topic-info">Topic Number: 4.2</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>Okay, here's a course text section on "Optimality of TD(0)" synthesized from the provided document, with explanations and detail:
+
+**Course Text: Optimality of TD(0)**
+
+In reinforcement learning, we aim to find optimal value functions that accurately predict future returns. When using Temporal Difference (TD) learning, particularly TD(0), it's important to understand the sense in which it can be considered "optimal," and how this differs from other methods like Monte Carlo (MC).
+
+**Batch Updating and Convergence**
+
+When we have a finite amount of experience (e.g., a set of episodes), a common technique is to use *batch updating*. In batch updating, we repeatedly present the available experience to our learning algorithm. For each episode, we calculate the updates based on the current value function, but we only apply the sum of all the updates to update the value function at the end of processing the batch. This process is repeated until the value function converges to a stable solution.
+
+Under batch updating, TD(0) is guaranteed to converge to a single, deterministic answer, provided the step-size parameter α is sufficiently small. Interestingly, the constant-α MC method also converges deterministically under the same conditions, but it converges to a *different* answer. Understanding these different convergence points is crucial to grasping the nuances of these methods.
+
+**TD(0) vs. Constant-α MC: A Key Difference**
+
+Constant-α MC, when used with batch updating, converges to values, *V(s)*, that are the sample averages of the actual returns experienced after visiting each state *s*. These are optimal estimates in the sense that they minimize the mean-squared error from the actual returns *in the training set*. In other words, it learns the average return seen so far for each state.
+
+It might seem surprising, then, that batch TD(0) can sometimes perform *better* than batch MC, as illustrated in Figure 6.8. How can a method that doesn't directly minimize error from observed returns be superior?
+
+The key lies in the different notions of optimality. MC is optimal in a limited way, aiming to be accurate to the observed returns. TD(0), on the other hand, is optimal in a way that is often *more relevant to predicting returns in a Markov process*. 
+
+**Example: The Predictor Scenario**
+
+Consider the following example to illustrate this point:
+
+Suppose we have a Markov reward process and observe the following eight episodes:
+*   A, 0, B, 0
+*   B, 1
+*   B, 1
+*   B, 1
+*   B, 1
+*   B, 1
+*   B, 1
+*   B, 0
+
+What are the optimal predictions for *V(A)* and *V(B)*?
+
+*   **V(B):** Most would agree that the optimal value for *V(B)* is 3/4, since six out of eight times the process terminated with a return of 1, and two times with a return of 0. This is a simple sample average of the observed returns for state B.
+
+*   **V(A):** Here, there are two reasonable answers:
+    1.  **MC Approach:** Since state A always transitions to B with a reward of 0, and we know that *V(B)* is 3/4, we might think that *V(A)* should also be 3/4. This makes sense if we first try to model the Markov process.
+    2. **TD Approach:** TD(0) doesn't directly track the sample average of returns for a state. Instead, it uses the *bootstrapped* return. That is, if we have seen that A -> B and B is worth 3/4, TD(0) would back up this value to A.
+
+**The Essence of TD(0) Optimality**
+
+The key takeaway is that MC aims to minimize error from observed returns. TD(0) aims to be consistent with the observed transitions and the estimated value of the next state. In many situations, using next state values (bootstrapping) leads to better predictions, even if the values are not equal to the sample average of all returns for that state.
+
+TD methods combine the sampling of Monte Carlo with the bootstrapping of DP. This combination can be advantageous in situations where the environment is Markovian, and the value of a state is closely linked to the values of its successor states.
+
+**Summary**
+
+*   Under batch updating, both TD(0) and constant-α MC converge to deterministic solutions.
+*   Constant-α MC converges to sample averages of observed returns, minimizing mean-squared error from the training data.
+*   TD(0) converges to a different solution based on the bootstrapping of estimated values of successor states.
+*   TD(0) can be "more optimal" than MC in the sense of producing a value function that is more accurate for predicting future returns, particularly in a Markov environment, even though it doesn't directly minimize the error based on observed returns.
+* The optimality of TD(0) should be understood in the context of its bootstrapping nature. It aims for consistency with the underlying Markov process, rather than simply memorizing the sample average returns.
+
+This difference can be subtle but is crucial for understanding why TD methods are often preferred over MC methods in many reinforcement learning applications.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

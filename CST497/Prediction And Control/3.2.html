@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy Improvement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .topic-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-title">Policy Improvement</div>
+    <div class="topic-info">Topic Number: 3.2</div>
+    <div class="topic-info">Time Allotted: 1 hours</div>
+    <github-md>## Policy Improvement
+
+In reinforcement learning, our goal is to find an optimal policy that maximizes the expected cumulative reward. A key step towards this goal is **policy improvement**, a process that systematically refines a given policy to achieve better performance.
+
+**Understanding the Basis of Policy Improvement**
+
+Policy improvement hinges on the relationship between a policy and its corresponding value function. Let's denote a policy as π, and its value function as vπ(s), representing the expected cumulative reward starting from state 's' when following policy π.  We also have the action-value function qπ(s,a), representing the expected cumulative reward starting from state 's' and taking action 'a', then following policy π.
+
+The core idea behind policy improvement is that if we find an action in a state that gives a higher expected reward than the current policy, we can improve our overall policy by choosing that action instead. Mathematically, this idea is captured by the following inequality, derived from the context (though not explicitly with this formatting):
+
+  *   vπ(s) ≤ qπ(s,π'(s))
+
+This states that, for any state *s*, the value of following the current policy π is less than or equal to the value of taking the action dictated by a new policy π' in that state, and then continuing to follow π. Further, as presented in the document, we can derive the following:
+
+  *   vπ(s) ≤ qπ(s,π′(s))
+  *   = Eπ′[Rt+1 + γvπ(St+1) |St=s]
+  *   ≤ Eπ′[Rt+1 + γqπ(St+1,π′(St+1)) |St=s]
+  *   = Eπ′[Rt+1 + γEπ′[Rt+2 + γvπ(St+2)] |St=s]
+  *   = Eπ′[Rt+1 + γRt+2 + γ2vπ(St+2) |St=s]
+  *   ≤ Eπ′[Rt+1 + γRt+2 + γ2Rt+3 + γ3vπ(St+3) |St=s]
+  *   ...
+  *   ≤ Eπ′[Rt+1 + γRt+2 + γ2Rt+3 + γ3Rt+4 + ··· |St=s]
+  *   = vπ′(s).
+
+This chain of inequalities shows that by changing a policy at one state, we may get a new policy with a value function that is greater than or equal to the original policy's value function at that state. This is the basis for policy improvement.
+
+**The Greedy Policy**
+
+The document explains that a key step in policy improvement is to consider changes at all states and to all possible actions.  We achieve this by creating a new policy, π', called the **greedy policy**, which selects the action that appears best in the short term according to the action-value function qπ(s,a). The greedy policy is defined as follows:
+
+π′(s) = argmax<sub>a</sub> qπ(s,a)
+
+This is equivalent to maximizing the expected immediate reward plus the discounted value of the next state, given by:
+
+π′(s) = argmax<sub>a</sub> E[Rt+1 + γvπ(St+1) |St=s,At=a]
+
+Which can also be expressed as:
+
+π′(s) = argmax<sub>a</sub> ∑<sub>s',r</sub> p(s',r|s,a)[r + γvπ(s')]
+
+Here:
+
+*   `argmax a` denotes the action 'a' that maximizes the expression that follows.
+*   `p(s',r|s,a)` is the probability of transitioning to state s' and receiving reward r when taking action 'a' in state 's'.
+*   `γ` is the discount factor.
+
+In essence, the greedy policy takes the action that has the highest expected reward after one step, based on the value function of the old policy, vπ.
+
+**Policy Improvement Theorem**
+
+The text points out that the greedy policy, by construction, meets the conditions of the **policy improvement theorem**. This theorem states that a greedy policy, π', is guaranteed to be as good as or better than the original policy, π. This means that vπ'(s) ≥ vπ(s) for all states s.
+
+**Iterative Policy Improvement**
+
+Policy improvement is often used in an iterative process. We start with an initial policy, evaluate its value function, create a new greedy policy based on that value function, and then repeat the process. The text explains that if the new greedy policy, π', is as good as, but not strictly better than, the old policy, π, then the value functions are equal, that is,  vπ = vπ'. In this case, the value function satisfies the following equation:
+
+vπ′(s) = max<sub>a</sub> E[Rt+1 + γvπ′(St+1) |St=s,At=a]
+vπ′(s) = max<sub>a</sub> ∑<sub>s',r</sub> p(s',r|s,a)[r + γvπ′(s')]
+
+This condition represents the Bellman optimality equation, indicating that we have reached an optimal policy.
+
+**Summary**
+
+Policy improvement is a key concept in reinforcement learning that allows us to refine policies towards an optimal solution. We evaluate the value function of an existing policy, create a greedy policy by selecting the action at each state that maximizes the expected return, and iteratively repeat this process until the policy converges. This iterative process, guided by the policy improvement theorem and the Bellman optimality equation, provides a structured approach to finding the optimal policy.
+ </github-md>
+    <div class="back-link"><a href="../syllabus_structure.html">Back to Syllabus</a></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script>

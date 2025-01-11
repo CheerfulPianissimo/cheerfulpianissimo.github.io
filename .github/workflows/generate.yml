@@ -19,6 +19,7 @@ jobs:
       - name: Install dependencies and run build
         run: |
           cd ${{ github.workspace }}
+          ls
           pip install --upgrade pip
           pip install git+https://github.com/obsidian-html/obsidian-html@cafcb03
           obsidianhtml convert -i notes/config.yaml -v
